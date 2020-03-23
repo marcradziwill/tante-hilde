@@ -1,0 +1,167 @@
+/* Typography
+    ========================================================================== */
+
+@font-face {
+  font-family: 'Questrial-Regular';
+  src: url('../fonts/Questrial/Questrial-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Questrial/Questrial-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('../fonts/Questrial/Questrial-Regular.otf')
+      format('opentype'),
+    /* Open Type Font */ url('../fonts/Questrial/Questrial-Regular.svg')
+      format('svg'),
+    /* Legacy iOS */ url('../fonts/Questrial/Questrial-Regular.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */ url('../fonts/Questrial/Questrial-Regular.woff')
+      format('woff'),
+    /* Modern Browsers */ url('../fonts/Questrial/Questrial-Regular.woff2')
+      format('woff2'); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('../fonts/Lato-Regular/Lato-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Lato-Regular/Lato-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('../fonts/Lato-Regular/Lato-Regular.otf')
+      format('opentype'),
+    /* Open Type Font */ url('../fonts/Lato-Regular/Lato-Regular.svg')
+      format('svg'),
+    /* Legacy iOS */ url('../fonts/Lato-Regular/Lato-Regular.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */ url('../fonts/Lato-Regular/Lato-Regular.woff')
+      format('woff'),
+    /* Modern Browsers */ url('../fonts/Lato-Regular/Lato-Regular.woff2')
+      format('woff2'); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font: 100%/1.5 'Lato-Regular';
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 40rem) {
+  html {
+    font-size: 112%;
+  }
+}
+
+@media (min-width: 64rem) {
+  html {
+    font-size: 120%;
+  }
+}
+
+body {
+  // color: $primaryTextColor;
+  font-family: 'Lato-Regular';
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Questrial-Regular';
+  font-weight: 600;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 1.883333em;
+  line-height: 1.3em;
+  margin-bottom: 1.5rem;
+  position: relative;
+  margin-top: 0;
+  // &:not(.clean)::before {
+  //   position: absolute;
+  //   background: currentColor;
+  //   width: 32px;
+  //   height: 5px;
+  //   top: -0.6em;
+  //   left: 0;
+  //   content: "";
+  //   color: $green;
+  // }
+}
+
+// @media (min-width: 40rem) {
+//   h1 { font-size: 1.5rem; }
+// }
+
+h2 {
+  font-size: 1.583333em;
+  margin-bottom: 12px;
+  position: relative;
+  margin-top: 0;
+  &::before {
+    position: absolute;
+    background: currentColor;
+    width: 32px;
+    height: 5px;
+    top: -0.6em;
+    left: 0;
+    content: '';
+    // color: $green;
+  }
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.0125em;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.0125em;
+}
+
+h6 {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 1.45rem;
+  color: inherit;
+  font-family: 'Questrial Regular', sans-serif;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  font-size: 21.666666666666668px;
+  line-height: 30.666666666666668px;
+  max-width: 433.33333333333337px;
+  margin: 5px;
+}
+@media (min-width: 640px) {
+  h6 {
+    font-size: 0.81225rem;
+    line-height: 1.1;
+  }
+}
+
+p.lead {
+  font-size: 1.133em;
+  line-height: 1.4em;
+  margin: 2rem 0;
+}
+
+p {
+  font-size: 1em;
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
+}

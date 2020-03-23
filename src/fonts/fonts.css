@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Lato Regular';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('Lato-Regular.woff2') format('woff2'),
+    url('Lato-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lato Italic';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url('Lato-Italic.woff2') format('woff2'),
+    url('Lato-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lato Bold';
+  font-style: bold;
+  font-weight: 100;
+  font-display: swap;
+  src: url('Lato-Bold.woff2') format('woff2'),
+    url('Lato-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lato Black';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('Lato-Black.woff2') format('woff2'),
+    url('Lato-Black.woff') format('woff');
+}
+@font-face {
+  font-family: 'Questrial Regular';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('Questrial-Regular.woff2') format('woff2'),
+    url('Questrial-Regular.woff') format('woff');
+}

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "alias": ["www.fuers-allgaeu.de", "www.fuers-allgaeu.de", "fuers-allgaeu.de"],
+  "builds": [{"src": "index.html", "use": "@now/static"}],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "status": 301,
+      "headers": {"Location": "https://fuers-allgaeu.de/$1"}
+    }
+  ]
+}

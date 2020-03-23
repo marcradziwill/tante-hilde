@@ -1,0 +1,26 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "<utils>": "./utils",
+          "<state>": "./state",
+          "<worker>": "./webworker",
+          "<components>": "./components"
+        }
+      }
+    ]
+  ],
+  "presets": [
+    [
+      "babel-preset-gatsby",
+      {
+        "targets": {
+          "browsers": [">0.25%", "not dead"]
+        }
+      }
+    ]
+  ]
+}
