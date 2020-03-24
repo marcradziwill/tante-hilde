@@ -1,25 +1,11 @@
-import React from 'react'
-import {css} from '@emotion/core'
-// import Image from 'components/Image';
+import React from 'react';
+import { css } from '@emotion/core';
+import Image from 'components/Image';
 // import Video from 'components/Video';
-import {media} from 'utils/media'
+import { media } from 'utils/media';
 
-const PageHeader = props => {
-  const {children, align, ...otherProps} = props
-  const isVideo = otherProps.video
-  const isHalf = otherProps.half
-
-  const isSingleImage = otherProps.images
-    ? otherProps.images.length === 1
-    : false
-
-  if (!isVideo && !isSingleImage) {
-    otherProps.images = otherProps.images.slice(0, 1)
-  }
-  if (isHalf) {
-    otherProps.images = otherProps.images.slice(0, 1)
-  }
-
+const PageHeader = (props) => {
+  const { children, align, ...otherProps } = props;
   return (
     <header
       css={css`
@@ -38,13 +24,12 @@ const PageHeader = props => {
         {/* {isVideo ? (
           <Video src={props.video} />
         ) : ( */}
-        {/* <Image
+        <Image
           style={{ height: '100%' }}
-          alt={otherProps.images[0].alt}
-          title={otherProps.images[0].title}
-          filename={otherProps.images[0].src}
-          {...otherProps.imageOptions}
-        /> */}
+          alt={otherProps.image.alt}
+          title={otherProps.image.title}
+          filename={otherProps.image.src}
+        />
         {/* )} */}
 
         <div
@@ -63,7 +48,7 @@ const PageHeader = props => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default PageHeader
+export default PageHeader;

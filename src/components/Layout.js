@@ -1,10 +1,10 @@
-import React from 'react'
-import {css} from '@emotion/core'
-// import NavigationHeader from 'components/NavigationHeader'
-import StyledBox from 'components/StyledBox'
+import React from 'react';
+import { css } from '@emotion/core';
+import NavigationHeader from 'components/NavigationHeader';
+import StyledBox from 'components/StyledBox';
 // const Footer = loadable(() => import('components/Footer'))
 
-const Layout = ({children, pageContext: {locale, pageEntry}, location}) => {
+const Layout = ({ children }) => {
   return (
     <div
       css={css`
@@ -25,11 +25,7 @@ const Layout = ({children, pageContext: {locale, pageEntry}, location}) => {
         `}
       >
         <header>
-          {/* <NavigationHeader
-            items={data.site.siteMetadata.menuLinks}
-            location={location.pathname}
-            locationEntry={pageEntry}
-          /> */}
+          <NavigationHeader />
         </header>
       </StyledBox>
       <StyledBox
@@ -47,6 +43,6 @@ const Layout = ({children, pageContext: {locale, pageEntry}, location}) => {
         {/* <Footer location={location.href} /> */}
       </StyledBox>
     </div>
-  )
-}
-export default Layout
+  );
+};
+export default Layout;

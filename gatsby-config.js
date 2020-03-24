@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-})
-const website = require('./src/utils/website')
+});
+const website = require('./src/utils/website');
 
-const siteUrl = 'https://marcradziwill.com'
+const siteUrl = 'https://marcradziwill.com';
 
 const gatsbySettings = {
   siteMetadata: {
@@ -35,37 +35,27 @@ const gatsbySettings = {
     social: {
       fbAppID: '',
       ogLanguage: website.ogLanguage,
-      author: website.author,
-      twitter: website.twitter,
-      github: website.github,
       facebook: website.facebook,
-      linkedin: website.linkedin,
-      googlemaps: website.googlemaps,
-      youtube: website.youtube,
+      instagram: website.instagram,
     },
   },
   plugins: [
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: `${__dirname}/src/locales`,
-    //     name: 'translations',
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `images`,
-    //     path: `${__dirname}/src/images`,
-    //   },
-    // },
-    // {
-    //   resolve: 'gatsby-source-filesystem',
-    //   options: {
-    //     path: `${__dirname}/content/blog`,
-    //     name: 'blog',
-    //   },
-    // },
+    `gatsby-transformer-csv`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/`,
+        name: 'content',
+      },
+    },
+
     `gatsby-plugin-sass`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
@@ -120,7 +110,7 @@ const gatsbySettings = {
       options: {
         id: process.env.GTM,
         includeInDevelopment: true,
-        defaultDataLayer: {platform: 'marcradziwill'},
+        defaultDataLayer: { platform: 'marcradziwill' },
       },
     },
     {
@@ -130,10 +120,10 @@ const gatsbySettings = {
         sitemap: 'https://marcradziwill.com/sitemap.xml',
         env: {
           development: {
-            policy: [{userAgent: '*', disallow: ['/']}],
+            policy: [{ userAgent: '*', disallow: ['/'] }],
           },
           production: {
-            policy: [{userAgent: '*', allow: '/'}],
+            policy: [{ userAgent: '*', allow: '/' }],
           },
         },
       },
@@ -156,8 +146,8 @@ const gatsbySettings = {
       },
     },
   ],
-}
+};
 if (process.env.NODE_ENV === `production`) {
-  gatsbySettings.plugins.push(`gatsby-plugin-offline`)
+  gatsbySettings.plugins.push(`gatsby-plugin-offline`);
 }
-module.exports = gatsbySettings
+module.exports = gatsbySettings;

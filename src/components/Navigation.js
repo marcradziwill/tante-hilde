@@ -1,31 +1,13 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image/withIEPolyfill';
+import { Link } from 'gatsby';
+// import Img from 'gatsby-image/withIEPolyfill';
 import { css } from '@emotion/core';
-import LanguageSwitcher from 'components/LanguageSwitcher';
-import GatsbyLink from 'components/GatsbyLink';
-import { useLocalContext } from 'components/LocalContext';
 import SocialTeaser from 'components/SocialTeaser';
 import { colors } from 'utils/theme';
 import { media } from 'utils/media';
-import { translateUrl } from 'utils/helpers';
 
-const Navigation = ({ items, locationEntry }) => {
-  const { locale } = useLocalContext();
-  const data = useStaticQuery(graphql`
-    query {
-      logo: file(relativePath: { in: "marc_grey.png" }) {
-        childImageSharp {
-          fixed(width: 36, quality: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
-    }
-  `);
-
+const Navigation = ({ items }) => {
   const NavItem = ({ menuItem }) => {
-    const linkObject = translateUrl(menuItem.name, locale);
     return (
       <li
         css={css`
@@ -40,11 +22,11 @@ const Navigation = ({ items, locationEntry }) => {
           }
         `}
       >
-        <GatsbyLink
+        <Link
           css={css`
             border-bottom: 2px solid transparent;
             display: block;
-            color: ${colors.white};
+            color: ${colors.brand};
             letter-spacing: 2px;
             text-transform: uppercase;
             font-size: 0.8rem;
@@ -55,23 +37,22 @@ const Navigation = ({ items, locationEntry }) => {
             z-index: 1;
             :hover {
               font-weight: 700;
-              color: ${colors.white};
+              color: ${colors.brand};
               text-decoration: none;
             }
             &.current-item {
               font-weight: 800;
             }
           `}
-          locale={locale}
-          to={menuItem.name}
+          to={menuItem.link}
           data-typeaction="Click"
           data-typename={
-            linkObject.title.charAt(0).toUpperCase() + linkObject.title.slice(1)
+            menuItem.title.charAt(0).toUpperCase() + menuItem.title.slice(1)
           }
           data-typecat="Nav-Punkt"
         >
-          {linkObject.title}
-        </GatsbyLink>
+          {menuItem.title}
+        </Link>
         {menuItem.submenu && menuItem.submenu.length > 0 && (
           <ul
             css={css`
@@ -126,6 +107,7 @@ const Navigation = ({ items, locationEntry }) => {
   return (
     <div
       css={css`
+        margin-left: 200px;
         position: fixed;
         min-height: 3.75rem;
         left: 0;
@@ -138,7 +120,7 @@ const Navigation = ({ items, locationEntry }) => {
     >
       <div
         css={css`
-          background-color: #6cb88d;
+          background-color: #ffffff;
           display: -webkit-box;
           display: -webkit-flex;
           display: -ms-flexbox;
@@ -165,28 +147,6 @@ const Navigation = ({ items, locationEntry }) => {
           }
         `}
       >
-        <GatsbyLink
-          css={css`
-            align-items: center;
-            display: flex;
-            flex-shrink: 0;
-            text-decoration: none;
-          `}
-          to="home"
-          locale={locale}
-          aria-label="Marc Radziwill, Back to homepage"
-          data-typeaction="Click"
-          data-typename="Nav Icon Hut"
-          data-typecat="Nav-Punkt"
-        >
-          <Img
-            alt="Marc"
-            style={{ width: '2rem' }}
-            fixed={[data.logo.childImageSharp.fixed]}
-            styles={{ height: '1.5rem', margin: 0 }}
-          />
-        </GatsbyLink>
-
         <nav
           aria-label="Primary Navigation"
           css={css`
@@ -256,8 +216,7 @@ const Navigation = ({ items, locationEntry }) => {
             minHeight: '3.75rem',
           }}
         >
-          <SocialTeaser color={colors['green-5']} parent="Header" />
-          <LanguageSwitcher location={locationEntry} />
+          <SocialTeaser parent="Header" />
         </div>
       </div>
     </div>

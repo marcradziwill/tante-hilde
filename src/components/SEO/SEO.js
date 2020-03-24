@@ -30,11 +30,8 @@ const SEO = ({
           defaultBanner: image
           social {
             ogLanguage
-            twitter
-            github
+            instagram
             facebook
-            linkedin
-            youtube
           }
           author {
             name
@@ -99,7 +96,7 @@ const SEO = ({
       author,
       siteUrl,
       defaultBanner,
-      social: { twitter, facebook, github, youtube, linkedin, ogLanguage },
+      social: { facebook, instagram, ogLanguage },
       organization,
     },
   } = site;
@@ -153,7 +150,7 @@ const SEO = ({
       height: portrait.childImageSharp.fixed.height,
       caption: author.name,
     },
-    sameAs: [twitter, github, facebook, linkedin, youtube],
+    sameAs: [instagram, facebook],
     url: homeURL,
     logo: {
       '@type': 'ImageObject',

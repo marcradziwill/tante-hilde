@@ -3,7 +3,9 @@
 //  *
 //  * See: https://www.gatsbyjs.org/docs/node-apis/
 //  */
-
+const { google } = require('googleapis');
+const credentials = require('./credentials.json');
+const fs = require('fs');
 // const path = require('path');
 // const _ = require('lodash');
 // const i18n = require(`./src/utils/i18n`);
@@ -362,169 +364,219 @@
 //   }
 // }
 
-// // eslint-disable-next-line complexity
-// const createCustomNodeFields = ({ node, getNode, actions }) => {
-//   const { createNodeField } = actions;
-//   if (node.internal.type === `Mdx`) {
-//     const name = path.basename(node.fileAbsolutePath, `.mdx`).split('.')[0];
-//     let lang = path.basename(node.fileAbsolutePath, `.mdx`).split(`.`)[1];
-//     if (lang === 'md') {
-//       lang = 'en';
-//     }
-//     createNodeField({ node, name: `name`, value: name });
-//     createNodeField({ node, name: `locale`, value: lang });
+// const scopes = ['https://www.googleapis.com/auth/drive'];
+// const auth = new google.auth.JWT(
+//   credentials.client_email,
+//   null,
+//   credentials.private_key,
+//   scopes,
+// );
+// const drive = google.drive({ version: 'v3', auth });
 
-//     if (node.frontmatter.image && node.frontmatter.image.src) {
-//       createNodeField({
-//         name: 'image',
-//         node,
-//         value: node.frontmatter.image.src,
-//       });
-//     }
-//     if (node.fileAbsolutePath.includes('content/blog/')) {
-//       const parent = getNode(node.parent);
-//       let slug =
-//         node.frontmatter.slug ||
-//         createFilePath({ node, getNode, basePath: `pages` });
-//       slug = `/blog/${node.frontmatter.slug || slugify(parent.name)}/`;
+// eslint-disable-next-line complexity
+const createCustomNodeFields = async ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === `CompaniesCsv`) {
+    const urlParams = node.Logo.split('id=');
+    const imageId = urlParams[1];
+    createNodeField({
+      name: 'imageId',
+      node,
+      value: imageId,
+    });
+  }
 
-//       createNodeField({
-//         name: 'id',
-//         node,
-//         value: node.id,
-//       });
+  // console.log(node['Speisekarte / sonstige PDF (nur PDF oder Bilder)']);
+  // const res = await drive.files.list({
+  //   folderId:
+  //     '0B9HCh7K3NqqCfmVyU0pWWkFIR1BwcDRxdll1Rl9DLW5QRmlsMUloeXZ5SzdlazJfUFQzUmc',
+  //   orderBy: 'createdTime desc',
+  // });
 
-//       createNodeField({
-//         name: 'published',
-//         node,
-//         value: node.frontmatter.published,
-//       });
+  // const dest = fs.createWriteStream(`${node.Name}.png`);
+  // await drive.files.get(
+  //   { fileId: idParam, alt: 'media' },
+  //   { responseType: 'stream' },
+  //   // {},
+  //   (err, res) => {
+  //     console.log(err, res);
+  //     res.data
+  //       .on('end', () => {
+  //         console.log('done');
+  //       })
+  //       .on('error', (err) => {
+  //         console.log('error', err);
+  //       });
+  //     // .pipe(dest);
+  //   },
+  // );
+  // console.log(res.data);
+  // drive.files.list(
+  //   {
+  //     fields: `files(name, ${node.Logo})`,
+  //   },
+  //   (err, res) => {
+  //     if (err) throw err;
+  //     const files = res.data.files;
+  //     if (files.length) {
+  //       files.map((file) => {
+  //         console.log(file);
+  //       });
+  //     } else {
+  //       console.log('No files found');
+  //     }
+  //   },
+  // );
+  //     createNodeField({
+  //   name: 'imageSrc',
+  //   node,
+  //   value: node.id,
+  // });
+  // }
+  // if (node.internal.type === `Mdx`) {
+  //   const name = path.basename(node.fileAbsolutePath, `.mdx`).split('.')[0];
+  //   let lang = path.basename(node.fileAbsolutePath, `.mdx`).split(`.`)[1];
+  //   if (lang === 'md') {
+  //     lang = 'en';
+  //   }
+  //   createNodeField({ node, name: `name`, value: name });
+  //   createNodeField({ node, name: `locale`, value: lang });
+  //   if (node.frontmatter.image && node.frontmatter.image.src) {
+  //     createNodeField({
+  //       name: 'image',
+  //       node,
+  //       value: node.frontmatter.image.src,
+  //     });
+  //   }
+  //   if (node.fileAbsolutePath.includes('content/blog/')) {
+  //     const parent = getNode(node.parent);
+  //     let slug =
+  //       node.frontmatter.slug ||
+  //       createFilePath({ node, getNode, basePath: `pages` });
+  //     slug = `/blog/${node.frontmatter.slug || slugify(parent.name)}/`;
+  //     createNodeField({
+  //       name: 'id',
+  //       node,
+  //       value: node.id,
+  //     });
+  //     createNodeField({
+  //       name: 'published',
+  //       node,
+  //       value: node.frontmatter.published,
+  //     });
+  //     createNodeField({
+  //       name: 'title',
+  //       node,
+  //       value: node.frontmatter.title,
+  //     });
+  //     createNodeField({
+  //       name: 'author',
+  //       node,
+  //       value: node.frontmatter.author || 'Marc Radziwill',
+  //     });
+  //     createNodeField({
+  //       name: 'description',
+  //       node,
+  //       value: node.frontmatter.description,
+  //     });
+  //     createNodeField({
+  //       name: 'plainTextDescription',
+  //       node,
+  //       value: stripMarkdown(node.frontmatter.description),
+  //     });
+  //     createNodeField({
+  //       name: 'slug',
+  //       node,
+  //       value: slug,
+  //     });
+  //     createNodeField({
+  //       name: 'date',
+  //       node,
+  //       value: node.frontmatter.date ? node.frontmatter.date.split(' ')[0] : '',
+  //     });
+  //     createNodeField({
+  //       name: 'modified',
+  //       node,
+  //       value: node.frontmatter.modified
+  //         ? node.frontmatter.modified.split(' ')[0]
+  //         : undefined,
+  //     });
+  //     createNodeField({
+  //       name: 'modifiedDescription',
+  //       node,
+  //       value: node.frontmatter.modifiedDescription
+  //         ? stripMarkdown(node.frontmatter.modifiedDescription)
+  //         : undefined,
+  //     });
+  //     createNodeField({
+  //       name: 'banner',
+  //       node,
+  //       value: node.frontmatter.banner,
+  //     });
+  //     createNodeField({
+  //       name: 'bannerCredit',
+  //       node,
+  //       value: node.frontmatter.bannerCredit,
+  //     });
+  //     createNodeField({
+  //       name: 'categories',
+  //       node,
+  //       value: node.frontmatter.categories || [],
+  //     });
+  //     createNodeField({
+  //       name: 'keywords',
+  //       node,
+  //       value: node.frontmatter.keywords || [],
+  //     });
+  //     createNodeField({
+  //       name: 'redirects',
+  //       node,
+  //       value: node.frontmatter.redirects,
+  //     });
+  //     createNodeField({
+  //       name: 'isTechArticle',
+  //       node,
+  //       value: node.frontmatter.isTechArticle,
+  //     });
+  //     createNodeField({
+  //       name: 'readerLevel',
+  //       node,
+  //       value: node.frontmatter.readerLevel,
+  //     });
+  //     createNodeField({
+  //       name: 'readingDependencies',
+  //       node,
+  //       value: node.frontmatter.readingDependencies,
+  //     });
+  //   }
+  // }
+};
 
-//       createNodeField({
-//         name: 'title',
-//         node,
-//         value: node.frontmatter.title,
-//       });
-
-//       createNodeField({
-//         name: 'author',
-//         node,
-//         value: node.frontmatter.author || 'Marc Radziwill',
-//       });
-
-//       createNodeField({
-//         name: 'description',
-//         node,
-//         value: node.frontmatter.description,
-//       });
-
-//       createNodeField({
-//         name: 'plainTextDescription',
-//         node,
-//         value: stripMarkdown(node.frontmatter.description),
-//       });
-
-//       createNodeField({
-//         name: 'slug',
-//         node,
-//         value: slug,
-//       });
-
-//       createNodeField({
-//         name: 'date',
-//         node,
-//         value: node.frontmatter.date ? node.frontmatter.date.split(' ')[0] : '',
-//       });
-//       createNodeField({
-//         name: 'modified',
-//         node,
-//         value: node.frontmatter.modified
-//           ? node.frontmatter.modified.split(' ')[0]
-//           : undefined,
-//       });
-
-//       createNodeField({
-//         name: 'modifiedDescription',
-//         node,
-//         value: node.frontmatter.modifiedDescription
-//           ? stripMarkdown(node.frontmatter.modifiedDescription)
-//           : undefined,
-//       });
-
-//       createNodeField({
-//         name: 'banner',
-//         node,
-//         value: node.frontmatter.banner,
-//       });
-
-//       createNodeField({
-//         name: 'bannerCredit',
-//         node,
-//         value: node.frontmatter.bannerCredit,
-//       });
-
-//       createNodeField({
-//         name: 'categories',
-//         node,
-//         value: node.frontmatter.categories || [],
-//       });
-
-//       createNodeField({
-//         name: 'keywords',
-//         node,
-//         value: node.frontmatter.keywords || [],
-//       });
-
-//       createNodeField({
-//         name: 'redirects',
-//         node,
-//         value: node.frontmatter.redirects,
-//       });
-
-//       createNodeField({
-//         name: 'isTechArticle',
-//         node,
-//         value: node.frontmatter.isTechArticle,
-//       });
-//       createNodeField({
-//         name: 'readerLevel',
-//         node,
-//         value: node.frontmatter.readerLevel,
-//       });
-//       createNodeField({
-//         name: 'readingDependencies',
-//         node,
-//         value: node.frontmatter.readingDependencies,
-//       });
-//     }
-//   }
-// };
-
-// // eslint-disable-next-line complexity
-// exports.onCreateNode = ({
-//   node,
-//   getNode,
-//   actions,
-//   loadNodeContent,
-//   createNodeId,
-//   createContentDigest,
-// }) => {
-//   createJsonNodes({
-//     node,
-//     actions,
-//     loadNodeContent,
-//     createNodeId,
-//     createContentDigest,
-//   });
-//   createCustomNodeFields({
-//     node,
-//     getNode,
-//     actions,
-//     loadNodeContent,
-//     createNodeId,
-//     createContentDigest,
-//   });
-// };
+// eslint-disable-next-line complexity
+exports.onCreateNode = ({
+  node,
+  getNode,
+  actions,
+  loadNodeContent,
+  createNodeId,
+  createContentDigest,
+}) => {
+  // createJsonNodes({
+  //   node,
+  //   actions,
+  //   loadNodeContent,
+  //   createNodeId,
+  //   createContentDigest,
+  // });
+  createCustomNodeFields({
+    node,
+    getNode,
+    actions,
+    loadNodeContent,
+    createNodeId,
+    createContentDigest,
+  });
+};
 
 // exports.onCreateWebpackConfig = ({
 //   actions: { replaceWebpackConfig },

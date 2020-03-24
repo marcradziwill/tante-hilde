@@ -1,5 +1,5 @@
 module.exports = {
-  siteTitle: 'Marc Radziwill', // Navigation and Site Title
+  siteTitle: 'Für das Allgäu', // Navigation and Site Title
   siteTitleAlt: 'The personal website of Marc Radziwill', // Alternative Site title for SEO
   siteTitleShort: 'marcradziwill', // short_name for manifest
   siteUrl: 'https://marcradziwill.com', // Domain of your site. No trailing slash!
@@ -26,12 +26,6 @@ module.exports = {
   backgroundColor: '#6CB88D',
 
   // Social component
-  facebook: 'https://twitter.com/marcradziwill/',
-  twitter: 'https://twitter.com/marc_radziwill/',
-  twitterHandle: '@marc_radziwill',
-  github: 'https://github.com/marcradziwill/',
-  linkedin: 'https://www.linkedin.com/in/marc-radziwill/',
-  youtube: 'https://www.youtube.com/channel/xxx',
-  googlemaps:
-    'https://www.google.com/maps/place/Marc+Radziwill/@47.7313385,10.3290423,15z/data=!4m2!3m1!1s0x0:0x1368d4f8f4565ce?sa=X&ved=2ahUKEwji7sOLpOzkAhUGa8AKHSqlBKIQ_BIwC3oECAwQCA',
+  facebook: 'https://facebook.com/marcradziwill/',
+  instagram: 'https://instagram.com/marcradziwill/',
 };
