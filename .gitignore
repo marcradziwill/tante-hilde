@@ -23,6 +23,7 @@ build/Release
 
 # Dependency directory
 node_modules
+content/
 .gatsby-context.js
 .sass-cache/
 .cache/

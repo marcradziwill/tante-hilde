@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby';
-// import Img from 'gatsby-image/withIEPolyfill';
 import { css } from '@emotion/core';
 import SocialTeaser from 'components/SocialTeaser';
 import { colors } from 'utils/theme';

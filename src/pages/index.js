@@ -117,7 +117,7 @@ const Index = ({ data: { companies } }) => {
               <h2>Tante Hilde - Dein virtueller Marktplatz im Allgäu!</h2>
 
               <p>
-                Wir helfen den Suchenden in dem wir alle Online- und
+                Wir helfen den Suchenden, indem wir alle Online- und
                 Lieferangebote im Allgäu bündeln und übersichtlich darstellen.
               </p>
               <p>

@@ -18,6 +18,7 @@ const SEO = ({
   pathname,
   article,
   node,
+  image,
   headerImage,
   follow,
 }) => {
@@ -44,33 +45,6 @@ const SEO = ({
               zipCity
             }
             logo
-          }
-        }
-      }
-      portrait: file(relativePath: { eq: "Marc-Radziwill-im-Portrait.png" }) {
-        childImageSharp {
-          fixed(width: 150) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-      # logo: file(relativePath: { eq: "marc-radziwill.de.png" }) {
-      #   childImageSharp {
-      #     fixed(width: 200) {
-      #       ...GatsbyImageSharpFixed
-      #     }
-      #   }
-      # }
-      imageFiles: allFile {
-        edges {
-          node {
-            relativePath
-            name
-            childImageSharp {
-              fixed(width: 1200, quality: 90) {
-                ...GatsbyImageSharpFixed
-              }
-            }
           }
         }
       }
@@ -103,18 +77,6 @@ const SEO = ({
   //   logo = logoDe;
   // }
 
-  let imageFile = '';
-  if (imageFiles && imageFiles.edges.length > 0 && headerImage) {
-    imageFile = imageFiles.edges.find((n) => {
-      return n.node.relativePath.includes(headerImage.src);
-    });
-  }
-  if (headerImage && headerImage.childImageSharp) {
-    imageFile = {
-      node: headerImage,
-    };
-  }
-
   // const localizedPath = i18n[locale].default ? '' : `/${i18n[locale].path}`;
   // const homeURL = `${siteUrl}${localizedPath}`;
   const homeURL = `https://tante-hilde.org/`;
@@ -122,7 +84,7 @@ const SEO = ({
   const seo = {
     title: title || 'defaultTitle',
     description: description || 'defaultDescription',
-    image: `${siteUrl}${banner || defaultBanner}`,
+    image: `${image}`,
     url: `${siteUrl}${pathname || ''}`,
   };
   const today = new Date();
@@ -138,20 +100,20 @@ const SEO = ({
       '@type': 'Place',
       address: 'Ostbahnhofstraße 7, 87435 Kempten (Allgäu), Germany',
     },
-    // image: {
-    //   '@type': 'ImageObject',
-    //   '@id': `${homeURL}#personalimage`,
-    //   url: `${siteUrl}${portrait.childImageSharp.fixed.src}`,
-    //   width: portrait.childImageSharp.fixed.width,
-    //   height: portrait.childImageSharp.fixed.height,
-    //   caption: author.name,
-    // },
+    image: {
+      '@type': 'ImageObject',
+      '@id': `${homeURL}#personalimage`,
+      url: `${image}`,
+      // width: portrait.childImageSharp.fixed.width,
+      // height: portrait.childImageSharp.fixed.height,
+      caption: author.name,
+    },
     sameAs: [instagram, facebook],
     url: homeURL,
     logo: {
       '@type': 'ImageObject',
       '@id': `${homeURL}#organizationlogo`,
-      url: `${siteUrl}tantehilde-gruen.png`,
+      url: `${siteUrl}/tantehilde-gruen.png`,
       width: '',
       height: '',
       caption: organization.name,
@@ -159,14 +121,11 @@ const SEO = ({
   };
 
   // const schemaImageFile = imageFile ? imageFile.node : logo;
-  // const schemaImage = {
-  //   '@type': 'ImageObject',
-  //   '@id': `${homeURL}#primaryimage`,
-  //   url: `${siteUrl}${schemaImageFile.childImageSharp.fixed.src}`,
-  //   width: schemaImageFile.childImageSharp.fixed.width,
-  //   height: schemaImageFile.childImageSharp.fixed.height,
-  //   caption: headerImage ? headerImage.alt : '',
-  // };
+  const schemaImage = {
+    '@type': 'ImageObject',
+    '@id': `${homeURL}#primaryimage`,
+    url: `${image}`,
+  };
 
   const schemaOrgWebPage = {
     '@type': 'WebPage',
@@ -186,7 +145,7 @@ const SEO = ({
     dateModified: buildTime,
     isPartOf: { '@id': `${homeURL}#website` },
     primaryImageOfPage: { '@id': `${homeURL}#primaryimage` },
-    // image: schemaImage,
+    image: schemaImage,
   };
 
   const schemaWebsite = {
@@ -205,7 +164,7 @@ const SEO = ({
     '@graph': [
       schemaPersonAndOrg,
       schemaWebsite,
-      // schemaImage,
+      schemaImage,
       schemaOrgWebPage,
     ],
   };

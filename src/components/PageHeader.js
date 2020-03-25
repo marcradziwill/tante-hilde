@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import Image from 'components/Image';
-// import Video from 'components/Video';
 import { media } from 'utils/media';
 
 const PageHeader = (props) => {
@@ -15,23 +14,17 @@ const PageHeader = (props) => {
     >
       <div
         style={{
-          // marginTop: '3rem',
           position: 'relative',
           height: '100%',
           width: '100%',
         }}
       >
-        {/* {isVideo ? (
-          <Video src={props.video} />
-        ) : ( */}
         <Image
           style={{ height: '100%' }}
           alt={otherProps.image.alt}
           title={otherProps.image.title}
           filename={otherProps.image.src}
         />
-        {/* )} */}
-
         <div
           css={css`
             position: absolute;
