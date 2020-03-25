@@ -214,7 +214,7 @@ const SEO = ({
         <html lang="de" />
         <meta name="author" content={author.name} />
         <meta name="description" content={seo.description.replace(/_/g, '')} />
-        <meta name="image" content={`${siteUrl}tantehilde-gruen.png`} />
+        <meta name="image" content={`${siteUrl}/tantehilde-gruen.png`} />
         <link
           href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
           rel="stylesheet"
@@ -242,7 +242,7 @@ const SEO = ({
       </Helmet>
       <Facebook
         desc={seo.description.replace(/_/g, '')}
-        image={`${siteUrl}tantehilde-gruen.png`}
+        image={`${siteUrl}/tantehilde-gruen.png`}
         title={seo.title}
         type={article ? 'article' : 'website'}
         url={seo.url}

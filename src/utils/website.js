@@ -2,7 +2,7 @@ module.exports = {
   siteTitle: 'Für das Allgäu', // Navigation and Site Title
   siteTitleAlt: 'The personal website of Marc Radziwill', // Alternative Site title for SEO
   siteTitleShort: 'Tante Hilde', // short_name for manifest
-  siteUrl: 'tante-hilde.de', // Domain of your site. No trailing slash!
+  siteUrl: 'tante-hilde.org', // Domain of your site. No trailing slash!
   siteLanguage: 'de', // Language Tag on <html> element
   siteLogo: 'images/logo.png', // Used for SEO and manifest, path to your image you placed in the 'static' folder
   siteDescription:

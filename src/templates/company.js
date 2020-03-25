@@ -30,6 +30,11 @@ function Company({ pageContext: { company } }) {
   ) {
     company.Webseite = `https://${company.Webseite}`;
   }
+  const youtube_parser = (url) => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length == 11 ? match[7] : false;
+  };
 
   return (
     <>
@@ -332,15 +337,7 @@ function Company({ pageContext: { company } }) {
         </div>
       </FullWidthBox>
       <FullWidthBox>
-        <div
-          css={css`
-            // display: flex;
-            // justify-content: center;
-            // text-align: center;
-            // align-items: center;
-            // flex-direction: column;
-          `}
-        >
+        <div>
           {/* Beschreibung Email Facebook_Link Instagram_Link Lieferung___Bezahlung
           PLZ__Ort Rechtliches Strasse__Hausnummer Telefon Webseite Webshop_Link
           PDF_Link Name_Firma Logo_Link Branch Fax Ansprechpartner
@@ -356,29 +353,52 @@ function Company({ pageContext: { company } }) {
           <p>{company.Branch}</p>
           <h3>Lieferung / Bezahlung</h3>
           <p>{company.Lieferung___Bezahlung}</p>
-          <h3>Webshop</h3>
-          <p>
-            <ExternalLink target="_blank" href={company.Webshop_Link}>
-              {company.Webshop_Link}
-            </ExternalLink>
-          </p>
-          <h3>Webshop</h3>
-          <p>
-            <ExternalLink target="_blank" href={company.PDF_Link}>
-              PDF Informationen
-            </ExternalLink>
-          </p>
-          <p>
-            {/* https://www.youtube-nocookie.com/embed/ */}
-            {/* <iframe
-            width="100%"
-            src={company.Video_Link}
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          /> */}
-          </p>
+          {company.Webshop_Link && (
+            <>
+              <h3>Webshop</h3>
+              <p>
+                <ExternalLink target="_blank" href={company.Webshop_Link}>
+                  {company.Webshop_Link}
+                </ExternalLink>
+              </p>
+            </>
+          )}
 
+          {company.PDF_Link && (
+            <>
+              <h3>Webshop</h3>
+              <p>
+                <ExternalLink target="_blank" href={company.PDF_Link}>
+                  PDF Informationen
+                </ExternalLink>
+              </p>
+            </>
+          )}
+          {company.Video_Link && (
+            <>
+              <h3>Video</h3>
+              <p
+                css={css`
+                  height: 500px;
+                `}
+              >
+                <iframe
+                  width="100%"
+                  height="500px"
+                  css={css`
+                    height: 500px;
+                  `}
+                  title="Video"
+                  src={`https://www.youtube-nocookie.com/embed/${youtube_parser(
+                    company.Video_Link,
+                  )}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </p>
+            </>
+          )}
           <SocialShare />
         </div>
       </FullWidthBox>

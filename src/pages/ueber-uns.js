@@ -14,9 +14,9 @@ const AboutUs = () => {
       <SEO
         title="Tante Hilde - Über uns"
         description="Idee zur Plattform - Tante Hilde"
-        image="/tantehilde-gruen.png"
+        image="/Header-Tantehilde-Laden-Allgaeu.png"
         // pathname={location.pathname}
-        headerImage="/tantehilde-gruen.png"
+        headerImage="/Header-Tantehilde-Laden-Allgaeu.png"
         follow="index, follow"
       />
       <div>
@@ -1161,7 +1161,7 @@ const AboutUs = () => {
                         data-typeaction="Click"
                         data-typename={` Webseite`}
                         target="_blank"
-                        href="https://tante-hilde.de"
+                        href="https://tante-hilde.org"
                       >
                         <svg
                           aria-label="Globe"

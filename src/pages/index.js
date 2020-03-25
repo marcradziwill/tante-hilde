@@ -10,7 +10,7 @@ import { css } from '@emotion/core';
 import { find } from 'lodash';
 
 const Index = ({ data: { companies } }) => {
-  const [filterCategory, setFilterCategory] = React.useState();
+  // const [filterCategory, setFilterCategory] = React.useState();
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
     companies.edges,
   );
@@ -42,29 +42,22 @@ const Index = ({ data: { companies } }) => {
       <SEO
         title="Tante Hilde"
         description="Dein virtueller Marktplatz im Allgäu!"
-        image="/tantehilde-gruen.png"
+        image="/Header-Tantehilde-Laden-Allgaeu.png"
         // pathname={location.pathname}
-        headerImage="/tantehilde-gruen.png"
+        headerImage="/Header-Tantehilde-Laden-Allgaeu.png"
         follow="index, follow"
       />
       <div>
         <article>
-          {/* <PageHeader
+          <PageHeader
             // title={page.htmlTitle}
             image={{
-              src: 'Schaufenster-von-seine-Laden-tagsueber.jpeg',
-              alt: 'Schaufenster von einem Laden tagsueber',
-              title: 'Schaufenster von einem Laden tagsueber',
+              src: 'Header-Tantehilde-Laden-Allgaeu.png',
+              alt: 'Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!',
+              title: 'Tante Hilde Laden Allgaeu',
             }}
-            // https://unsplash.com/photos/xfPpB7Pe8NA
-            widthhero="50%"
-            vheight="50vh"
-          >
-            <h1 className="white">Tante Hilde</h1>
-            <h2 className="small white">
-              Dein virtueller Marktplatz im Allgäu!
-            </h2>
-          </PageHeader> */}
+            vheight="60vh"
+          />
           <FullWidthBox>
             <div
               css={css`
@@ -88,12 +81,20 @@ const Index = ({ data: { companies } }) => {
                 >
                   Dein virtueller Marktplatz im Allgäu!
                 </h2>
-                <div css={css`display: flex width: 30%`}>
+                <h3
+                  css={css`
+                    max-width: 100% !important;
+                  `}
+                  className="small"
+                >
+                  Kostenlos - im Solidaritätsgedanken
+                </h3>
+                {/* <div css={css`display: flex width: 30%`}>
                   <img src="/tantehilde-gruen.png" alt="" />
-                </div>
+                </div> */}
               </ExternalLink>
               <p>
-                Melde dich jetzt an und trage deine Daten in{' '}
+                Melde dich jetzt kostenlos an und trage deine Daten in{' '}
                 <ExternalLink
                   href="https://docs.google.com/forms/d/e/1FAIpQLSeBpMd-oqTT1zkLcG-CnsvoJPNscd5g3ooyWQUwPAmfaDUCdw/viewform?usp=sf_link"
                   target="_blank"
@@ -154,7 +155,7 @@ const Index = ({ data: { companies } }) => {
                 Eure Einträge werden nach 24 Stunden spätestens online gestellt.
               </p>
               <p>
-                Melde dich jetzt an und trage deine Daten in{' '}
+                Melde dich jetzt kostenlos an und trage deine Daten in{' '}
                 <ExternalLink
                   href="https://docs.google.com/forms/d/e/1FAIpQLSeBpMd-oqTT1zkLcG-CnsvoJPNscd5g3ooyWQUwPAmfaDUCdw/viewform?usp=sf_link"
                   target="_blank"
@@ -339,6 +340,46 @@ const Index = ({ data: { companies } }) => {
                 );
               })}
             </ResponsiveGrid>
+          </FullWidthBox>
+          <FullWidthBox
+            css={css`
+              display: flex;
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+              text-align: center;
+            `}
+          >
+            <p>
+              Der{' '}
+              <ExternalLink
+                target="_blank"
+                href="https://github.com/marcradziwill/tante-hilde"
+              >
+                Programmiercode
+              </ExternalLink>{' '}
+              dieser Seite ist quelloffen und darf gerne für deine Region
+              verwendet werden. Für Texte und Bilder gilt folgende Lizenz:
+              <a
+                rel="license"
+                href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+              >
+                Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe
+                unter gleichen Bedingungen 4.0 International Lizenz
+              </a>
+              .
+            </p>
+            <p>
+              <a
+                rel="license"
+                href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+              >
+                <img
+                  alt="Creative Commons Lizenzvertrag"
+                  src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"
+                />
+              </a>
+            </p>
           </FullWidthBox>
         </article>
       </div>

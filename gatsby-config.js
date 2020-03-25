@@ -4,7 +4,7 @@ require('dotenv').config({
 });
 const website = require('./src/utils/website');
 
-const siteUrl = 'https://tante-hilde.de';
+const siteUrl = 'https://tante-hilde.org';
 
 const gatsbySettings = {
   siteMetadata: {
@@ -96,19 +96,18 @@ const gatsbySettings = {
         ],
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-google-tagmanager',
-    //   options: {
-    //     id: process.env.GTM,
-    //     includeInDevelopment: true,
-    //     defaultDataLayer: { platform: 'marcradziwill' },
-    //   },
-    // },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-PZJKCK9',
+        includeInDevelopment: true,
+      },
+    },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://tante-hilde.de',
-        sitemap: 'https://tante-hilde.de/sitemap.xml',
+        host: 'https://tante-hilde.org',
+        sitemap: 'https://tante-hilde.org/sitemap.xml',
         env: {
           development: {
             policy: [{ userAgent: '*', disallow: ['/'] }],
