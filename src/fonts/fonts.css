@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Lato Regular';
   font-style: normal;
   font-weight: 100;
@@ -37,4 +37,18 @@
   font-display: swap;
   src: url('Questrial-Regular.woff2') format('woff2'),
     url('Questrial-Regular.woff') format('woff');
+} */
+
+/* font converted using font-converter.net. thank you! */
+@font-face {
+  font-family: "Pacifico-Regular";
+  src: url("Pacifico-Regular.eot"); /* IE9 Compat Modes */
+  src: url("Pacifico-Regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("Pacifico-Regular.otf") format("opentype"),
+    /* Open Type Font */ url("Pacifico-Regular.svg") format("svg"),
+    /* Legacy iOS */ url("Pacifico-Regular.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("Pacifico-Regular.woff") format("woff"),
+    /* Modern Browsers */ url("Pacifico-Regular.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
 }

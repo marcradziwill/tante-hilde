@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "alias": ["www.tante-hilde.org"],
+  "builds": [{ "src": "index.html", "use": "@now/static" }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "status": 301,
+      "headers": { "Location": "https://tante-hilde.org/$1" }
+    }
+  ]
+}

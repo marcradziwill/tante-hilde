@@ -2,7 +2,8 @@ import React from 'react';
 import { css } from '@emotion/core';
 import NavigationHeader from 'components/NavigationHeader';
 import StyledBox from 'components/StyledBox';
-// const Footer = loadable(() => import('components/Footer'))
+import loadable from '@loadable/component';
+const Footer = loadable(() => import('components/Footer'));
 
 const Layout = ({ children }) => {
   return (
@@ -31,6 +32,7 @@ const Layout = ({ children }) => {
       <StyledBox
         css={css`
           grid-area: main;
+          margin-top: 5rem;
         `}
       >
         <main>{children}</main>
@@ -38,9 +40,10 @@ const Layout = ({ children }) => {
       <StyledBox
         css={css`
           grid-area: footer;
+          margin-top: 100px;
         `}
       >
-        {/* <Footer location={location.href} /> */}
+        <Footer />
       </StyledBox>
     </div>
   );

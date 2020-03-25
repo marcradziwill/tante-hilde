@@ -6,17 +6,15 @@ import {
   TwitterShareButton,
   EmailShareButton,
 } from 'react-share';
-import i18n from 'utils/i18n';
-import { useLocalContext } from 'components/LocalContext';
 import StyledBox from 'components/StyledBox';
 
-const SocialShare = ({ location }) => {
-  let { locale } = useLocalContext();
-  if (!locale) {
-    locale = 'en';
+const SocialShare = () => {
+  let location;
+  if (typeof window !== 'undefined') {
+    location = window.location;
+  } else {
+    location = '';
   }
-  const currentLang = i18n[locale];
-
   return (
     <StyledBox
       css={css`
@@ -26,7 +24,7 @@ const SocialShare = ({ location }) => {
         align-items: center;
       `}
     >
-      <h6 style={{ margin: '10px' }}>{currentLang.sharepage}</h6>
+      <h6 style={{ margin: '10px' }}>Teilen</h6>
       <ul
         css={css`
           margin-left: 0;

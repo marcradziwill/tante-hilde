@@ -52,7 +52,7 @@ const rgbaColors = {
   orange: orangeColorsRgba,
   blue: blueColorsRgba,
 };
-const greenColors = ['#EEFAF3', '#C8EBD7', '#9BD5B4', '#6CB88D', '#439A69'];
+const greenColors = ['#EEFAF3', '#C8EBD7', '#9BD5B4', '#73B471', '#439A69'];
 const orangeColors = ['#FFBB94', '#FFAA7A', '#FF9C64', '#F5894C', '#FA7930'];
 const blueColors = ['#FFFFFF', '#DBF3FC', '#ABDEF1', '#7EC4ED', '#55A3C1'];
 const darkColors = [

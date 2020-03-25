@@ -2,8 +2,8 @@ import Typography from 'typography';
 import '../fonts/fonts.css';
 
 export const fonts = {
-  regular: 'Lato Regular',
-  headline: 'Questrial Regular',
+  regular: ' Raleway',
+  headline: 'Pacifico',
 };
 
 const typography = new Typography({

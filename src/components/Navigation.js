@@ -65,7 +65,7 @@ const Navigation = ({ items }) => {
                   visibility: visible;
                   opacity: 1;
                   display: block;
-                  background: #6cb88d;
+                  background: #73b471;
                 }
                 ul {
                   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px;
@@ -89,7 +89,7 @@ const Navigation = ({ items }) => {
                     clear: both;
                     width: 100%;
                     :hover {
-                      background: #6cb88d;
+                      background: #73b471;
                     }
                   }
                 }
@@ -171,7 +171,7 @@ const Navigation = ({ items }) => {
                   visibility: visible;
                   opacity: 1;
                   display: block;
-                  background: #6cb88d;
+                  background: #73b471;
                 }
                 ul {
                   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px;
@@ -195,7 +195,7 @@ const Navigation = ({ items }) => {
                     clear: both;
                     width: 100%;
                     :hover {
-                      background: #6cb88d;
+                      background: #73b471;
                     }
                   }
                 }

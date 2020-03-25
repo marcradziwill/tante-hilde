@@ -66,7 +66,7 @@ const MobileNavigation = ({ items, location }) => {
               width: 100%;
               height: 100%;
             `}
-            background="#6CB88D"
+            background="#73B471"
           >
             <ul
               css={css`
@@ -104,7 +104,7 @@ const MobileNavigation = ({ items, location }) => {
                 animation-duration: 0.5s;
                 animation-iteration-count: 5;
                 bottom: 50px;
-                background: #6cb88d;
+                background: #73b471;
                 position: fixed;
                 z-index: 2;
                 left: 0;
@@ -166,8 +166,8 @@ const MobileNavigation = ({ items, location }) => {
           css={css`
             animation-duration: 0.5s;
             animation-iteration-count: 5;
-            bottom: 50px;
-            background: #6cb88d;
+            bottom: 90px;
+            background: #73b471;
             position: fixed;
             z-index: 2;
             left: 0;

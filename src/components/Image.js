@@ -27,7 +27,7 @@ const Image = (props) => (
                 fluid(
                   maxWidth: 640
                   quality: 80
-                  traceSVG: { color: "#6CB88D" }
+                  traceSVG: { color: "#73B471" }
                 ) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
@@ -44,7 +44,7 @@ const Image = (props) => (
                 fluid(
                   maxWidth: 1280
                   quality: 80
-                  traceSVG: { color: "#6CB88D" }
+                  traceSVG: { color: "#73B471" }
                 ) {
                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
@@ -61,7 +61,7 @@ const Image = (props) => (
                 fluid(
                   maxWidth: 1600
                   quality: 80
-                  traceSVG: { color: "#6CB88D" }
+                  traceSVG: { color: "#73B471" }
                 ) {
                   ...GatsbyImageSharpFluid_withWebp
                 }

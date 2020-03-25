@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import loadable from '@loadable/component';
 import { css } from '@emotion/core';
 import SocialTeaser from 'components/SocialTeaser';
-import { colors } from 'utils/theme';
 import { media } from 'utils/media';
 const NavigationMobile = loadable(() => import('components/NavigationMobile'));
 const Navigation = loadable(() => import('components/Navigation'));
@@ -58,7 +57,7 @@ const NavigationHeader = ({ location, locationEntry }) => {
           align-items: center;
           width: 100%;
           height: 100%;
-          min-height: 3.75rem;
+          min-height: 5rem;
           position: relative;
           &:after {
             content: '';
@@ -77,7 +76,9 @@ const NavigationHeader = ({ location, locationEntry }) => {
             display: flex;
             flex-shrink: 0;
             text-decoration: none;
-            width: 100px;
+            width: 80px;
+            height: 80px;
+            margin-top: 22px;
           `}
           to="/"
           aria-label="Zurück zur Startseite"
@@ -85,7 +86,7 @@ const NavigationHeader = ({ location, locationEntry }) => {
           data-typename="Nav Icon Logo"
           data-typecat="Nav-Punkt"
         >
-          Tante Hilde{' '}
+          <img src="/tantehilde-black.png" alt="Tante Hilde Logo" />
         </Link>
         {isMobileDevice() ? (
           <NavigationMobile items={items} location={location} />
@@ -104,8 +105,7 @@ const NavigationHeader = ({ location, locationEntry }) => {
             minHeight: '3.75rem',
           }}
         >
-          <SocialTeaser color={colors['green-5']} parent="Header" />
-          {/* <LanguageSwitcher location={locationEntry} /> */}
+          <SocialTeaser />
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ require('dotenv').config({
 });
 const website = require('./src/utils/website');
 
-const siteUrl = 'https://marcradziwill.com';
+const siteUrl = 'https://tante-hilde.de';
 
 const gatsbySettings = {
   siteMetadata: {
@@ -81,7 +81,7 @@ const gatsbySettings = {
         // eslint-disable-next-line
         theme_color: website.themeColor,
         display: 'standalone',
-        // icon: `src/images/marc_favicon.png`,
+        // icon: `./static/tantehilde-gruen.png`,
         icons: [
           {
             src: '/favicons/android-chrome-192x192.png',
@@ -94,30 +94,21 @@ const gatsbySettings = {
             type: 'image/png',
           },
         ],
-        localize: [
-          {
-            start_url: `/de/`,
-            lang: `de`,
-            name: `marc radziwill`,
-            short_name: `marc radziwill.`,
-            description: `Ich bin seit fast 10 Jahren selbstständig als Developer Advocate, Web Entwickler und Frontend Architekt und helfe meinen Kunden Projekte in den Bereichen technische Beratung, App- und Webentwicklung zu realisieren.`,
-          },
-        ],
       },
     },
-    {
-      resolve: 'gatsby-plugin-google-tagmanager',
-      options: {
-        id: process.env.GTM,
-        includeInDevelopment: true,
-        defaultDataLayer: { platform: 'marcradziwill' },
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-google-tagmanager',
+    //   options: {
+    //     id: process.env.GTM,
+    //     includeInDevelopment: true,
+    //     defaultDataLayer: { platform: 'marcradziwill' },
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https:/marcradziwill.com',
-        sitemap: 'https://marcradziwill.com/sitemap.xml',
+        host: 'https://tante-hilde.de',
+        sitemap: 'https://tante-hilde.de/sitemap.xml',
         env: {
           development: {
             policy: [{ userAgent: '*', disallow: ['/'] }],
