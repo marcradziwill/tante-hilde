@@ -1,23 +1,12 @@
 import React from 'react';
-import { useStaticQuery, Link, graphql } from 'gatsby';
-import Img from 'gatsby-image/withIEPolyfill';
+import { Link } from 'gatsby';
 import { css } from '@emotion/core';
 import FullWidthBox from 'components/FullWidthBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
-import ExternalLink from 'components/ExternalLink';
-// import Newsletter from 'components/Newsletter';
-// import CookieLayer from 'components/CookieLayer';
-import SocialShare from 'components/SocialShare';
-import SocialTeaser from 'components/SocialTeaser';
-// import GatsbyLink from 'components/GatsbyLink';
+import CookieLayer from 'components/CookieLayer';
 import StyledBox from 'components/StyledBox';
-import { translateUrl, scrollToAnchor } from 'utils/helpers';
 
-const scrollTop = () => {
-  scrollToAnchor('___gatsby');
-};
-
-const Footer = ({ location }) => {
+const Footer = () => {
   return (
     <footer
       css={css`
@@ -165,7 +154,7 @@ const Footer = ({ location }) => {
           </ResponsiveGrid>
         </FullWidthBox>
       </StyledBox>
-      {/* <CookieLayer /> */}
+      <CookieLayer />
     </footer>
   );
 };

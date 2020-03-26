@@ -16,19 +16,23 @@ import SocialShare from 'components/SocialShare';
 // import StyledBox from 'components/StyledBox';
 
 function Company({ pageContext: { company } }) {
-  // console.log(company);
+  console.log(company);
 
-  if (
-    !company.Webshop_Link.startsWith('http') ||
-    !company.Webshop_Link.startsWith('https')
-  ) {
-    company.Webshop_Link = `https://${company.Webshop_Link}`;
+  if (company.Webshop_Link.length > 0) {
+    if (
+      !company.Webshop_Link.startsWith('http') ||
+      !company.Webshop_Link.startsWith('https')
+    ) {
+      company.Webshop_Link = `https://${company.Webshop_Link}`;
+    }
   }
-  if (
-    !company.Webseite.startsWith('http') ||
-    !company.Webseite.startsWith('https')
-  ) {
-    company.Webseite = `https://${company.Webseite}`;
+  if (company.Webseite.length > 0) {
+    if (
+      !company.Webseite.startsWith('http') ||
+      !company.Webseite.startsWith('https')
+    ) {
+      company.Webseite = `https://${company.Webseite}`;
+    }
   }
   const youtube_parser = (url) => {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -334,6 +338,22 @@ function Company({ pageContext: { company } }) {
               </ExternalLink>
             </StyledBox>
           </StyledBox>
+          <StyledBox>
+            <ExternalLink
+              css={css`
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+                color: #73b471;
+              `}
+              target="_blank"
+              href={`https://maps.google.com/?q=${company.Strasse__Hausnummer}-${company.PLZ__Ort}`}
+            >
+              {company.Strasse__Hausnummer},{` `}
+              {company.PLZ__Ort}
+            </ExternalLink>
+          </StyledBox>
         </div>
       </FullWidthBox>
       <FullWidthBox>
@@ -374,7 +394,16 @@ function Company({ pageContext: { company } }) {
               </p>
             </>
           )}
-          {company.Video_Link && (
+          {company.Video_Link.includes('channel') ? (
+            <>
+              <h3>Video</h3>
+              <p>
+                <ExternalLink target="_blank" href={company.Video_Link}>
+                  Video Link
+                </ExternalLink>
+              </p>
+            </>
+          ) : (
             <>
               <h3>Video</h3>
               <p

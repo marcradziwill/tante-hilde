@@ -7,6 +7,7 @@ import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import Image from 'components/Image';
 import ExternalLink from 'components/ExternalLink';
 import { css } from '@emotion/core';
+import { scrollToAnchor } from 'utils/helpers';
 import { find } from 'lodash';
 
 const Index = ({ data: { companies } }) => {
@@ -132,11 +133,32 @@ const Index = ({ data: { companies } }) => {
                 Online-bzw. Lieferangebote bekannter zu machen und so mehr
                 Kunden zu erreichen.
               </p>
+              <p>
+                Melde dich jetzt kostenlos an und trage deine Daten in{' '}
+                <ExternalLink
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeBpMd-oqTT1zkLcG-CnsvoJPNscd5g3ooyWQUwPAmfaDUCdw/viewform?usp=sf_link"
+                  target="_blank"
+                >
+                  unserem Formular
+                </ExternalLink>{' '}
+                ein.
+              </p>
               <h2>Für die AllgäuerInnen:</h2>
               <p>
                 Wir sind die Schnittstelle zwischen deinem Bedürfnis nach
                 Produkten oder Dienstleistungen aus dem Allgäu und den
                 regionalen Anbietern.
+              </p>
+              <p>
+                Nutze unsere{' '}
+                <ExternalLink
+                  onClick={() => {
+                    scrollToAnchor('search');
+                  }}
+                >
+                  Suchfunktion
+                </ExternalLink>{' '}
+                und finde deinen Lieblingsladen!
               </p>
               <h2>Für Alle:</h2>
               <p>
@@ -168,7 +190,7 @@ const Index = ({ data: { companies } }) => {
           </FullWidthBox>
           <FullWidthBox>
             <ResponsiveGrid>
-              <div>
+              <div id="search">
                 {/* <Input  placeholder="Suchen" /> */}
                 <input
                   placeholder="Suchen"
@@ -311,6 +333,7 @@ const Index = ({ data: { companies } }) => {
                         justify-content: center;
                         align-items: center;
                         flex-direction: column;
+                        margin-top: 50px;
                       `}
                     >
                       <img
