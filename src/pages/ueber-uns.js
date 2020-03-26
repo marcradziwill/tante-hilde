@@ -665,7 +665,7 @@ const AboutUs = () => {
                         data-typeaction="Click"
                         data-typename={` Instagram`}
                         target="_blank"
-                        href="www.instagram.com/isenhoffs_buero/"
+                        href="https://www.instagram.com/isenhoffs_buero/"
                       >
                         <svg
                           aria-label="Instagram"
@@ -846,7 +846,7 @@ const AboutUs = () => {
                         data-typeaction="Click"
                         data-typename={` Instagram`}
                         target="_blank"
-                        href="www.instagram.com/isenhoffs_buero/"
+                        href="https://www.instagram.com/isenhoffs_buero/"
                       >
                         <svg
                           aria-label="Instagram"
@@ -1027,7 +1027,7 @@ const AboutUs = () => {
                         data-typeaction="Click"
                         data-typename={` Instagram`}
                         target="_blank"
-                        href="www.instagram.com/isenhoffs_buero/"
+                        href="https://www.instagram.com/isenhoffs_buero/"
                       >
                         <svg
                           aria-label="Instagram"

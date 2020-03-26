@@ -106,7 +106,7 @@ const CookieLayer = () => {
                   className="allow-track"
                   onClick={saveSettingsEnbleAllCookies}
                 >
-                  <span className="allow-track">Cookies für Gremlin</span>
+                  <span className="allow-track">Cookies bestätigen</span>
                 </StyledButton>
                 {settingsOpen && (
                   <StyledButton

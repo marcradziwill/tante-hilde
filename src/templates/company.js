@@ -16,7 +16,7 @@ import SocialShare from 'components/SocialShare';
 // import StyledBox from 'components/StyledBox';
 
 function Company({ pageContext: { company } }) {
-  console.log(company);
+  // console.log(company);
 
   if (company.Webshop_Link.length > 0) {
     if (
@@ -405,27 +405,31 @@ function Company({ pageContext: { company } }) {
             </>
           ) : (
             <>
-              <h3>Video</h3>
-              <p
-                css={css`
-                  height: 500px;
-                `}
-              >
-                <iframe
-                  width="100%"
-                  height="500px"
-                  css={css`
-                    height: 500px;
-                  `}
-                  title="Video"
-                  src={`https://www.youtube-nocookie.com/embed/${youtube_parser(
-                    company.Video_Link,
-                  )}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </p>
+              {company.Video_Link && (
+                <>
+                  <h3>Video</h3>
+                  <p
+                    css={css`
+                      height: 500px;
+                    `}
+                  >
+                    <iframe
+                      width="100%"
+                      height="500px"
+                      css={css`
+                        height: 500px;
+                      `}
+                      title="Video"
+                      src={`https://www.youtube-nocookie.com/embed/${youtube_parser(
+                        company.Video_Link,
+                      )}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </p>
+                </>
+              )}
             </>
           )}
           <SocialShare />

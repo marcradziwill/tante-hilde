@@ -19,28 +19,53 @@ const MobileNavigation = ({ items, location }) => {
           transition: all 0.3s cubic-bezier(0, 0.995, 0.99, 1) 0.3s;
         `}
       >
-        <Link
-          onClick={onToggle}
-          to={menuItem.link}
-          css={css`
-            color: white;
-            display: block;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 1.25rem;
-            text-decoration: none;
-            padding: 1rem;
-            font-weight: 400;
-            &:hover,
-            &:focus {
-              outline: 0;
-              background-color: rgba(0, 0, 0, 0.2);
-            }
-          `}
-        >
-          {menuItem.title}
-        </Link>
+        {menuItem.extern ? (
+          <ExternalLink
+            target="_blank"
+            href={menuItem.link}
+            css={css`
+              color: white;
+              display: block;
+              text-align: center;
+              text-transform: uppercase;
+              letter-spacing: 5px;
+              font-size: 1.25rem;
+              text-decoration: none;
+              padding: 1rem;
+              font-weight: 400;
+              &:hover,
+              &:focus {
+                outline: 0;
+                background-color: rgba(0, 0, 0, 0.2);
+              }
+            `}
+          >
+            {menuItem.title}
+          </ExternalLink>
+        ) : (
+          <Link
+            onClick={onToggle}
+            to={menuItem.link}
+            css={css`
+              color: white;
+              display: block;
+              text-align: center;
+              text-transform: uppercase;
+              letter-spacing: 5px;
+              font-size: 1.25rem;
+              text-decoration: none;
+              padding: 1rem;
+              font-weight: 400;
+              &:hover,
+              &:focus {
+                outline: 0;
+                background-color: rgba(0, 0, 0, 0.2);
+              }
+            `}
+          >
+            {menuItem.title}
+          </Link>
+        )}
       </li>
     );
   };

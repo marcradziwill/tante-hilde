@@ -344,7 +344,11 @@ const Index = ({ data: { companies } }) => {
                           // display: flex;
                         `}
                         alt="2"
-                        src={`${company.node.Logo_Link}`}
+                        src={`${
+                          company.node.Logo_Link
+                            ? company.node.Logo_Link
+                            : '/Dummybild.png'
+                        }`}
                       />
                       <div
                         css={css`

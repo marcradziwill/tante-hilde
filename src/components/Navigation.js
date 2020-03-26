@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { css } from '@emotion/core';
 import SocialTeaser from 'components/SocialTeaser';
+import ExternalLink from 'components/ExternalLink';
 import { colors } from 'utils/theme';
 import { media } from 'utils/media';
 
@@ -21,37 +22,73 @@ const Navigation = ({ items }) => {
           }
         `}
       >
-        <Link
-          css={css`
-            border-bottom: 2px solid transparent;
-            display: block;
-            color: ${colors.brand};
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            position: relative;
-            text-decoration: none;
-            padding: 1rem 0.6rem;
-            top: 0;
-            z-index: 1;
-            :hover {
-              font-weight: 700;
+        {menuItem.extern ? (
+          <ExternalLink
+            css={css`
+              border-bottom: 2px solid transparent;
+              display: block;
               color: ${colors.brand};
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              font-size: 0.8rem;
+              position: relative;
               text-decoration: none;
+              padding: 1rem 0.6rem;
+              top: 0;
+              z-index: 1;
+              :hover {
+                font-weight: 700;
+                color: ${colors.brand};
+                text-decoration: none;
+              }
+              &.current-item {
+                font-weight: 800;
+              }
+            `}
+            href={menuItem.link}
+            target="_blank"
+            data-typeaction="Click"
+            data-typename={
+              menuItem.title.charAt(0).toUpperCase() + menuItem.title.slice(1)
             }
-            &.current-item {
-              font-weight: 800;
+            data-typecat="Nav-Punkt"
+          >
+            {menuItem.title}
+          </ExternalLink>
+        ) : (
+          <Link
+            css={css`
+              border-bottom: 2px solid transparent;
+              display: block;
+              color: ${colors.brand};
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              font-size: 0.8rem;
+              position: relative;
+              text-decoration: none;
+              padding: 1rem 0.6rem;
+              top: 0;
+              z-index: 1;
+              :hover {
+                font-weight: 700;
+                color: ${colors.brand};
+                text-decoration: none;
+              }
+              &.current-item {
+                font-weight: 800;
+              }
+            `}
+            to={menuItem.link}
+            data-typeaction="Click"
+            data-typename={
+              menuItem.title.charAt(0).toUpperCase() + menuItem.title.slice(1)
             }
-          `}
-          to={menuItem.link}
-          data-typeaction="Click"
-          data-typename={
-            menuItem.title.charAt(0).toUpperCase() + menuItem.title.slice(1)
-          }
-          data-typecat="Nav-Punkt"
-        >
-          {menuItem.title}
-        </Link>
+            data-typecat="Nav-Punkt"
+          >
+            {menuItem.title}
+          </Link>
+        )}
+
         {menuItem.submenu && menuItem.submenu.length > 0 && (
           <ul
             css={css`

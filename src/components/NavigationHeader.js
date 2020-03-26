@@ -25,6 +25,12 @@ const items = [
     title: 'Über uns',
     link: '/ueber-uns/',
   },
+  {
+    title: 'Formular',
+    extern: true,
+    link:
+      'https://docs.google.com/forms/d/e/1FAIpQLSeBpMd-oqTT1zkLcG-CnsvoJPNscd5g3ooyWQUwPAmfaDUCdw/viewform?usp=sf_link',
+  },
 ];
 const NavigationHeader = ({ location, locationEntry }) => {
   return (
