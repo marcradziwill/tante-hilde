@@ -4,16 +4,17 @@ import SEO from 'components/SEO/SEO';
 import PageHeader from 'components/PageHeader';
 import FullWidthBox from 'components/FullWidthBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
-import Image from 'components/Image';
+// import Image from 'components/Image';
 import ExternalLink from 'components/ExternalLink';
 import { css } from '@emotion/core';
 import { scrollToAnchor } from 'utils/helpers';
-import { find } from 'lodash';
+// import { orderBy } from 'lodash';
 
 const Index = ({ data: { companies } }) => {
   // const [filterCategory, setFilterCategory] = React.useState();
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
     companies.edges,
+    // orderBy(companies.edges, 'node.Name_Firma'),
   );
 
   const changeCategory = (event) => {
@@ -346,6 +347,7 @@ const Index = ({ data: { companies } }) => {
                           height: 150px;
                           border-radius: 50%;
                           border: 1px solid #73b471;
+                          object-fit: contain;
                         `}
                         alt="2"
                         src={`${
@@ -357,7 +359,7 @@ const Index = ({ data: { companies } }) => {
                       <div
                         css={css`
                           display: flex;
-                          text-aling: center;
+                          text-align: center;
                           flex-direction: column;
                           justify-content: center;
                           align-items: center;
