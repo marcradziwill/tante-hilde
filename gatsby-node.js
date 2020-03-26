@@ -21,9 +21,11 @@ function createCompanyPages({ companyPath, data, actions }) {
     pagePath = pagePath.replace(/ü/g, 'ue');
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
-
+    pagePath = pagePath.replace(/é/g, '');
+    const pagePathFull = pagePath.replace(/[&\/\\#,+()$!~®%.'":*?<>{}]/g, '');
+    console.log(pagePathFull);
     createPage({
-      path: companyPath + pagePath,
+      path: companyPath + pagePathFull,
       component: path.resolve(`./src/templates/company.js`),
       context: {
         id: node.id,
@@ -88,39 +90,41 @@ const createCustomNodeFields = ({ node, getNode, actions }) => {
     pagePath = pagePath.replace(/ü/g, 'ue');
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
+    pagePath = pagePath.replace(/é/g, '');
+    const pagePathFull = pagePath.replace(/[&\/\\#,+()$!~®%.'":*?<>{}]/g, '');
     createNodeField({
       name: 'pageUrl',
       node,
-      value: pagePath,
+      value: pagePathFull,
     });
   }
 };
-exports.onCreateNode = async ({
-  node,
-  actions: { createNode },
-  store,
-  cache,
-  createNodeId,
-}) => {
-  // For all MarkdownRemark nodes that have a featured image url, call createRemoteFileNode
-  if (
-    node.internal.type === 'MarkdownRemark' &&
-    node.frontmatter.featuredImgUrl !== null
-  ) {
-    let fileNode = await createRemoteFileNode({
-      url: node.frontmatter.featuredImgUrl, // string that points to the URL of the image
-      parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
-      createNode, // helper function in gatsby-node to generate the node
-      createNodeId, // helper function in gatsby-node to generate the node id
-      cache, // Gatsby's cache
-      store, // Gatsby's redux store
-    });
-    // if the file was created, attach the new node to the parent node
-    if (fileNode) {
-      node.featuredImg___NODE = fileNode.id;
-    }
-  }
-};
+// exports.onCreateNode = async ({
+//   node,
+//   actions: { createNode },
+//   store,
+//   cache,
+//   createNodeId,
+// }) => {
+//   // For all MarkdownRemark nodes that have a featured image url, call createRemoteFileNode
+//   if (
+//     node.internal.type === 'MarkdownRemark' &&
+//     node.frontmatter.featuredImgUrl !== null
+//   ) {
+//     let fileNode = await createRemoteFileNode({
+//       url: node.frontmatter.featuredImgUrl, // string that points to the URL of the image
+//       parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
+//       createNode, // helper function in gatsby-node to generate the node
+//       createNodeId, // helper function in gatsby-node to generate the node id
+//       cache, // Gatsby's cache
+//       store, // Gatsby's redux store
+//     });
+//     // if the file was created, attach the new node to the parent node
+//     if (fileNode) {
+//       node.featuredImg___NODE = fileNode.id;
+//     }
+//   }
+// };
 // eslint-disable-next-line complexity
 exports.onCreateNode = ({
   node,

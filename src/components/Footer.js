@@ -5,12 +5,16 @@ import FullWidthBox from 'components/FullWidthBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import CookieLayer from 'components/CookieLayer';
 import StyledBox from 'components/StyledBox';
+import { media } from 'utils/media';
 
 const Footer = () => {
   return (
     <footer
       css={css`
-        position: fixed;
+        // position: absolute;
+        @media ${media.small} {
+          position: fixed;
+        }
         bottom: 0;
         width: 100%;
         a {

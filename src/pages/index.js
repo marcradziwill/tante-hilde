@@ -190,7 +190,12 @@ const Index = ({ data: { companies } }) => {
           </FullWidthBox>
           <FullWidthBox>
             <ResponsiveGrid>
-              <div id="search">
+              <div
+                id="search"
+                css={css`
+                  padding: 0 10px;
+                `}
+              >
                 {/* <Input  placeholder="Suchen" /> */}
                 <input
                   placeholder="Suchen"
@@ -321,7 +326,6 @@ const Index = ({ data: { companies } }) => {
               `}
             >
               {companiesToDisplay.map((company, index) => {
-                // console.log(company.node);
                 return (
                   <Link
                     to={`/unternehmen/${company.node.fields.pageUrl}/`}
@@ -341,7 +345,7 @@ const Index = ({ data: { companies } }) => {
                           width: 150px;
                           height: 150px;
                           border-radius: 50%;
-                          // display: flex;
+                          border: 1px solid #73b471;
                         `}
                         alt="2"
                         src={`${
@@ -360,7 +364,6 @@ const Index = ({ data: { companies } }) => {
                         `}
                       >
                         <h5>{company.node.Name_Firma}</h5>
-                        <h5>{company.node.Webseite}</h5>
                       </div>
                     </div>
                   </Link>
