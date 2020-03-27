@@ -35,6 +35,10 @@ function Company({ pageContext: { company } }) {
       company.Webseite = `https://${company.Webseite}`;
     }
   }
+  let videoId;
+  if (company.Video_Link.includes('vimeo')) {
+    videoId = company.Video_Link.split('/')[3];
+  }
   const youtube_parser = (url) => {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     const match = url.match(regExp);
@@ -72,7 +76,7 @@ function Company({ pageContext: { company } }) {
             {/* <Image filename="tantehilde_logo.png" alt="" title="" /> */}
             <img
               css={css`
-                width: 70%;
+                width: 50%;
               `}
               src={company.Logo_Link}
               alt=""
@@ -371,21 +375,33 @@ function Company({ pageContext: { company } }) {
       </FullWidthBox>
       <FullWidthBox>
         <div>
-          {/* Beschreibung Email Facebook_Link Instagram_Link Lieferung___Bezahlung
-          PLZ__Ort Rechtliches Strasse__Hausnummer Telefon Webseite Webshop_Link
-          PDF_Link Name_Firma Logo_Link Branch Fax Ansprechpartner
-          Bestellung__ber_ Video_Link */}
           <h2>Details</h2>
-          <h3>Beschreibung</h3>
-          <p>{company.Beschreibung}</p>
-          <h3>Bestellung per</h3>
-          <p>{company.Bestellung__ber_}</p>
-          <h3>Ansprechpartner</h3>
-          <p>{company.Ansprechpartner}</p>
+          {company.Beschreibung && (
+            <>
+              <h3>Beschreibung</h3>
+              <p>{company.Beschreibung}</p>
+            </>
+          )}
+          {company.Bestellung__ber_ && (
+            <>
+              <h3>Bestellung per</h3>
+              <p>{company.Bestellung__ber_}</p>
+            </>
+          )}
+          {company.Ansprechpartner && (
+            <>
+              <h3>Ansprechpartner</h3>
+              <p>{company.Ansprechpartner}</p>
+            </>
+          )}
           <h3>Branche</h3>
           <p>{company.Branch}</p>
-          <h3>Lieferung / Bezahlung</h3>
-          <p>{company.Lieferung___Bezahlung}</p>
+          {company.Lieferung___Bezahlung && (
+            <>
+              <h3>Lieferung / Bezahlung</h3>
+              <p>{company.Lieferung___Bezahlung}</p>
+            </>
+          )}
           {company.Webshop_Link && (
             <>
               <h3>Webshop</h3>
@@ -417,15 +433,29 @@ function Company({ pageContext: { company } }) {
               </p>
             </>
           ) : (
-            <>
-              {company.Video_Link && (
-                <>
-                  <h3>Video</h3>
-                  <p
-                    css={css`
-                      height: 500px;
-                    `}
-                  >
+            company.Video_Link && (
+              <>
+                <h3>Video</h3>
+                <p
+                  css={css`
+                    height: 500px;
+                  `}
+                >
+                  {/* https://player.vimeo.com/video/171813417 */}
+                  {company.Video_Link.includes('vimeo.') ? (
+                    <iframe
+                      width="100%"
+                      height="500px"
+                      css={css`
+                        height: 500px;
+                      `}
+                      title="Video"
+                      src={`https://player.vimeo.com/video/${videoId}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
                     <iframe
                       width="100%"
                       height="500px"
@@ -440,12 +470,28 @@ function Company({ pageContext: { company } }) {
                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
-                  </p>
-                </>
-              )}
-            </>
+                  )}
+                </p>
+              </>
+            )
           )}
           <SocialShare />
+          <StyledBox>
+            <ExternalLink
+              css={css`
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+                color: #73b471;
+              `}
+              target="_blank"
+              href="mailto:tantehildeallgaeu@gmail.com"
+            >
+              Bei Änderungen eurer Daten oder allgemeinen Fragen, schreibt uns
+              gerne eine Email.
+            </ExternalLink>
+          </StyledBox>
         </div>
       </FullWidthBox>
     </>

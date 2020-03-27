@@ -8,14 +8,15 @@ import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import ExternalLink from 'components/ExternalLink';
 import { css } from '@emotion/core';
 import { scrollToAnchor } from 'utils/helpers';
-// import { orderBy } from 'lodash';
+import { orderBy, uniq } from 'lodash';
 
 const Index = ({ data: { companies } }) => {
   // const [filterCategory, setFilterCategory] = React.useState();
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
-    companies.edges,
-    // orderBy(companies.edges, 'node.Name_Firma'),
+    // companies.edges,
+    orderBy(companies.edges, 'node.Name_Firma'),
   );
+  const [filterPlace, setFilterPlace] = React.useState();
 
   const changeCategory = (event) => {
     event.preventDefault();
@@ -38,6 +39,33 @@ const Index = ({ data: { companies } }) => {
     });
     setCompaniesToDisplay(companyToFilter);
   };
+  const changePlace = (event) => {
+    event.preventDefault();
+    const val = event.target.value;
+    if (val === 'alle') {
+      setCompaniesToDisplay(companies.edges);
+    } else {
+      const companyToFilter = companies.edges.filter((com) => {
+        return com.node.PLZ__Ort.includes(val);
+      });
+      setCompaniesToDisplay(companyToFilter);
+    }
+  };
+  const places = [];
+  companies.edges.map((compan) => {
+    compan.node.PLZ__Ort = compan.node.PLZ__Ort.replace(/\(Allgäu\)/g, '');
+    compan.node.PlaceFilter = compan.node.PLZ__Ort.replace(
+      /[&\/\\#,+()$!~®%.'":*?<>{}]/g,
+      '',
+    );
+    compan.node.PlaceFilter = compan.node.PlaceFilter.replace(
+      /([0-9]+)(.)/g,
+      '$2',
+    );
+
+    places.push(compan.node.PlaceFilter.trim());
+    return compan;
+  });
 
   return (
     <>
@@ -190,14 +218,13 @@ const Index = ({ data: { companies } }) => {
             </div>
           </FullWidthBox>
           <FullWidthBox>
-            <ResponsiveGrid>
-              <div
-                id="search"
-                css={css`
-                  padding: 0 10px;
-                `}
-              >
-                {/* <Input  placeholder="Suchen" /> */}
+            <ResponsiveGrid
+              templatecolumns="100%"
+              css={css`
+                margin-bottom: 20px;
+              `}
+            >
+              <div id="search">
                 <input
                   placeholder="Suchen"
                   css={css`
@@ -222,6 +249,40 @@ const Index = ({ data: { companies } }) => {
                   type="text"
                   onChange={onSearchInput}
                 />
+              </div>
+            </ResponsiveGrid>
+            <ResponsiveGrid>
+              <div
+                css={css`
+                  width: 100%;
+                  border: 1px solid #ccc;
+                  border-radius: 3px;
+                  overflow: hidden;
+                  select {
+                    width: 100%;
+                    padding: 5px 8px;
+                    border: none;
+                    box-shadow: none;
+                    background: transparent;
+                    background-image: none;
+                    -webkit-appearance: none;
+                  }
+
+                  select:focus {
+                    outline: none;
+                  }
+                `}
+              >
+                <select onChange={changePlace}>
+                  <option value="alle">Alle Orte</option>
+                  {uniq(places).map((place, idx) => {
+                    return (
+                      <option key={idx} value={place}>
+                        {place}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <div
                 css={css`
