@@ -81,7 +81,8 @@ const gatsbySettings = {
         // eslint-disable-next-line
         theme_color: website.themeColor,
         display: 'standalone',
-        // icon: `./static/tantehilde-gruen.png`,
+        // icon: `src/images/tantehilde-gruen.png`,
+        // icon: `src/images/marc_favicon.png`,
         icons: [
           {
             src: '/favicons/android-chrome-192x192.png',

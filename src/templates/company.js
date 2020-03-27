@@ -11,13 +11,14 @@ import SEO from 'components/SEO/SEO';
 import ExternalLink from 'components/ExternalLink';
 import StyledBox from 'components/StyledBox';
 import SocialShare from 'components/SocialShare';
+import Video from 'components/Video';
 // import mdxComponents from 'components/mdx';
 // import NewsletterBox from 'components/NewsletterBox';
 // import Markdown from 'react-markdown';
 // import StyledBox from 'components/StyledBox';
 
 function Company({ pageContext: { company } }) {
-  // console.log(company);
+  console.log(company);
 
   if (company.Webshop_Link.length > 0) {
     if (
@@ -38,6 +39,20 @@ function Company({ pageContext: { company } }) {
   let videoId;
   if (company.Video_Link.includes('vimeo')) {
     videoId = company.Video_Link.split('/')[3];
+    company.VideoType = 'vimeo';
+  }
+  if (company.Video_Link.includes('.mp4')) {
+    company.VideoType = 'local';
+  }
+  if (company.Video_Link.includes('youtu')) {
+    if (company.Video_Link.includes('channel')) {
+      company.VideoType = 'channel';
+    } else {
+      company.VideoType = 'youtube';
+    }
+  }
+  if (company.Video_Link.includes('insta')) {
+    company.VideoType = 'instagram';
   }
   const youtube_parser = (url) => {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
@@ -423,58 +438,75 @@ function Company({ pageContext: { company } }) {
               </p>
             </>
           )}
-          {company.Video_Link.includes('channel') ? (
+          {company.Video_Link && (
             <>
               <h3>Video</h3>
-              <p>
-                <ExternalLink target="_blank" href={company.Video_Link}>
-                  Video Link
-                </ExternalLink>
-              </p>
+              <div
+                css={css`
+                  height: ${company.VideoType === 'channel' ? '' : '500px'};
+                `}
+              >
+                {company.VideoType === 'channel' && (
+                  <>
+                    <h3>Video</h3>
+                    <ExternalLink target="_blank" href={company.Video_Link}>
+                      Video Link
+                    </ExternalLink>
+                  </>
+                )}
+                {company.VideoType === 'vimeo' && (
+                  <>
+                    <h3>Video</h3>
+                    <p
+                      css={css`
+                        height: 500px;
+                      `}
+                    >
+                      <iframe
+                        width="100%"
+                        height="500px"
+                        css={css`
+                          height: 500px;
+                        `}
+                        title="Video"
+                        src={`https://player.vimeo.com/video/${videoId}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </p>
+                  </>
+                )}
+                {company.VideoType === 'youtube' && (
+                  <iframe
+                    width="100%"
+                    height="500px"
+                    css={css`
+                      height: 500px;
+                    `}
+                    title="Video"
+                    src={`https://www.youtube-nocookie.com/embed/${youtube_parser(
+                      company.Video_Link,
+                    )}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                )}
+                {company.VideoType === 'instagram' && (
+                  <ExternalLink target="_blank" href={company.Video_Link}>
+                    Video Link
+                  </ExternalLink>
+                )}
+
+                {company.VideoType === 'local' && (
+                  <Video filepath={company.Video_Link} />
+                )}
+              </div>
             </>
-          ) : (
-            company.Video_Link && (
-              <>
-                <h3>Video</h3>
-                <p
-                  css={css`
-                    height: 500px;
-                  `}
-                >
-                  {/* https://player.vimeo.com/video/171813417 */}
-                  {company.Video_Link.includes('vimeo.') ? (
-                    <iframe
-                      width="100%"
-                      height="500px"
-                      css={css`
-                        height: 500px;
-                      `}
-                      title="Video"
-                      src={`https://player.vimeo.com/video/${videoId}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  ) : (
-                    <iframe
-                      width="100%"
-                      height="500px"
-                      css={css`
-                        height: 500px;
-                      `}
-                      title="Video"
-                      src={`https://www.youtube-nocookie.com/embed/${youtube_parser(
-                        company.Video_Link,
-                      )}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  )}
-                </p>
-              </>
-            )
           )}
+
+          {/* */}
           <SocialShare />
           <StyledBox>
             <ExternalLink
