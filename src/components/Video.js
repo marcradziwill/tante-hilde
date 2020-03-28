@@ -1,11 +1,6 @@
 /* eslint-disable max-statements-per-line */
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { css } from '@emotion/core';
-import { useNetworkStatus } from 'react-adaptive-hooks/network';
-import Image from 'components/Image';
 const Video = (props) => {
-  console.log(props);
   const HeaderVideo = (
     <video
       preload="auto"

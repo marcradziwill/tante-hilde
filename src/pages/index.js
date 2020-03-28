@@ -16,7 +16,7 @@ const Index = ({ data: { companies } }) => {
     // companies.edges,
     orderBy(companies.edges, 'node.Name_Firma'),
   );
-  const [filterPlace, setFilterPlace] = React.useState();
+  // const [filterPlace, setFilterPlace] = React.useState();
 
   const changeCategory = (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ const Index = ({ data: { companies } }) => {
         return com.node.Branch === val;
       });
 
-      setCompaniesToDisplay(companyToFilter);
+      setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
     }
   };
   const onSearchInput = (event) => {
@@ -37,18 +37,19 @@ const Index = ({ data: { companies } }) => {
     const companyToFilter = companies.edges.filter((com) => {
       return com.node.Name_Firma.includes(val);
     });
-    setCompaniesToDisplay(companyToFilter);
+    setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
   };
   const changePlace = (event) => {
     event.preventDefault();
     const val = event.target.value;
     if (val === 'alle') {
-      setCompaniesToDisplay(companies.edges);
+      setCompaniesToDisplay(orderBy(companies.edges, 'node.Name_Firma'));
     } else {
       const companyToFilter = companies.edges.filter((com) => {
         return com.node.PLZ__Ort.includes(val);
       });
-      setCompaniesToDisplay(companyToFilter);
+
+      setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
     }
   };
   const places = [];

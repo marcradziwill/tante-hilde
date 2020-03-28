@@ -18,13 +18,8 @@ import Video from 'components/Video';
 // import StyledBox from 'components/StyledBox';
 
 function Company({ pageContext: { company } }) {
-  console.log(company);
-
   if (company.Webshop_Link.length > 0) {
-    if (
-      !company.Webshop_Link.startsWith('http') ||
-      !company.Webshop_Link.startsWith('https')
-    ) {
+    if (!company.Webshop_Link.startsWith('http')) {
       company.Webshop_Link = `https://${company.Webshop_Link}`;
     }
   }
@@ -391,6 +386,12 @@ function Company({ pageContext: { company } }) {
       <FullWidthBox>
         <div>
           <h2>Details</h2>
+          {company.Ansprechpartner && (
+            <>
+              <h3>Ansprechpartner</h3>
+              <p>{company.Ansprechpartner}</p>
+            </>
+          )}
           {company.Beschreibung && (
             <>
               <h3>Beschreibung</h3>
@@ -403,12 +404,13 @@ function Company({ pageContext: { company } }) {
               <p>{company.Bestellung__ber_}</p>
             </>
           )}
-          {company.Ansprechpartner && (
+          {company.Mobile && (
             <>
-              <h3>Ansprechpartner</h3>
-              <p>{company.Ansprechpartner}</p>
+              <h3>Bestellung per</h3>
+              <p>{company.Mobile}</p>
             </>
           )}
+
           <h3>Branche</h3>
           <p>{company.Branch}</p>
           {company.Lieferung___Bezahlung && (

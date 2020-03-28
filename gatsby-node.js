@@ -13,7 +13,7 @@ function createCompanyPages({ companyPath, data, actions }) {
   }
 
   const { edges } = data;
-  const { createRedirect, createPage } = actions;
+  const { createPage } = actions;
 
   edges.forEach(({ node }, i) => {
     let pagePath = node.Name_Firma.toLowerCase().replace(/ /g, '-');
@@ -22,8 +22,8 @@ function createCompanyPages({ companyPath, data, actions }) {
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
     pagePath = pagePath.replace(/é/g, '');
-    const pagePathFull = pagePath.replace(/[&\/\\#,+()$!~®%.'":*?<>{}]/g, '');
-    console.log(pagePathFull);
+    const pagePathFull = pagePath.replace(/[&\/\\#,+()$!~®%.'"*?<>{}]/g, '');
+
     createPage({
       path: companyPath + pagePathFull,
       component: path.resolve(`./src/templates/company.js`),
@@ -54,6 +54,7 @@ exports.createPages = async ({ actions, graphql }) => {
             Telefon
             Webseite
             Webshop_Link
+            Mobile
             Zeitstempel
             PDF_Link
             Name_Firma
