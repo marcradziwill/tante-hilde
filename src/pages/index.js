@@ -1,22 +1,25 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import SEO from 'components/SEO/SEO';
 import PageHeader from 'components/PageHeader';
 import FullWidthBox from 'components/FullWidthBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
-// import Image from 'components/Image';
 import ExternalLink from 'components/ExternalLink';
 import { css } from '@emotion/core';
 import { scrollToAnchor } from 'utils/helpers';
 import { orderBy, uniq } from 'lodash';
-
+import loadable from '@loadable/component';
+// import 'intersection-observer';
+import VisibilitySensor from 'react-visibility-sensor';
+// import CompanyList from 'components/CompanyList';
+import CountUp from 'react-countup';
+const CompanyList = loadable(() => import('components/CompanyList'));
+const SocialShare = loadable(() => import('components/SocialShare'));
 const Index = ({ data: { companies } }) => {
-  // const [filterCategory, setFilterCategory] = React.useState();
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
     // companies.edges,
     orderBy(companies.edges, 'node.Name_Firma'),
   );
-  // const [filterPlace, setFilterPlace] = React.useState();
 
   const changeCategory = (event) => {
     event.preventDefault();
@@ -35,7 +38,9 @@ const Index = ({ data: { companies } }) => {
     event.preventDefault();
     const val = event.target.value;
     const companyToFilter = companies.edges.filter((com) => {
-      return com.node.Name_Firma.includes(val);
+      return (
+        com.node.Name_Firma.includes(val) || com.node.Beschreibung.includes(val)
+      );
     });
     setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
   };
@@ -118,8 +123,17 @@ const Index = ({ data: { companies } }) => {
                   `}
                   className="small"
                 >
-                  Kostenlos - im Solidaritätsgedanken
+                  Werde einer von {companies.edges.length} Unternehmen aus dem
+                  Alläu.
                 </h3>
+                <h4
+                  css={css`
+                    max-width: 100% !important;
+                  `}
+                  className="small"
+                >
+                  Kostenlos - im Solidaritätsgedanken
+                </h4>
                 {/* <div css={css`display: flex width: 30%`}>
                   <img src="/tantehilde-gruen.png" alt="" />
                 </div> */}
@@ -136,6 +150,73 @@ const Index = ({ data: { companies } }) => {
               </p>
             </div>
           </FullWidthBox>
+          <FullWidthBox>
+            <div
+              css={css`
+                background: #73b471;
+                font-size: 1rem;
+                padding: 20px;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+              `}
+            >
+              <ResponsiveGrid>
+                <VisibilitySensor
+                  css={css`
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4rem;
+                  `}
+                >
+                  {({ isVisible }) => (
+                    <div
+                      css={css`
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 4rem;
+                      `}
+                    >
+                      {isVisible ? (
+                        <CountUp duration={5} end={companies.edges.length} />
+                      ) : (
+                        '0'
+                      )}
+                    </div>
+                  )}
+                </VisibilitySensor>
+
+                <p
+                  css={css`
+                    font-size: 1rem;
+                    max-width: 100%;
+                    text-align: left;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  `}
+                >
+                  Wir sind schon {companies.edges.length} Unternehmen aus dem
+                  Alläu. Teilt fleißig unsere Seite und helft unseren
+                  Lieblingsläden im Allgäu.
+                </p>
+              </ResponsiveGrid>
+            </div>
+            <SocialShare
+              css={css`
+                padding-top: 20px;
+                background: #a3d2a1;
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+                h6 {
+                  font-size: 1.5rem;
+                }
+              `}
+            />
+          </FullWidthBox>{' '}
           <FullWidthBox>
             <div
               css={css`
@@ -368,72 +449,7 @@ const Index = ({ data: { companies } }) => {
             </ResponsiveGrid>
           </FullWidthBox>
           <FullWidthBox>
-            <div
-              css={css`
-                text-align: center;
-                width: 100%;
-              `}
-            >
-              <h2
-                css={css`
-                  max-width: 100%;
-                `}
-              >
-                Allgäuer Unternehmen
-              </h2>
-            </div>
-            <ResponsiveGrid
-              templatecolumns="33% 33% 33%"
-              css={css`
-                grid-gutter: 5px;
-              `}
-            >
-              {companiesToDisplay.map((company, index) => {
-                return (
-                  <Link
-                    to={`/unternehmen/${company.node.fields.pageUrl}/`}
-                    key={index}
-                  >
-                    <div
-                      css={css`
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: column;
-                        margin-top: 50px;
-                      `}
-                    >
-                      <img
-                        css={css`
-                          width: 150px;
-                          height: 150px;
-                          border-radius: 50%;
-                          border: 1px solid #73b471;
-                          object-fit: contain;
-                        `}
-                        alt="2"
-                        src={`${
-                          company.node.Logo_Link
-                            ? company.node.Logo_Link
-                            : '/Dummybild.png'
-                        }`}
-                      />
-                      <div
-                        css={css`
-                          display: flex;
-                          text-align: center;
-                          flex-direction: column;
-                          justify-content: center;
-                          align-items: center;
-                        `}
-                      >
-                        <h5>{company.node.Name_Firma}</h5>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </ResponsiveGrid>
+            <CompanyList companies={companiesToDisplay} />
           </FullWidthBox>
           <FullWidthBox
             css={css`

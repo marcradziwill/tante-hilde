@@ -8,7 +8,7 @@ import {
 } from 'react-share';
 import StyledBox from 'components/StyledBox';
 
-const SocialShare = () => {
+const SocialShare = (props) => {
   let location;
   if (typeof window !== 'undefined') {
     location = window.location;
@@ -17,6 +17,7 @@ const SocialShare = () => {
   }
   return (
     <StyledBox
+      {...props}
       css={css`
         -webkit-align-items: center;
         -webkit-box-align: center;
