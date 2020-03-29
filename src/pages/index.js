@@ -28,10 +28,10 @@ const Index = ({ data: { companies } }) => {
       setCompaniesToDisplay(companies.edges);
     } else {
       const companyToFilter = companies.edges.filter((com) => {
-        return com.node.Branch === val;
+        return com.node.Branch.includes(val);
       });
 
-      setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
+      setCompaniesToDisplay(companyToFilter);
     }
   };
   const onSearchInput = (event) => {
@@ -299,6 +299,22 @@ const Index = ({ data: { companies } }) => {
                 </ExternalLink>{' '}
                 ein.
               </p>
+              <p>
+                <ExternalLink
+                  css={css`
+                    display: flex;
+                    align-items: start;
+                    justify-content: start;
+                    margin-top: 10px;
+                    color: #73b471;
+                  `}
+                  target="_blank"
+                  href="mailto:tantehildeallgaeu@gmail.com"
+                >
+                  Bei Fragen, Problemen oder Änderungen eurer Daten, meldet euch
+                  gerne bei Tante Hilde per Email.
+                </ExternalLink>
+              </p>
             </div>
           </FullWidthBox>
           <FullWidthBox>
@@ -440,6 +456,9 @@ const Index = ({ data: { companies } }) => {
                   <option value="Kreative Dienste">Kreative Dienste</option>
                   <option value="Schmuck /Opti">Schmuck /Optik</option>
                   <option value="Schuhe">Schuhe</option>
+                  <option value="Zeitschrift / Medien">
+                    Zeitschrift / Medien
+                  </option>
                   <option value="Sicherheit">Sicherheit</option>
                   <option value="Sport">Sport</option>
                   <option value="Unterhaltungs-Elektronik">

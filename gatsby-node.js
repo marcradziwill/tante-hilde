@@ -16,13 +16,15 @@ function createCompanyPages({ companyPath, data, actions }) {
   const { createPage } = actions;
 
   edges.forEach(({ node }, i) => {
-    let pagePath = node.Name_Firma.toLowerCase().replace(/ /g, '-');
+    let pagePath = node.Name_Firma.toLowerCase().replace(/\s/g, '-');
+    pagePath = pagePath.replace(/-+/g, '-');
     pagePath = pagePath.replace(/ä/g, 'ae');
     pagePath = pagePath.replace(/ü/g, 'ue');
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
     pagePath = pagePath.replace(/é/g, '');
-    const pagePathFull = pagePath.replace(/[&\/\\#,+()$!~®%.'"*?<>{}]/g, '');
+    pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
+    const pagePathFull = pagePath.replace(/-+/g, '-');
 
     createPage({
       path: companyPath + pagePathFull,
@@ -86,13 +88,14 @@ exports.createPages = async ({ actions, graphql }) => {
 const createCustomNodeFields = ({ node, getNode, actions }) => {
   const { createNodeField, createRemoteFileNode } = actions;
   if (node.internal.type === `CompaniesCsv`) {
-    let pagePath = node['Name Firma'].toLowerCase().replace(/ /g, '-');
+    let pagePath = node['Name Firma'].toLowerCase().replace(/\s/g, '-');
+    pagePath = pagePath.replace(/-+/g, '-');
     pagePath = pagePath.replace(/ä/g, 'ae');
     pagePath = pagePath.replace(/ü/g, 'ue');
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
-    pagePath = pagePath.replace(/é/g, '');
-    const pagePathFull = pagePath.replace(/[&\/\\#,+()$!~®%.'":*?<>{}]/g, '');
+    pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
+    const pagePathFull = pagePath.replace(/-+/g, '-');
     createNodeField({
       name: 'pageUrl',
       node,

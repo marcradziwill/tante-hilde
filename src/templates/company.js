@@ -18,6 +18,7 @@ import Video from 'components/Video';
 // import StyledBox from 'components/StyledBox';
 
 function Company({ pageContext: { company } }) {
+  console.log(company);
   if (company.Webshop_Link.length > 0) {
     if (!company.Webshop_Link.startsWith('http')) {
       company.Webshop_Link = `https://${company.Webshop_Link}`;
@@ -404,9 +405,15 @@ function Company({ pageContext: { company } }) {
               <p>{company.Bestellung__ber_}</p>
             </>
           )}
+          {company.Telefon && (
+            <>
+              <h3>Telefon</h3>
+              <p>{company.Telefon}</p>
+            </>
+          )}
           {company.Mobile && (
             <>
-              <h3>Bestellung per</h3>
+              <h3>Mobil</h3>
               <p>{company.Mobile}</p>
             </>
           )}
@@ -522,8 +529,8 @@ function Company({ pageContext: { company } }) {
               target="_blank"
               href="mailto:tantehildeallgaeu@gmail.com"
             >
-              Bei Änderungen eurer Daten oder allgemeinen Fragen, schreibt uns
-              gerne eine Email.
+              Bei Fragen, Problemen oder Änderungen eurer Daten, meldet euch
+              gerne bei Tante Hilde unter tantehildeallgaeu@gmail.com.
             </ExternalLink>
           </StyledBox>
         </div>
