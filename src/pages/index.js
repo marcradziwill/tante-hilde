@@ -123,17 +123,17 @@ const Index = ({ data: { companies } }) => {
                   `}
                   className="small"
                 >
-                  Werde einer von {companies.edges.length} Unternehmen aus dem
-                  Alläu.
+                  Kostenlos - im Solidaritätsgedanken
                 </h3>
-                <h4
+                <h3
                   css={css`
                     max-width: 100% !important;
                   `}
                   className="small"
                 >
-                  Kostenlos - im Solidaritätsgedanken
-                </h4>
+                  Bei uns findest du aktuell schon {companies.edges.length}{' '}
+                  Lieblingsläden
+                </h3>
                 {/* <div css={css`display: flex width: 30%`}>
                   <img src="/tantehilde-gruen.png" alt="" />
                 </div> */}
@@ -146,7 +146,7 @@ const Index = ({ data: { companies } }) => {
                 >
                   unserem Formular
                 </ExternalLink>{' '}
-                ein.
+                ein, wenn du auch einen Lieblingsladen hast.
               </p>
             </div>
           </FullWidthBox>
@@ -197,11 +197,13 @@ const Index = ({ data: { companies } }) => {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    padding-bottom: 0;
+                    margin-bottom: 0;
                   `}
                 >
                   Wir sind schon {companies.edges.length} Unternehmen aus dem
-                  Alläu. Teilt fleißig unsere Seite und helft unseren
-                  Lieblingsläden im Allgäu.
+                  Allgäu. Teilt fleißig unsere Seite und helft unseren
+                  Lieblingsläden.
                 </p>
               </ResponsiveGrid>
             </div>

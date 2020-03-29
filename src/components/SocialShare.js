@@ -25,7 +25,7 @@ const SocialShare = (props) => {
         align-items: center;
       `}
     >
-      <h6 style={{ margin: '10px' }}>Teilen</h6>
+      <h6 style={{ margin: '20px', marginBottom: '30px' }}>Teilen</h6>
       <ul
         css={css`
           margin-left: 0;
