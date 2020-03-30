@@ -22,7 +22,7 @@ function createCompanyPages({ companyPath, data, actions }) {
     pagePath = pagePath.replace(/ü/g, 'ue');
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
-    pagePath = pagePath.replace(/é/g, '');
+    pagePath = pagePath.replace(/é/g, 'e');
     pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
     const pagePathFull = pagePath.replace(/-+/g, '-');
 
@@ -93,6 +93,7 @@ const createCustomNodeFields = ({ node, getNode, actions }) => {
     pagePath = pagePath.replace(/ä/g, 'ae');
     pagePath = pagePath.replace(/ü/g, 'ue');
     pagePath = pagePath.replace(/ö/g, 'oe');
+    pagePath = pagePath.replace(/é/g, 'e');
     pagePath = pagePath.replace(/ß/g, 'ss');
     pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
     const pagePathFull = pagePath.replace(/-+/g, '-');

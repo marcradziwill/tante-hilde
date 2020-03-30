@@ -31,7 +31,7 @@ const Index = ({ data: { companies } }) => {
         return com.node.Branch.includes(val);
       });
 
-      setCompaniesToDisplay(companyToFilter);
+      setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
     }
   };
   const onSearchInput = (event) => {
@@ -57,7 +57,7 @@ const Index = ({ data: { companies } }) => {
       setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
     }
   };
-  const places = [];
+  let places = [];
   companies.edges.map((compan) => {
     compan.node.PLZ__Ort = compan.node.PLZ__Ort.replace(/\(Allgäu\)/g, '');
     compan.node.PlaceFilter = compan.node.PLZ__Ort.replace(
@@ -69,9 +69,12 @@ const Index = ({ data: { companies } }) => {
       '$2',
     );
 
+    // let name = compan.node.PlaceFilter.trim();
+    // let place = name.charAt(0).toUpperCase() + name.slice(1);
     places.push(compan.node.PlaceFilter.trim());
     return compan;
   });
+  places = orderBy(places);
 
   return (
     <>

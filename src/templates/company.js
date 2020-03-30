@@ -1,24 +1,14 @@
 /* eslint-disable complexity */
 import React from 'react';
-// import { graphql, Link } from 'gatsby';
-// import Img from 'gatsby-image';
 import { css } from '@emotion/core';
-// import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
-// import { MDXProvider } from '@mdx-js/react';
-// import config from 'utils/website';
 import FullWidthBox from 'components/FullWidthBox';
 import SEO from 'components/SEO/SEO';
 import ExternalLink from 'components/ExternalLink';
 import StyledBox from 'components/StyledBox';
 import SocialShare from 'components/SocialShare';
 import Video from 'components/Video';
-// import mdxComponents from 'components/mdx';
-// import NewsletterBox from 'components/NewsletterBox';
-// import Markdown from 'react-markdown';
-// import StyledBox from 'components/StyledBox';
 
 function Company({ pageContext: { company } }) {
-  console.log(company);
   if (company.Webshop_Link.length > 0) {
     if (!company.Webshop_Link.startsWith('http')) {
       company.Webshop_Link = `https://${company.Webshop_Link}`;
@@ -408,13 +398,33 @@ function Company({ pageContext: { company } }) {
           {company.Telefon && (
             <>
               <h3>Telefon</h3>
-              <p>{company.Telefon}</p>
+              <p>
+                <ExternalLink
+                  href={`tel:${company.Telefon.replace(/\s/g, '')}`}
+                >
+                  {company.Telefon}
+                </ExternalLink>
+              </p>
             </>
           )}
           {company.Mobile && (
             <>
               <h3>Mobil</h3>
-              <p>{company.Mobile}</p>
+              <p>
+                <ExternalLink href={`tel:${company.Mobile.replace(/\s/g, '')}`}>
+                  {company.Mobile}
+                </ExternalLink>
+              </p>
+            </>
+          )}
+          {company.Email && (
+            <>
+              <h3>Mobil</h3>
+              <p>
+                <ExternalLink href={`mailto:${company.Email}`}>
+                  {company.Email}
+                </ExternalLink>
+              </p>
             </>
           )}
 

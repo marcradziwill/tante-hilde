@@ -17,7 +17,7 @@ const CompanyList = (props) => {
             max-width: 100%;
           `}
         >
-          {props.companies.length} Allgäuer Unternehmen
+          {props.companies.length} Allgäuer Unternehmen und Dienstleister
         </h2>
       </div>
       <ResponsiveGrid
