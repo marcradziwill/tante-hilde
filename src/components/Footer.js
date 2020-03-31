@@ -5,9 +5,15 @@ import FullWidthBox from 'components/FullWidthBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import CookieLayer from 'components/CookieLayer';
 import StyledBox from 'components/StyledBox';
+import ExternalLink from 'components/ExternalLink';
+import { scrollToAnchor } from 'utils/helpers';
 import { media } from 'utils/media';
 
 const Footer = () => {
+  const scrollTop = () => {
+    scrollToAnchor('___gatsby');
+  };
+
   return (
     <footer
       css={css`
@@ -25,6 +31,32 @@ const Footer = () => {
         }
       `}
     >
+      <ExternalLink
+        onClick={scrollTop}
+        rel="scrolltop"
+        css={css`
+          cursor: pointer;
+          position: fixed;
+          bottom: 10%;
+          right: 5%;
+          padding: 10px;
+          width: 55px;
+          background: #73b474;
+          border-radius: 30px;
+          height: 55px;
+        `}
+      >
+        {/* <Up style={{ marginLeft: '3px', marginTop: '3px' }} /> */}
+        <svg aria-label="Up" viewBox="0 0 24 24">
+          <polyline
+            fill="none"
+            stroke="#555"
+            strokeWidth="2"
+            points="7.086 1.174 17.086 11.174 7.086 21.174"
+            transform="rotate(-89 12.086 11.174)"
+          />
+        </svg>
+      </ExternalLink>
       <StyledBox
         style={{ color: '#ffffff' }}
         background="brand"

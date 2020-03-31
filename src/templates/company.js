@@ -9,6 +9,12 @@ import SocialShare from 'components/SocialShare';
 import Video from 'components/Video';
 
 function Company({ pageContext: { company } }) {
+  company.Beschreibung = company.Beschreibung.replace(/\\n/g, '<br />');
+  company.Lieferung___Bezahlung = company.Lieferung___Bezahlung.replace(
+    /\\n/g,
+    '<br />',
+  );
+
   if (company.Webshop_Link.length > 0) {
     if (!company.Webshop_Link.startsWith('http')) {
       company.Webshop_Link = `https://${company.Webshop_Link}`;
@@ -386,7 +392,11 @@ function Company({ pageContext: { company } }) {
           {company.Beschreibung && (
             <>
               <h3>Beschreibung</h3>
-              <p>{company.Beschreibung}</p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: company.Beschreibung.split('\n').join('<br />'),
+                }}
+              />
             </>
           )}
           {company.Bestellung__ber_ && (
@@ -419,7 +429,7 @@ function Company({ pageContext: { company } }) {
           )}
           {company.Email && (
             <>
-              <h3>Mobil</h3>
+              <h3>Email</h3>
               <p>
                 <ExternalLink href={`mailto:${company.Email}`}>
                   {company.Email}
@@ -427,13 +437,18 @@ function Company({ pageContext: { company } }) {
               </p>
             </>
           )}
-
           <h3>Branche</h3>
           <p>{company.Branch}</p>
           {company.Lieferung___Bezahlung && (
             <>
               <h3>Lieferung / Bezahlung</h3>
-              <p>{company.Lieferung___Bezahlung}</p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: company.Lieferung___Bezahlung.split('\n').join(
+                    '<br />',
+                  ),
+                }}
+              />
             </>
           )}
           {company.Webshop_Link && (

@@ -16,9 +16,16 @@ import CountUp from 'react-countup';
 const CompanyList = loadable(() => import('components/CompanyList'));
 const SocialShare = loadable(() => import('components/SocialShare'));
 const Index = ({ data: { companies } }) => {
+  companies.edges.map((compan) => {
+    compan.node.FilterName =
+      compan.node.Name_Firma.charAt(0).toUpperCase() +
+      compan.node.Name_Firma.slice(1);
+    return compan;
+  });
+
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
     // companies.edges,
-    orderBy(companies.edges, 'node.Name_Firma'),
+    orderBy(companies.edges, 'node.FilterName'),
   );
 
   const changeCategory = (event) => {
@@ -31,7 +38,7 @@ const Index = ({ data: { companies } }) => {
         return com.node.Branch.includes(val);
       });
 
-      setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
+      setCompaniesToDisplay(orderBy(companyToFilter, 'node.FilterName'));
     }
   };
   const onSearchInput = (event) => {
@@ -39,22 +46,23 @@ const Index = ({ data: { companies } }) => {
     const val = event.target.value;
     const companyToFilter = companies.edges.filter((com) => {
       return (
-        com.node.Name_Firma.includes(val) || com.node.Beschreibung.includes(val)
+        com.node.Name_Firma.toLowerCase().includes(val.toLowerCase()) ||
+        com.node.Beschreibung.toLowerCase().includes(val.toLowerCase())
       );
     });
-    setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
+    setCompaniesToDisplay(orderBy(companyToFilter, 'node.FilterName'));
   };
   const changePlace = (event) => {
     event.preventDefault();
     const val = event.target.value;
     if (val === 'alle') {
-      setCompaniesToDisplay(orderBy(companies.edges, 'node.Name_Firma'));
+      setCompaniesToDisplay(orderBy(companies.edges, 'node.FilterName'));
     } else {
       const companyToFilter = companies.edges.filter((com) => {
         return com.node.PLZ__Ort.includes(val);
       });
 
-      setCompaniesToDisplay(orderBy(companyToFilter, 'node.Name_Firma'));
+      setCompaniesToDisplay(orderBy(companyToFilter, 'node.FilterName'));
     }
   };
   let places = [];
@@ -329,7 +337,7 @@ const Index = ({ data: { companies } }) => {
             >
               <div id="search">
                 <input
-                  placeholder="Suchen"
+                  placeholder="Suchen nach Name oder Beschreibung"
                   css={css`
                     box-sizing: border-box;
                     font-size: inherit;
