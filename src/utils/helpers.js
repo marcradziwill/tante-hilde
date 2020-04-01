@@ -8,66 +8,128 @@ const scrollToAnchor = (anchor) => {
   }
 };
 
-const categories = {
-  walkthedog: {
-    value: 'walkthedog',
-    text: 'Tierbetreuung / Gassi gehen',
-    color: '#3cb8cf',
+const categories = [
+  {
+    name: 'Autos, Motorräder / Zubehör',
+    link: 'autos-motorraeder-zubehoer',
   },
-  shopping: {
-    value: 'shopping',
-    text: 'Einkäufe / Erledigungen',
-    color: '#cf9d3c',
+  {
+    name: 'Banken / Versicherungen',
+    link: 'banken-versicherungen',
   },
-  doc: {
-    value: 'doc',
-    text: 'Rezept abholen beim Arzt',
-    color: '#533ccf',
+  {
+    name: 'Bauen / Wohnen',
+    link: 'bauen-wohnen',
   },
-  pharmacy: {
-    value: 'pharmacy',
-    text: 'Zur Apotheke gehen',
-    color: '#b8cf3c',
+  {
+    name: 'Bekleidung / Accessoires',
+    link: 'bekleidung-acessoires',
   },
-  childcare: {
-    value: 'childcare',
-    text: 'Kinderbetreuung',
-    color: '#cf543c',
+  {
+    name: 'Betten / Heimtextilien',
+    link: 'betten-heimtextilien',
   },
-  education: {
-    value: 'education',
-    text: 'Bildung',
-    color: '#6ecf3c',
+  {
+    name: 'Bücher / Schreibwaren',
+    link: 'banken-versicherungen',
   },
-  repairs: {
-    value: 'repairs',
-    text: 'Kleine Reparaturen',
-    color: '#cf3c6e',
+  {
+    name: 'Büro / Computer',
+    link: 'buero-computer',
   },
-  dailytasks: {
-    value: 'dailytasks',
-    text: 'Tägliche Aufgaben',
-    color: '#3ccf9d',
+  {
+    name: 'Dekoration / Geschenk',
+    link: 'dekoration-geschenk',
   },
-  network: {
-    value: 'network',
-    text: 'Networking / Reden / Telefonieren',
-    color: '#cf3c6e',
+  {
+    name: 'Energie',
+    link: 'energie',
   },
-  music: {
-    value: 'music',
-    text: 'Musik',
-    color: '#cf9d3c',
+
+  {
+    name: 'Fahrräder / Zubehör',
+    link: 'fahrraeder-zubehoer',
   },
-  digital: {
-    value: 'digital',
-    text: 'Digital',
-    color: '#3c6ecf',
+  {
+    name: 'Ferien / Reisen',
+    link: 'ferien-reisen',
   },
-  other: {
-    value: 'other',
-    text: 'Sonstiges',
-    color: '#799cde',
+
+  {
+    name: 'Freizeit / Hobby',
+    link: 'freizeit-hobby',
   },
-};
+  {
+    name: 'Garten / Pflanzen',
+    link: 'banken-versicherungen',
+  },
+
+  {
+    name: 'Gastronomie',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Gesundheit / Kosmetik',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Handwerk',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Haushaltsgeräte/-waren',
+    link: 'banken-versicherungen',
+  },
+
+  {
+    name: 'Heimwerker-Artikel',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Kinder / Spielwaren',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Kunst / Antiquitäten',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Lebensmittel',
+    link: 'banken-versicherungen',
+  },
+
+  {
+    name: 'Möbel / Einrichtungen',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Kreative Dienste',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Schmuck /Optik',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Schuhe',
+    link: 'banken-versicherungen',
+  },
+
+  {
+    name: 'Zeitschrift / Medien',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Sicherheit',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Unterhaltungs-Elektronik',
+    link: 'banken-versicherungen',
+  },
+  {
+    name: 'Sonstiges',
+    link: 'banken-versicherungen',
+  },
+];
 export { categories, scrollToAnchor };

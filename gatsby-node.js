@@ -38,6 +38,37 @@ function createCompanyPages({ companyPath, data, actions }) {
 
   return null;
 }
+function createBranchPages({ prefixPath, data, actions }) {
+  if (_.isEmpty(data)) {
+    throw new Error('There are no branches!');
+  }
+
+  const { createPage } = actions;
+
+  data.companies.forEach((com) => {
+    let pagePath = com.node.Name_Firma.toLowerCase().replace(/\s/g, '-');
+    pagePath = pagePath.replace(/-+/g, '-');
+    pagePath = pagePath.replace(/ä/g, 'ae');
+    pagePath = pagePath.replace(/ü/g, 'ue');
+    pagePath = pagePath.replace(/ö/g, 'oe');
+    pagePath = pagePath.replace(/é/g, 'e');
+    pagePath = pagePath.replace(/ß/g, 'ss');
+    pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
+    com.node.fields = {
+      pageUrl: pagePath.replace(/-+/g, '-'),
+    };
+  });
+
+  createPage({
+    path: `${prefixPath}${data.urlPath}/`,
+    component: path.resolve(`./src/templates/branches.js`),
+    context: {
+      companies: data,
+    },
+  });
+
+  return null;
+}
 
 exports.createPages = async ({ actions, graphql }) => {
   const { data, errors } = await graphql(`
@@ -76,6 +107,35 @@ exports.createPages = async ({ actions, graphql }) => {
   }
 
   const { companies } = data;
+  const categories = companies.edges.map((com) => {
+    let cate = com.node.Branch.toLowerCase().replace(/\//g, '');
+    cate = cate.replace(/ä/g, 'ae');
+    cate = cate.replace(/ü/g, 'ue');
+    cate = cate.replace(/ö/g, 'oe');
+    cate = cate.replace(/ß/g, 'ss');
+    cate = cate.replace(/\,/g, '');
+    cate = cate.replace(/\-/g, '');
+    cate = cate.replace(/\s+/g, '-');
+
+    return {
+      urlPath: cate,
+      category: com.node.Branch,
+    };
+  });
+
+  const categoriesToPage = _.uniqBy(categories, 'category');
+  categoriesToPage.forEach((item) => {
+    const cateCom = companies.edges.filter((com) => {
+      return com.node.Branch.includes(item.category);
+    });
+    item.companies = cateCom;
+    createBranchPages({
+      prefixPath: '/branche/',
+      data: item,
+      actions,
+    });
+  });
+
   createCompanyPages({
     companyPath: '/unternehmen/',
     data: companies,
