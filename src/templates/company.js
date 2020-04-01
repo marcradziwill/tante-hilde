@@ -464,10 +464,10 @@ function Company({ pageContext: { company } }) {
 
           {company.PDF_Link && (
             <>
-              <h3>Webshop</h3>
+              <h3>Informationen</h3>
               <p>
                 <ExternalLink target="_blank" href={company.PDF_Link}>
-                  PDF Informationen
+                  Informationen
                 </ExternalLink>
               </p>
             </>
