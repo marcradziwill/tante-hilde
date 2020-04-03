@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import { css } from '@emotion/core';
 import { uniqBy, orderBy } from 'lodash';
+import { media } from 'utils/media';
 
 const BranchList = ({ companies }) => {
   const branches = companies.map((com) => {
@@ -26,11 +27,23 @@ const BranchList = ({ companies }) => {
       templatecolumns="33% 33% 33%"
       css={css`
         grid-gutter: 5px;
+        display: flex;
+        overflow: scroll;
+        @media ${media.small} {
+          display: grid;
+          overflow: unset;
+        }
       `}
     >
       {orderBy(branchesToDisplay, 'category').map((branche, index) => {
         return (
-          <Link to={`/branche/${branche.urlPath}/`} key={index}>
+          <Link
+            css={css`
+              margin-right: 20px;
+            `}
+            to={`/branche/${branche.urlPath}/`}
+            key={index}
+          >
             <div
               css={css`
                 display: flex;
@@ -56,6 +69,9 @@ const BranchList = ({ companies }) => {
                     display: flex;
                     text-align: center;
                     color: #fff;
+                    max-width: 157px;
+                    padding: 10px;
+                    word-break: break-all;
                   `}
                 >
                   {branche.category}

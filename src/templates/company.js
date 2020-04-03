@@ -46,6 +46,9 @@ function Company({ pageContext: { company } }) {
   if (company.Video_Link.includes('insta')) {
     company.VideoType = 'instagram';
   }
+  if (!company.VideoType && company.Video_Link.length > 0) {
+    company.VideoType = 'iframe';
+  }
   const youtube_parser = (url) => {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     const match = url.match(regExp);
@@ -522,6 +525,20 @@ function Company({ pageContext: { company } }) {
                     src={`https://www.youtube-nocookie.com/embed/${youtube_parser(
                       company.Video_Link,
                     )}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                )}
+                {company.VideoType === 'iframe' && (
+                  <iframe
+                    width="100%"
+                    height="500px"
+                    css={css`
+                      height: 500px;
+                    `}
+                    title="Video"
+                    src={company.Video_Link}
                     frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

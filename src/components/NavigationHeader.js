@@ -16,11 +16,16 @@ const isMobileDevice = () => {
     // eslint-disable-next-line no-empty
   } catch (e) {}
 };
+
 const items = [
   {
     title: 'Start',
     link: '/',
   },
+  // {
+  //   title: 'Branchen',
+  //   link: '/branche/',
+  // },
   {
     title: 'Über uns',
     link: '/ueber-uns/',
@@ -33,6 +38,17 @@ const items = [
   },
 ];
 const NavigationHeader = ({ location, locationEntry }) => {
+  // const data = useStaticQuery(graphql`
+  //   query MenuQuery {
+  //     allSitePage {
+  //       nodes {
+  //         path
+  //       }
+  //     }
+  //   }
+  // `);
+  // console.log(data.allSitePage.nodes);
+
   return (
     <div
       css={css`
@@ -63,7 +79,7 @@ const NavigationHeader = ({ location, locationEntry }) => {
           align-items: center;
           width: 100%;
           height: 100%;
-          min-height: 5rem;
+          // min-height: 2rem;
           position: relative;
           &:after {
             content: '';
@@ -82,8 +98,8 @@ const NavigationHeader = ({ location, locationEntry }) => {
             display: flex;
             flex-shrink: 0;
             text-decoration: none;
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             margin-top: 22px;
           `}
           to="/"

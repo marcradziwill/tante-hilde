@@ -3,7 +3,8 @@ import { css } from '@emotion/core';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import { orderBy, uniq } from 'lodash';
 
-const Filter = ({ companies, onchangecompanies }) => {
+const Filter = (props) => {
+  const { onchangecompanies, companies, ...otherProps } = props;
   companies.map((compan) => {
     compan.node.FilterName =
       compan.node.Name_Firma.charAt(0).toUpperCase() +
@@ -15,7 +16,7 @@ const Filter = ({ companies, onchangecompanies }) => {
     event.preventDefault();
     const val = event.target.value;
     if (val === 'alle') {
-      onchangecompanies(companies);
+      props.onchangecompanies(companies);
     } else {
       const companyToFilter = companies.filter((com) => {
         return com.node.Branch.includes(val) || val.includes(com.node.Branch);
@@ -65,7 +66,7 @@ const Filter = ({ companies, onchangecompanies }) => {
   places = orderBy(places);
 
   return (
-    <>
+    <div {...otherProps}>
       <ResponsiveGrid
         templatecolumns="100%"
         css={css`
@@ -202,7 +203,7 @@ const Filter = ({ companies, onchangecompanies }) => {
           </select>
         </div>
       </ResponsiveGrid>
-    </>
+    </div>
   );
 };
 

@@ -11,6 +11,8 @@ import { css } from '@emotion/core';
 import { scrollToAnchor } from 'utils/helpers';
 import { orderBy } from 'lodash';
 import loadable from '@loadable/component';
+import { media } from 'utils/media';
+
 // import 'intersection-observer';
 import VisibilitySensor from 'react-visibility-sensor';
 // import CompanyList from 'components/CompanyList';
@@ -26,62 +28,8 @@ const Index = ({ data: { companies } }) => {
   });
 
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
-    // companies.edges,
     orderBy(companies.edges, 'node.FilterName'),
   );
-
-  // const changeCategory = (event) => {
-  //   event.preventDefault();
-  //   const val = event.target.value;
-  //   if (val === 'alle') {
-  //     setCompaniesToDisplay(companies.edges);
-  //   } else {
-  //     const companyToFilter = companies.edges.filter((com) => {
-  //       return com.node.Branch.includes(val) || val.includes(com.node.Branch);
-  //     });
-  //     setCompaniesToDisplay(orderBy(companyToFilter, 'node.FilterName'));
-  //   }
-  // };
-  // const onSearchInput = (event) => {
-  //   event.preventDefault();
-  //   const val = event.target.value;
-  //   const companyToFilter = companies.edges.filter((com) => {
-  //     return (
-  //       com.node.Name_Firma.toLowerCase().includes(val.toLowerCase()) ||
-  //       com.node.Beschreibung.toLowerCase().includes(val.toLowerCase())
-  //     );
-  //   });
-  //   setCompaniesToDisplay(orderBy(companyToFilter, 'node.FilterName'));
-  // };
-  // const changePlace = (event) => {
-  //   event.preventDefault();
-  //   const val = event.target.value;
-  //   if (val === 'alle') {
-  //     setCompaniesToDisplay(orderBy(companies.edges, 'node.FilterName'));
-  //   } else {
-  //     const companyToFilter = companies.edges.filter((com) => {
-  //       return com.node.PLZ__Ort.includes(val);
-  //     });
-
-  //     setCompaniesToDisplay(orderBy(companyToFilter, 'node.FilterName'));
-  //   }
-  // };
-  // let places = [];
-  // companies.edges.map((compan) => {
-  //   compan.node.PLZ__Ort = compan.node.PLZ__Ort.replace(/\(Allgäu\)/g, '');
-  //   compan.node.PlaceFilter = compan.node.PLZ__Ort.replace(
-  //     /[&\/\\#,+()$!~®%.'":*?<>{}]/g,
-  //     '',
-  //   );
-  //   compan.node.PlaceFilter = compan.node.PlaceFilter.replace(
-  //     /([0-9]+)(.)/g,
-  //     '$2',
-  //   );
-
-  //   places.push(compan.node.PlaceFilter.trim());
-  //   return compan;
-  // });
-  // places = orderBy(places);
 
   return (
     <>
@@ -228,17 +176,31 @@ const Index = ({ data: { companies } }) => {
                 }
               `}
             />
-          </FullWidthBox>{' '}
-          <FullWidthBox>
-            <div
-              css={css`
-                // display: flex;
-                // justify-content: center;
-                // text-align: center;
-                // align-items: center;
-                // flex-direction: column;
-              `}
-            >
+          </FullWidthBox>
+          <FullWidthBox
+            pad="20px"
+            css={css`
+              display: flex;
+              @media ${media.small} {
+                display: none;
+              }
+            `}
+          >
+            <Filter
+              id="searchMobile"
+              companies={companies.edges}
+              onchangecompanies={setCompaniesToDisplay}
+            />
+          </FullWidthBox>
+          <FullWidthBox
+            css={css`
+              display: none;
+              @media ${media.small} {
+                display: flex;
+              }
+            `}
+          >
+            <div>
               <h2>Tante Hilde - Dein virtueller Marktplatz im Allgäu!</h2>
 
               <p>
@@ -327,7 +289,7 @@ const Index = ({ data: { companies } }) => {
               </p>
             </div>
           </FullWidthBox>
-          <FullWidthBox>
+          {/* <FullWidthBox>
             <div
               css={css`
                 text-align: center;
@@ -343,9 +305,17 @@ const Index = ({ data: { companies } }) => {
               </h2>
             </div>
             <BranchList companies={companies.edges} />
-          </FullWidthBox>
-          <FullWidthBox>
+          </FullWidthBox> */}
+          <FullWidthBox
+            css={css`
+              display: none;
+              @media ${media.small} {
+                display: flex;
+              }
+            `}
+          >
             <Filter
+              id="searchDesktop"
               companies={companies.edges}
               onchangecompanies={setCompaniesToDisplay}
             />

@@ -51,16 +51,60 @@ const gatsbySettings = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        path: `${__dirname}/content/blog`,
+        name: 'blog',
+      },
+    },
+
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         path: `${__dirname}/content/`,
         name: 'content',
       },
     },
-
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: ['.mdx', '.md', '.markdown'],
+        gatsbyRemarkPlugins: [
+          `gatsby-remark-reading-time`,
+          `gatsby-remark-copy-linked-files`,
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              backgroundColor: '#ffffff',
+              maxWidth: 1280,
+            },
+          },
+          `gatsby-remark-embedder`,
+        ],
+      },
+    },
+    {
+      resolve: 'gatsby-remark-images',
+      options: {
+        backgroundColor: '#ffffff',
+        maxWidth: 1280,
+      },
+    },
     `gatsby-plugin-sass`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    // {
+    //   resolve: `gatsby-source-wordpress`,
+    //   options: {
+    //     // your WordPress source
+    //     baseUrl: `tantehildeallgaeu.wordpress.com`,
+    //     protocol: `https`,
+    //     // is it hosted on wordpress.com, or self-hosted?
+    //     hostingWPCOM: true,
+    //     // does your site use the Advanced Custom Fields Plugin?
+    //     useACF: false,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-typography`,
       options: {

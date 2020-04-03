@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
       <StyledBox
         css={css`
           grid-area: main;
-          margin-top: 5rem;
+          // margin-top: 5rem;
         `}
       >
         <main>{children}</main>

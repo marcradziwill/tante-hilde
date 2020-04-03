@@ -1,7 +1,7 @@
 const scrollToAnchor = (anchor) => {
   if (document.getElementById(anchor)) {
     window.scrollTo({
-      top: document.getElementById(anchor).offsetTop - 60,
+      top: document.getElementById(anchor).offsetTop - 100,
       left: 0,
       behavior: 'smooth',
     });
@@ -23,7 +23,7 @@ const categories = [
   },
   {
     name: 'Bekleidung / Accessoires',
-    link: 'bekleidung-acessoires',
+    link: 'bekleidung-accessoires',
   },
   {
     name: 'Betten / Heimtextilien',
@@ -31,7 +31,7 @@ const categories = [
   },
   {
     name: 'Bücher / Schreibwaren',
-    link: 'banken-versicherungen',
+    link: 'buecher-schreibwaren',
   },
   {
     name: 'Büro / Computer',
@@ -39,7 +39,7 @@ const categories = [
   },
   {
     name: 'Dekoration / Geschenk',
-    link: 'dekoration-geschenk',
+    link: 'dekoration-geschenke',
   },
   {
     name: 'Energie',
@@ -61,54 +61,54 @@ const categories = [
   },
   {
     name: 'Garten / Pflanzen',
-    link: 'banken-versicherungen',
+    link: 'garten-pflanzen',
   },
 
   {
     name: 'Gastronomie',
-    link: 'banken-versicherungen',
+    link: 'gastronomie',
   },
   {
     name: 'Gesundheit / Kosmetik',
-    link: 'banken-versicherungen',
+    link: 'gesundheit-kosmetik',
   },
   {
     name: 'Handwerk',
-    link: 'banken-versicherungen',
+    link: 'handwerk',
   },
   {
     name: 'Haushaltsgeräte/-waren',
-    link: 'banken-versicherungen',
+    link: 'haushaltsgeraetewaren',
   },
 
   {
     name: 'Heimwerker-Artikel',
-    link: 'banken-versicherungen',
+    link: '/heimwerkerartikel/',
   },
   {
     name: 'Kinder / Spielwaren',
-    link: 'banken-versicherungen',
+    link: '/kinder-spielwaren/',
   },
   {
     name: 'Kunst / Antiquitäten',
-    link: 'banken-versicherungen',
+    link: 'kunst-antiquitaeten',
   },
   {
     name: 'Lebensmittel',
-    link: 'banken-versicherungen',
+    link: 'lebensmittel',
   },
 
   {
     name: 'Möbel / Einrichtungen',
-    link: 'banken-versicherungen',
+    link: 'moebel-einrichtungen',
   },
   {
     name: 'Kreative Dienste',
-    link: 'banken-versicherungen',
+    link: 'kreative-dienste',
   },
   {
     name: 'Schmuck /Optik',
-    link: 'banken-versicherungen',
+    link: 'schmuck-optik',
   },
   {
     name: 'Schuhe',
@@ -125,11 +125,77 @@ const categories = [
   },
   {
     name: 'Unterhaltungs-Elektronik',
-    link: 'banken-versicherungen',
+    link: 'unterhaltungselektronik',
   },
   {
     name: 'Sonstiges',
     link: 'banken-versicherungen',
   },
 ];
+
 export { categories, scrollToAnchor };
+
+//   "path": "/branche/lebensmittel/"
+// },
+// {
+//   "path": "/branche/gastronomie/"
+// },
+// {
+//   "path": "/branche/schmuck-optik/"
+// },
+// {
+//   "path": "/branche/bekleidung-accessoires/"
+// },
+// {
+//   "path": "/branche/dekoration-geschenke/"
+// },
+// {
+//   "path": "/branche/buero-computer/"
+// },
+// {
+//   "path": "/branche/freizeit-hobby/"
+// },
+// {
+//   "path": "/branche/handwerk/"
+// },
+// {
+//   "path": "/branche/fahrraeder-zubehoer/"
+// },
+// {
+//   "path": "/branche/unterhaltungselektronik/"
+// },
+// {
+//   "path": "/branche/moebel-einrichtungen/"
+// },
+// {
+//   "path": "/branche/sport/"
+// },
+// {
+//   "path": "/branche/haushaltsgeraetewaren/"
+// },
+// {
+//   "path": "/branche/zeitschrift-medien/"
+// },
+// {
+//   "path": "/branche/sicherheit/"
+// },
+// {
+//   "path": "/branche/ferien-reisen/"
+// },
+// {
+//   "path": "/branche/kinder-spielwaren/"
+// },
+// {
+//   "path": "/branche/autos-motorraeder-zubehoer/"
+// },
+// {
+//   "path": "/branche/heimwerkerartikel/"
+// },
+// {
+//   "path": "/branche/bauen-wohnen/"
+// },
+// {
+//   "path": "/branche/schuhe/"
+// },
+// {
+//   "path": "/branche/betten-heimtextilien/"

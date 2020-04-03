@@ -5,6 +5,10 @@ import {
   LinkedinShareButton,
   TwitterShareButton,
   EmailShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TelegramIcon,
 } from 'react-share';
 import StyledBox from 'components/StyledBox';
 
@@ -97,6 +101,26 @@ const SocialShare = (props) => {
               />
             </svg>
           </LinkedinShareButton>
+        </li>
+        <li>
+          <TelegramShareButton
+            url={location}
+            data-typecat="Link"
+            data-typeaction="Click"
+            data-typename="Share Twitter"
+          >
+            <TelegramIcon size={24} round={true} />
+          </TelegramShareButton>
+        </li>
+        <li>
+          <WhatsappShareButton
+            url={location}
+            data-typecat="Link"
+            data-typeaction="Click"
+            data-typename="Share Twitter"
+          >
+            <WhatsappIcon size={24} round={true} />
+          </WhatsappShareButton>
         </li>
         <li>
           <TwitterShareButton
