@@ -22,16 +22,20 @@ const items = [
     title: 'Start',
     link: '/',
   },
-  // {
-  //   title: 'Branchen',
-  //   link: '/branche/',
-  // },
+  {
+    title: 'Schaufenster',
+    link: '/schaufenster/',
+  },
+  {
+    title: 'Unternehmen',
+    link: '/unternehmen/',
+  },
   {
     title: 'Über uns',
     link: '/ueber-uns/',
   },
   {
-    title: 'Formular',
+    title: 'Anmelden',
     extern: true,
     link:
       'https://docs.google.com/forms/d/e/1FAIpQLSeBpMd-oqTT1zkLcG-CnsvoJPNscd5g3ooyWQUwPAmfaDUCdw/viewform?usp=sf_link',
@@ -120,12 +124,16 @@ const NavigationHeader = ({ location, locationEntry }) => {
           />
         )}
         <div
-          css={{
-            alignSelf: `flex-end`,
-            display: `flex`,
-            marginLeft: `auto`,
-            minHeight: '3.75rem',
-          }}
+          css={css`
+            align-self: flex-end;
+            display: flex;
+            margin-left: auto;
+            min-height: 3.75rem;
+            margin-right: 30px;
+            @media ${media.medium} {
+              margin-right: 0;
+            }
+          `}
         >
           <SocialTeaser />
         </div>

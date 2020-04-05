@@ -164,6 +164,26 @@ function createBlogPages({ blogPath, data, paginationTemplate, actions }) {
   return null;
 }
 
+// exports.onCreatePage = async ({ actions, page }) => {
+//   const { createPage, deletePage } = actions;
+//   const oldPage = { ...page };
+
+//   deletePage(oldPage);
+//   createPage({
+//     ...page,
+//     path: page.path,
+//     context: {
+//       options: {
+//         indexStrategy: 'Prefix match',
+//         searchSanitizer: 'Lower Case',
+//         TitleIndex: true,
+//         AuthorIndex: true,
+//         SearchByTerm: true,
+//       },
+//       ...page.context,
+//     },
+//   });
+// };
 exports.createPages = async ({ actions, graphql }) => {
   // createCategoryPages({
   //   blogCategoryPath: '/blog/categories/',
@@ -207,7 +227,7 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
       }
-      companies: allCompaniesCsv {
+      companies: allCompaniesCsv(filter: { Publizieren: { ne: "false" } }) {
         edges {
           node {
             Beschreibung
@@ -280,7 +300,7 @@ exports.createPages = async ({ actions, graphql }) => {
   });
 
   createBlogPages({
-    blogPath: '/blog/',
+    blogPath: '/schaufenster/',
     data: blog,
     paginationTemplate: path.resolve(`src/templates/blog.js`),
     actions,

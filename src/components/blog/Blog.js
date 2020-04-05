@@ -56,10 +56,36 @@ function PaginatedBlog({
             <h1
               css={css`
                 color: #555;
+                margin-bottom: 100px;
               `}
             >
-              Tante Hilde Blog
+              Das Tante Hilde - Schaufenster
             </h1>
+            <p>
+              Liebe Allgäuer! Wir sind Tante Hilde! #wirsindtantehildeallgäu.
+              Schön, dass ihr alle dabei seid, unsere Plattform unterstützt, zur
+              gezielten Suche nutzt und/oder euren Freunden empfehlt. Nur so
+              können wir auch etwas erreichen! Und wir haben bisher einiges
+              erreicht! Ihr nutzt uns vielfach und unsere Reichweite ist enorm!
+              Danke dafür! Ein herzliches Dankeschön auch von unseren
+              eingetragenen Unternehmen und Dienstleistern - die sind
+              überwältigt von so viel Wertschätzung und Unterstützung!
+              #gemeinsamimallgäu.
+            </p>
+            <p>
+              Demnächst wird es auch ein weiteres Format geben. Das Tante Hilde
+              - Schaufenster. Wir (die kreativen Köpfe hinter Tante Hilde)
+              werden in den kommenden Tagen und Wochen kleine Videos mit unseren
+              Lieblingsläden, Lieblingsdienstleistern und Lieblingsallgäuern
+              produzieren. In diesem Sinne! Bleibt dabei und seid gespannt!
+              Liebe Grüße von deiner Tante Hilde{' '}
+              <span aria-label="lachender Smiley mit Händen" role="img">
+                🤗
+              </span>
+              <span aria-label="grünes Herz" role="img">
+                💚
+              </span>
+            </p>
           </FullWidthBox>
           <FullWidthBox>
             <ResponsiveGrid>

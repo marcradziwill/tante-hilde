@@ -6,9 +6,8 @@ import { orderBy, uniq } from 'lodash';
 const Filter = (props) => {
   const { onchangecompanies, companies, ...otherProps } = props;
   companies.map((compan) => {
-    compan.node.FilterName =
-      compan.node.Name_Firma.charAt(0).toUpperCase() +
-      compan.node.Name_Firma.slice(1);
+    compan.FilterName =
+      compan.Name_Firma.charAt(0).toUpperCase() + compan.Name_Firma.slice(1);
     return compan;
   });
 
@@ -19,9 +18,9 @@ const Filter = (props) => {
       props.onchangecompanies(companies);
     } else {
       const companyToFilter = companies.filter((com) => {
-        return com.node.Branch.includes(val) || val.includes(com.node.Branch);
+        return com.Branch.includes(val) || val.includes(com.Branch);
       });
-      onchangecompanies(orderBy(companyToFilter, 'node.FilterName'));
+      onchangecompanies(orderBy(companyToFilter, 'FilterName'));
     }
   };
   const onSearchInput = (event) => {
@@ -29,38 +28,35 @@ const Filter = (props) => {
     const val = event.target.value;
     const companyToFilter = companies.filter((com) => {
       return (
-        com.node.Name_Firma.toLowerCase().includes(val.toLowerCase()) ||
-        com.node.Beschreibung.toLowerCase().includes(val.toLowerCase())
+        com.Name_Firma.toLowerCase().includes(val.toLowerCase()) ||
+        com.Beschreibung.toLowerCase().includes(val.toLowerCase())
       );
     });
-    onchangecompanies(orderBy(companyToFilter, 'node.FilterName'));
+    onchangecompanies(orderBy(companyToFilter, 'FilterName'));
   };
   const changePlace = (event) => {
     event.preventDefault();
     const val = event.target.value;
     if (val === 'alle') {
-      onchangecompanies(orderBy(companies, 'node.FilterName'));
+      onchangecompanies(orderBy(companies, 'FilterName'));
     } else {
       const companyToFilter = companies.filter((com) => {
-        return com.node.PLZ__Ort.includes(val);
+        return com.PLZ__Ort.includes(val);
       });
 
-      onchangecompanies(orderBy(companyToFilter, 'node.FilterName'));
+      onchangecompanies(orderBy(companyToFilter, 'FilterName'));
     }
   };
   let places = [];
   companies.map((compan) => {
-    compan.node.PLZ__Ort = compan.node.PLZ__Ort.replace(/\(Allgäu\)/g, '');
-    compan.node.PlaceFilter = compan.node.PLZ__Ort.replace(
+    compan.PLZ__Ort = compan.PLZ__Ort.replace(/\(Allgäu\)/g, '');
+    compan.PlaceFilter = compan.PLZ__Ort.replace(
       /[&\/\\#,+()$!~®%.'":*?<>{}]/g,
       '',
     );
-    compan.node.PlaceFilter = compan.node.PlaceFilter.replace(
-      /([0-9]+)(.)/g,
-      '$2',
-    );
+    compan.PlaceFilter = compan.PlaceFilter.replace(/([0-9]+)(.)/g, '$2');
 
-    places.push(compan.node.PlaceFilter.trim());
+    places.push(compan.PlaceFilter.trim());
     return compan;
   });
   places = orderBy(places);

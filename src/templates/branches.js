@@ -9,16 +9,16 @@ import CompanyList from 'components/CompanyList';
 import { orderBy } from 'lodash';
 
 function Company({ pageContext: { companies } }) {
-  companies.companies.map((compan) => {
+  const tempCompanies = companies.companies.map((compan) => {
     compan.node.FilterName =
       compan.node.Name_Firma.charAt(0).toUpperCase() +
       compan.node.Name_Firma.slice(1);
-    return compan;
+    return compan.node;
   });
 
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
     // companies.edges,
-    orderBy(companies.companies, 'node.FilterName'),
+    orderBy(tempCompanies, 'FilterName'),
   );
   return (
     <>
@@ -43,7 +43,7 @@ function Company({ pageContext: { companies } }) {
       </FullWidthBox>
       <FullWidthBox>
         <Filter
-          companies={companies.companies}
+          companies={tempCompanies}
           onchangecompanies={setCompaniesToDisplay}
         />
       </FullWidthBox>

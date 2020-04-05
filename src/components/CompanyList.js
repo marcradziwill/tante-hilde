@@ -13,7 +13,7 @@ const CompanyList = (props) => {
     >
       {props.companies.map((company, index) => {
         return (
-          <Link to={`/unternehmen/${company.node.fields.pageUrl}/`} key={index}>
+          <Link to={`/unternehmen/${company.fields.pageUrl}/`} key={index}>
             <div
               css={css`
                 display: flex;
@@ -33,9 +33,7 @@ const CompanyList = (props) => {
                 `}
                 alt="2"
                 src={`${
-                  company.node.Logo_Link
-                    ? company.node.Logo_Link
-                    : '/Dummybild.png'
+                  company.Logo_Link ? company.Logo_Link : '/Dummybild.png'
                 }`}
               />
               <div
@@ -47,7 +45,7 @@ const CompanyList = (props) => {
                   align-items: center;
                 `}
               >
-                <h5>{company.node.Name_Firma}</h5>
+                <h5>{company.Name_Firma}</h5>
               </div>
             </div>
           </Link>

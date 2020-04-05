@@ -182,43 +182,40 @@ const MobileNavigation = ({ items, location }) => {
       )}
       <nav
         css={css`
-          @media ${media.small} {
+          @media ${media.medium} {
             display: none;
           }
         `}
       >
         <ExternalLink
           css={css`
-            animation-duration: 0.5s;
-            animation-iteration-count: 5;
-            bottom: 90px;
-            background: #73b471;
             position: fixed;
             z-index: 2;
-            left: 0;
-            right: 0;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70px;
-            height: 70px;
-            text-align: center;
-            border-radius: 50%;
-            padding: 11px;
-            cursor: pointer;
-            color: white;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 800;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-              0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            right: 20px;
+            top: 37px;
           `}
           className="animated pulse"
           onClick={onToggle}
         >
-          <span>MENU</span>
+          <svg
+            aria-label="Menu"
+            viewBox="0 0 24 24"
+            css={css`
+              display: inline-block;
+              -webkit-flex: 0 0 auto;
+              -ms-flex: 0 0 auto;
+              flex: 0 0 auto;
+              width: 24px;
+              height: 24px;
+            `}
+          >
+            <path
+              fill="none"
+              stroke="#555"
+              strokeWidth="3"
+              d="M2,19 L22,19 M2,5 L22,5 M2,12 L22,12"
+            />
+          </svg>
         </ExternalLink>
       </nav>
     </>
