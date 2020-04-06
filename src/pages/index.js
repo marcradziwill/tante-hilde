@@ -22,6 +22,16 @@ import CountUp from 'react-countup';
 const CompanyList = loadable(() => import('components/CompanyList'));
 const SocialShare = loadable(() => import('components/SocialShare'));
 
+const isMobileDevice = () => {
+  try {
+    return (
+      typeof window.orientation !== 'undefined' ||
+      navigator.userAgent.indexOf('IEMobile') !== -1
+    );
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
+};
+
 const removeSpecialChars = (str) => {
   return str
     .replace(/ä/g, 'ae')
@@ -49,6 +59,7 @@ const Index = ({ data: { companies } }) => {
   );
   const [searchObject, setSearch] = React.useState();
   const [results, setResults] = React.useState();
+  const [searchMode, setSearchMode] = React.useState(false);
 
   const searchData = (e) => {
     // console.log(searchObject.search);
@@ -89,6 +100,7 @@ const Index = ({ data: { companies } }) => {
       dataToSearch.sanitizer = new JsSearch.LowerCaseSanitizer();
       dataToSearch.searchIndex = new JsSearch.TfIdfSearchIndex('Name_Firma');
       dataToSearch.addIndex('category');
+      dataToSearch.addIndex('Keywords');
       dataToSearch.addIndex('Name_FirmaSearch');
       dataToSearch.addIndex('BranchSearch');
       dataToSearch.addIndex('BeschreibungSearch');
@@ -143,6 +155,10 @@ const Index = ({ data: { companies } }) => {
     }
   };
 
+  const onFocusInput = () => {
+    setSearchMode(true);
+  };
+
   return (
     <>
       <SEO
@@ -155,32 +171,39 @@ const Index = ({ data: { companies } }) => {
       />
       <div>
         <article>
-          <PageHeader
-            // title={page.htmlTitle}
-            image={{
-              src: 'Header-Tantehilde-Laden-Allgaeu.png',
-              alt: 'Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!',
-              title: 'Tante Hilde Laden Allgaeu',
-            }}
-            vheight="60vh"
-          />
+          {!searchMode && (
+            <PageHeader
+              // title={page.htmlTitle}
+              image={{
+                src: 'Header-Tantehilde-Laden-Allgaeu.png',
+                alt:
+                  'Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!',
+                title: 'Tante Hilde Laden Allgaeu',
+              }}
+              vheight="60vh"
+            />
+          )}
           <FullWidthBox>
-            <h1
-              css={css`
-                text-align: center;
-              `}
-            >
-              Tante Hilde
-            </h1>
-            <h2
-              css={css`
-                text-align: center;
-                max-width: 100% !important;
-              `}
-              className="small"
-            >
-              Dein virtueller Marktplatz im Allgäu!
-            </h2>
+            {!searchMode && (
+              <>
+                <h1
+                  css={css`
+                    text-align: center;
+                  `}
+                >
+                  Tante Hilde
+                </h1>
+                <h2
+                  css={css`
+                    text-align: center;
+                    max-width: 100% !important;
+                  `}
+                  className="small"
+                >
+                  Dein virtueller Marktplatz im Allgäu!
+                </h2>
+              </>
+            )}
             <div
               css={css`
                 display: flex;
@@ -224,8 +247,10 @@ const Index = ({ data: { companies } }) => {
                     margin: 0 auto;
                     width: 100%;
                     padding: 0 30px;
-                    font-size: 16px;
-
+                    font-size: 13px;
+                    @media ${media.small} {
+                      font-size: 16px;
+                    }
                     :hover {
                       box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
                       border-color: rgba(223, 225, 229, 0);
@@ -236,6 +261,16 @@ const Index = ({ data: { companies } }) => {
                   autoComplete="off"
                   name="suche"
                   type="text"
+                  onFocus={() => {
+                    if (isMobileDevice()) {
+                      setSearchMode(true);
+                    }
+                  }}
+                  onBlur={() => {
+                    if (isMobileDevice()) {
+                      setSearchMode(false);
+                    }
+                  }}
                   onChange={searchData}
                 />
                 <svg
@@ -709,6 +744,7 @@ export const query = graphql`
           Webshop_Link
           Zeitstempel
           PDF_Link
+          Keywords
           Name_Firma
           Logo_Link
           Branch

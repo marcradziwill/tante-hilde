@@ -242,6 +242,7 @@ exports.createPages = async ({ actions, graphql }) => {
             Webseite
             Webshop_Link
             Mobile
+            Keywords
             Zeitstempel
             PDF_Link
             Name_Firma
