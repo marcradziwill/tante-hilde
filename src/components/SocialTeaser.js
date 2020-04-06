@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import ExternalLink from './ExternalLink';
 import { css } from '@emotion/core';
 import StyledBox from 'components/StyledBox';
-import { scrollToAnchor } from 'utils/helpers';
 
 const SocialTeaser = () => {
   const data = useStaticQuery(graphql`
@@ -19,62 +18,8 @@ const SocialTeaser = () => {
     }
   `);
 
-  const isMobileDevice = () => {
-    try {
-      return (
-        typeof window.orientation !== 'undefined' ||
-        navigator.userAgent.indexOf('IEMobile') !== -1
-      );
-      // eslint-disable-next-line no-empty
-    } catch (e) {}
-  };
-
-  const scrollTo = () => {
-    if (isMobileDevice()) {
-      scrollToAnchor('searchMobile');
-    } else {
-      scrollToAnchor('searchDesktop');
-    }
-  };
-
   return (
     <StyledBox direction="row" className="align-c">
-      <StyledBox pad="small">
-        <ExternalLink
-          css={css`
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.5s;
-          `}
-          data-typecat="Icon"
-          data-typeaction="Click"
-          target="_blank"
-          onClick={scrollTo}
-        >
-          <svg
-            aria-label="Search"
-            viewBox="0 0 24 24"
-            css={css`
-              display: inline-block;
-              -webkit-flex: 0 0 auto;
-              -ms-flex: 0 0 auto;
-              flex: 0 0 auto;
-              width: 24px;
-              height: 24px;
-              fill: #555;
-              stroke: #555;
-            `}
-          >
-            <path
-              fill="none"
-              stroke="#555"
-              strokeWidth="3"
-              d="M15,15 L22,22 L15,15 Z M9.5,17 C13.6421356,17 17,13.6421356 17,9.5 C17,5.35786438 13.6421356,2 9.5,2 C5.35786438,2 2,5.35786438 2,9.5 C2,13.6421356 5.35786438,17 9.5,17 Z"
-            />
-          </svg>
-        </ExternalLink>
-      </StyledBox>
       <StyledBox pad="small">
         <ExternalLink
           css={css`

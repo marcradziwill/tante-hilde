@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql, Link, navigate } from 'gatsby';
 import SEO from 'components/SEO/SEO';
 import PageHeader from 'components/PageHeader';
 import FullWidthBox from 'components/FullWidthBox';
@@ -44,7 +44,7 @@ const Index = ({ data: { companies } }) => {
     return compan.node;
   });
 
-  const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
+  const [companiesToDisplay] = React.useState(
     orderBy(tempCompanies, 'FilterName'),
   );
   const [searchObject, setSearch] = React.useState();
@@ -55,8 +55,12 @@ const Index = ({ data: { companies } }) => {
     const queryResult = searchObject.search.search(
       removeSpecialChars(e.target.value),
     );
-    console.log(queryResult);
-    setResults({ searchQuery: e.target.value, searchResults: queryResult });
+
+    setResults({
+      searchQuery: e.target.value,
+      searchResults: queryResult,
+      higlighted: queryResult[0],
+    });
   };
 
   React.useEffect(() => {
@@ -79,8 +83,8 @@ const Index = ({ data: { companies } }) => {
 
     const rebuildIndex = () => {
       const dataToSearch = new JsSearch.Search('Name_Firma');
-      dataToSearch.indexStrategy = new JsSearch.PrefixIndexStrategy();
-      // dataToSearch.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+      // dataToSearch.indexStrategy = new JsSearch.PrefixIndexStrategy();
+      dataToSearch.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
       // dataToSearch.indexStrategy = new JsSearch.ExactWordIndexStrategy();
       dataToSearch.sanitizer = new JsSearch.LowerCaseSanitizer();
       dataToSearch.searchIndex = new JsSearch.TfIdfSearchIndex('Name_Firma');
@@ -104,6 +108,40 @@ const Index = ({ data: { companies } }) => {
 
     rebuildIndex();
   }, [companiesToDisplay]);
+
+  const onNavigateWithKeyBoard = (e) => {
+    // e.preventDefault();
+    if (results) {
+      const currentIndex = results.searchResults.indexOf(results.higlighted);
+      let newIndex = 0;
+      if (e.key === 'Enter') {
+        if (results.higlighted) {
+          navigate(`/unternehmen/${results.higlighted.fields.pageUrl}`);
+        }
+      } else {
+        if (e.key === 'ArrowUp') {
+          if (results.searchResults[currentIndex - 1]) {
+            newIndex = currentIndex - 1;
+          }
+          setResults({
+            searchQuery: results.searchQuery,
+            searchResults: results.searchResults,
+            higlighted: results.searchResults[newIndex],
+          });
+        }
+        if (e.key === 'ArrowDown') {
+          if (results.searchResults[currentIndex + 1]) {
+            newIndex = currentIndex + 1;
+          }
+          setResults({
+            searchQuery: results.searchQuery,
+            searchResults: results.searchResults,
+            higlighted: results.searchResults[newIndex],
+          });
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -165,7 +203,8 @@ const Index = ({ data: { companies } }) => {
                 `}
               >
                 <input
-                  placeholder="Suchen nach Name oder Beschreibung"
+                  id="searchInput"
+                  placeholder="Suchen nach deinem Lieblingsladen"
                   css={css`
                     background: #fff;
                     display: flex;
@@ -192,6 +231,8 @@ const Index = ({ data: { companies } }) => {
                       border-color: rgba(223, 225, 229, 0);
                     }
                   `}
+                  onKeyDown={onNavigateWithKeyBoard}
+                  tabIndex="0"
                   autoComplete="off"
                   name="suche"
                   type="text"
@@ -241,6 +282,8 @@ const Index = ({ data: { companies } }) => {
                       text-align: left;
                       // align-items: start;
                     `}
+                    onKeyDown={onNavigateWithKeyBoard}
+                    tabIndex="1"
                   >
                     {orderBy(results.searchResults, 'category').map(
                       (searchItem, index) => {
@@ -249,12 +292,14 @@ const Index = ({ data: { companies } }) => {
                             className="animated fadeIn"
                             css={css`
                               list-style: none;
-                              // margin-top: 25px;
-                              // border-bottom: 1px solid #73b471;
                               padding: 5px 20px;
                               :hover {
-                                bacground: gray;
+                                background: lightgrey;
                               }
+
+                              ${results.higlighted === searchItem
+                                ? 'background: lightgrey;'
+                                : ''}
                             `}
                             key={index}
                           >
@@ -272,7 +317,14 @@ const Index = ({ data: { companies } }) => {
                               )}
                               {searchItem.category && (
                                 <Link to={`/branche/${searchItem.urlPath}/`}>
-                                  Kategorie: {searchItem.category}
+                                  <span
+                                    css={css`
+                                      color: #555;
+                                    `}
+                                  >
+                                    Kategorie:
+                                  </span>{' '}
+                                  {searchItem.category}
                                 </Link>
                               )}
                             </div>
@@ -511,23 +563,22 @@ const Index = ({ data: { companies } }) => {
           <FullWidthBox>
             <div
               css={css`
-                background: #73b471;
-                font-size: 1rem;
-                padding: 20px;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
                 text-align: center;
-                a {
-                  color: #fff;
-                  :hover {
-                    color: #555;
-                  }
-                }
               `}
             >
-              <Link to="/unternehmen/">
+              <button
+                onClick={() => {
+                  navigate('/unternehmen/');
+                }}
+                css={css`
+                  background: #73b471;
+                  padding: 7px;
+                  border-radius: 7px;
+                  border: 0;
+                `}
+              >
                 Hier geht's zu deinen Lieblingsläden
-              </Link>
+              </button>
             </div>
           </FullWidthBox>
           {/* <FullWidthBox>
