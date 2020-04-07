@@ -4,7 +4,7 @@ const Video = (props) => {
   const HeaderVideo = (
     <video
       preload="auto"
-      // muted
+      muted
       controls
       autoPlay
       style={{

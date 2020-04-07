@@ -49,6 +49,7 @@ function Company({ pageContext: { company } }) {
   if (!company.VideoType && company.Video_Link.length > 0) {
     company.VideoType = 'iframe';
   }
+
   const youtube_parser = (url) => {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     const match = url.match(regExp);
@@ -56,7 +57,11 @@ function Company({ pageContext: { company } }) {
   };
 
   return (
-    <>
+    <FullWidthBox
+      css={css`
+        // margin-top: 100px;
+      `}
+    >
       <SEO
         title={company.Name_Firma}
         description={company.Beschreibung}
@@ -477,7 +482,7 @@ function Company({ pageContext: { company } }) {
           )}
           {company.Video_Link && (
             <>
-              <h3>Video</h3>
+              {/* <h3>Video</h3> */}
               <div
                 css={css`
                   height: ${company.VideoType === 'channel' ? '' : '500px'};
@@ -577,7 +582,7 @@ function Company({ pageContext: { company } }) {
           </StyledBox>
         </div>
       </FullWidthBox>
-    </>
+    </FullWidthBox>
   );
 }
 export default Company;

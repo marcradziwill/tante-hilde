@@ -227,7 +227,7 @@ const Index = ({ data: { companies } }) => {
               >
                 <input
                   id="searchInput"
-                  placeholder="Suchen nach deinem Lieblingsladen"
+                  placeholder="Lieblingsladen suchen"
                   css={css`
                     background: #fff;
                     display: flex;

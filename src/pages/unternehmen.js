@@ -26,7 +26,11 @@ const Unternehmen = ({ data: { companies } }) => {
   );
 
   return (
-    <>
+    <FullWidthBox
+      css={css`
+        margin-top: 100px;
+      `}
+    >
       <SEO
         title="Tante Hilde"
         description="Dein virtueller Marktplatz im Allgäu!"
@@ -174,7 +178,7 @@ const Unternehmen = ({ data: { companies } }) => {
           </FullWidthBox>
         </article>
       </div>
-    </>
+    </FullWidthBox>
   );
 };
 export const query = graphql`
