@@ -11,47 +11,24 @@ export default function CodingBlogWithData(props) {
     <StaticQuery
       query={graphql`
         query {
-          allMdx(
-            sort: { fields: [frontmatter___date], order: DESC }
-            filter: {
-              frontmatter: { published: { ne: false }, unlisted: { ne: true } }
-              fileAbsolutePath: { regex: "//content/blog//" }
-            }
+          allWordpressPost(
+            filter: { status: { eq: "publish" } }
+            sort: { fields: date, order: ASC }
           ) {
-            edges {
-              node {
-                excerpt(pruneLength: 300)
-                id
-                fields {
-                  title
-                  slug
-                  date
-                  categories
-                }
-                parent {
-                  ... on File {
-                    sourceInstanceName
-                  }
-                }
-                frontmatter {
-                  title
-                  date(formatString: "MMMM DD, YYYY")
-                  banner {
-                    childImageSharp {
-                      fluid(
-                        maxWidth: 640
-                        # maxHeight: 400
-                        traceSVG: { color: "#6CB88D" }
-                      ) {
-                        ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                      }
-                    }
-                  }
-                  slug
-                  keywords
-                  categories
-                }
-                timeToRead
+            nodes {
+              id
+              title
+              date
+              content
+              slug
+              excerpt
+              categories {
+                name
+              }
+              featured_media {
+                alt_text
+                source_url
+                title
               }
             }
           }

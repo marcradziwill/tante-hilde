@@ -57,13 +57,20 @@ const NavigationHeader = ({ location, locationEntry }) => {
     <div
       css={css`
         position: fixed;
-        min-height: 3.75rem;
+
         border-bottom: 1px solid #555;
         left: 0;
         right: 0;
         z-index: 5;
         @media ${media.small} {
           position: fixed;
+        }
+        min-height: 3.75rem;
+        @media ${media.small} {
+          min-height: 6.9rem;
+        }
+        @media ${media.medium} {
+          min-height: 3.75rem;
         }
       `}
     >
@@ -83,7 +90,13 @@ const NavigationHeader = ({ location, locationEntry }) => {
           align-items: center;
           width: 100%;
           height: 100%;
-          // min-height: 2rem;
+          min-height: 3.75rem;
+          @media ${media.small} {
+            min-height: 6.9rem;
+          }
+          @media ${media.medium} {
+            min-height: 3.75rem;
+          }
           position: relative;
           &:after {
             content: '';
@@ -123,20 +136,7 @@ const NavigationHeader = ({ location, locationEntry }) => {
             locationEntry={locationEntry}
           />
         )}
-        <div
-          css={css`
-            align-self: flex-end;
-            display: flex;
-            margin-left: auto;
-            min-height: 3.75rem;
-            margin-right: 30px;
-            @media ${media.medium} {
-              margin-right: 0;
-            }
-          `}
-        >
-          <SocialTeaser />
-        </div>
+        <SocialTeaser parent="Header" />
       </div>
     </div>
   );

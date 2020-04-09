@@ -1,40 +1,22 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { css } from '@emotion/core';
-import Img from 'gatsby-image';
 import FullWidthBox from 'components/FullWidthBox';
 import PageHeader from 'components/PageHeader';
 import SEO from 'components/SEO/SEO';
-// import StyledButton from 'components/StyledButton';
 import StyledBox from 'components/StyledBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
-// import Svelte from '../../../static/icons/Svelte_Logo.svg';
-// import { NewsletterContext } from 'state/context';
 
-function PaginatedBlog({
-  data: { allMdx, site },
-  pageContext: { pagination },
-}) {
-  console.log(allMdx);
-  const { page, nextPagePath, previousPagePath } = pagination;
+function PaginatedBlog({ data, pageContext: { pagination } }) {
+  const { nextPagePath, previousPagePath } = pagination;
   const showPagination = previousPagePath || nextPagePath;
 
-  console.log(allMdx.edges);
-  const posts = page
-    .map((id) =>
-      allMdx.edges.find(
-        (edge) =>
-          edge.node.id === id &&
-          edge.node.parent.sourceInstanceName !== 'pages',
-      ),
-    )
-    .filter((post) => post !== undefined);
-
+  const posts = data.allWordpressPost.nodes;
   return (
     <>
       <SEO
-        title="Tante Hilde Blog"
-        description="Unser Tante Hilde Blog"
+        title="Tante Hilde Schaufenster"
+        description="Unser Tante Hilde Schaufenster"
         image="/Header-Tantehilde-Laden-Allgaeu.png"
         headerImage="/Header-Tantehilde-Laden-Allgaeu.png"
         follow="index, follow"
@@ -89,7 +71,7 @@ function PaginatedBlog({
           </FullWidthBox>
           <FullWidthBox>
             <ResponsiveGrid>
-              {posts.map(({ node: post }) => (
+              {posts.map((post) => (
                 <div
                   key={post.id}
                   style={{
@@ -99,38 +81,34 @@ function PaginatedBlog({
                     flexDirection: 'column',
                   }}
                 >
-                  {post.frontmatter.banner && (
+                  {post.featured_media && (
                     <div
                       style={{
                         position: 'relative',
                       }}
                     >
                       <Link
-                        aria-label={`View ${post.frontmatter.title} article`}
-                        to={post.fields.slug}
+                        aria-label={`View ${post.title} article`}
+                        to={`/schaufenster/${post.slug}/`}
                       >
-                        <Img
-                          style={{ height: '300px' }}
-                          alt={`Image of blog post: ${post.frontmatter.title}`}
-                          fluid={post.frontmatter.banner.childImageSharp.fluid}
-                        />
+                        <div style={{ textAlign: 'center' }}>
+                          <img
+                            src={post.featured_media.source_url}
+                            alt={post.featured_media.alt}
+                            title={post.featured_media.title}
+                          />
+                        </div>
                       </Link>
                     </div>
                   )}
                   <StyledBox>
                     <StyledBox pad={{ top: '20px' }}>
-                      <h2
-                        className="medium"
-                        css={css`
-                          // margin: 0;
-                        `}
-                      >
+                      <h2 className="medium">
                         <Link
-                          aria-label={`View ${post.frontmatter.title} article`}
-                          to={post.fields.slug}
-                        >
-                          {post.frontmatter.title}
-                        </Link>
+                          to={`/schaufenster/${post.slug}/`}
+                          aria-label={`View ${post.title} article`}
+                          dangerouslySetInnerHTML={{ __html: post.title }}
+                        />
                       </h2>
                       <h3
                         style={{
@@ -141,8 +119,9 @@ function PaginatedBlog({
                           margin: '0',
                         }}
                       >
-                        von Tante Hilde{' | '}
-                        <span
+                        von Tante Hilde
+                        {/* {' | '} */}
+                        {/* <span
                           style={{
                             fontSize: '.675rem',
                             lineHeight: '1.375rem',
@@ -151,21 +130,11 @@ function PaginatedBlog({
                             margin: '0',
                           }}
                         >
-                          {post.frontmatter.date}
-                          {' | '}
-                        </span>
-                        <span
-                          css={css`
-                            font-size: 0.675rem;
-                          `}
-                        >
-                          {post.timeToRead === 1
-                            ? `${post.timeToRead} minute to read`
-                            : `${post.timeToRead} minutes to read`}
-                        </span>
+                          {post.date}
+                        </span> */}
                       </h3>
                     </StyledBox>
-                    {post.frontmatter.categories && (
+                    {/* {post.categories && (
                       <StyledBox>
                         <span
                           css={css`
@@ -174,24 +143,14 @@ function PaginatedBlog({
                           `}
                         >
                           Kategorien:
-                          {post.frontmatter.categories.map(
-                            (categoryItem, idx) => {
-                              let categoryItemName =
-                                categoryItem.charAt(0).toUpperCase() +
-                                categoryItem.slice(1);
-
-                              if (categoryItem === 'javascript') {
-                                categoryItemName = 'JavaScript';
-                              }
-
-                              return <span key={idx}> {categoryItemName}</span>;
-                            },
-                          )}
+                          {post.categories.map((categoryItem, idx) => {
+                            return <span key={idx}> {categoryItem.name}</span>;
+                          })}
                         </span>
                       </StyledBox>
-                    )}
+                    )} */}
                     <StyledBox pad={{ top: '20px' }}>
-                      <p>{post.excerpt}</p>
+                      <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
                     </StyledBox>
                     <StyledBox
                       pad={{
@@ -199,8 +158,8 @@ function PaginatedBlog({
                       }}
                     >
                       <Link
-                        to={post.fields.slug}
-                        aria-label={`view "${post.frontmatter.title}" article`}
+                        to={`/schaufenster/${post.slug}/`}
+                        aria-label={`view "${post.title}" article`}
                       >
                         Mehr lesen →
                       </Link>

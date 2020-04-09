@@ -407,6 +407,16 @@ function Company({ pageContext: { company } }) {
               />
             </>
           )}
+          {company.Webseite && (
+            <>
+              <h3>Webseite</h3>
+              <p>
+                <ExternalLink target="_blank" href={company.Webseite}>
+                  {company.Webseite}
+                </ExternalLink>
+              </p>
+            </>
+          )}
           {company.Bestellung__ber_ && (
             <>
               <h3>Bestellung per</h3>
@@ -469,7 +479,6 @@ function Company({ pageContext: { company } }) {
               </p>
             </>
           )}
-
           {company.PDF_Link && (
             <>
               <h3>Informationen</h3>

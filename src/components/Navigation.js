@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { css } from '@emotion/core';
-import SocialTeaser from 'components/SocialTeaser';
 import ExternalLink from 'components/ExternalLink';
 import { colors } from 'utils/theme';
 import { media } from 'utils/media';
@@ -34,6 +33,7 @@ const Navigation = ({ items }) => {
               position: relative;
               text-decoration: none;
               padding: 1rem 0.6rem;
+
               top: 0;
               z-index: 1;
               :hover {
@@ -143,14 +143,18 @@ const Navigation = ({ items }) => {
   return (
     <div
       css={css`
+        display: flex;
         margin-left: 200px;
-        position: fixed;
+        @media ${media.small} {
+          margin-left: 100px;
+        }
+        // position: fixed;
         min-height: 3.75rem;
         left: 0;
         right: 0;
         z-index: 5;
         @media ${media.small} {
-          position: fixed;
+          // position: fixed;
         }
       `}
     >
@@ -203,6 +207,17 @@ const Navigation = ({ items }) => {
               margin-left: 16px;
               padding-left: 0;
               li {
+                // :nth-child(n + 4) {
+                //   display: none;
+                //   a {
+                //     color: blue;
+                //   }
+                // }
+                // @media ${media.medium} {
+                //   :nth-child(n + 4) {
+                //     display: inline-block;
+                //   }
+                // }
                 :hover > ul {
                   visibility: visible;
                   opacity: 1;
@@ -243,17 +258,6 @@ const Navigation = ({ items }) => {
             ))}
           </ul>
         </nav>
-
-        <div
-          css={{
-            alignSelf: `flex-end`,
-            display: `flex`,
-            marginLeft: `auto`,
-            minHeight: '3.75rem',
-          }}
-        >
-          <SocialTeaser parent="Header" />
-        </div>
       </div>
     </div>
   );

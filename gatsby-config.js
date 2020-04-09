@@ -36,6 +36,7 @@ const gatsbySettings = {
       fbAppID: '',
       ogLanguage: website.ogLanguage,
       facebook: website.facebook,
+      youtube: website.youtube,
       instagram: website.instagram,
     },
   },
@@ -48,14 +49,6 @@ const gatsbySettings = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/content/blog`,
-        name: 'blog',
-      },
-    },
-
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -93,18 +86,26 @@ const gatsbySettings = {
     `gatsby-plugin-react-helmet`,
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    // {
-    //   resolve: `gatsby-source-wordpress`,
-    //   options: {
-    //     // your WordPress source
-    //     baseUrl: `tantehildeallgaeu.wordpress.com`,
-    //     protocol: `https`,
-    //     // is it hosted on wordpress.com, or self-hosted?
-    //     hostingWPCOM: true,
-    //     // does your site use the Advanced Custom Fields Plugin?
-    //     useACF: false,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        // your WordPress source
+        baseUrl: `tante-hilde.eu`,
+        protocol: `https`,
+        // is it hosted on wordpress.com, or self-hosted?
+        hostingWPCOM: false,
+        // does your site use the Advanced Custom Fields Plugin?
+        useACF: false,
+        includedRoutes: [
+          '**/categories',
+          '**/posts',
+          '**/pages',
+          '**/media',
+          '**/tags',
+          '**/taxonomies',
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
@@ -126,7 +127,7 @@ const gatsbySettings = {
         theme_color: website.themeColor,
         display: 'standalone',
         // icon: `src/images/tantehilde-gruen.png`,
-        // icon: `src/images/marc_favicon.png`,
+        icon: `src/images/tantehilde-gruen.png`,
         icons: [
           {
             src: '/favicons/android-chrome-192x192.png',

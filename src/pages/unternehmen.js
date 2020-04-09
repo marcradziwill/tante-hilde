@@ -1,13 +1,13 @@
 import React from 'react';
+import loadable from '@loadable/component';
 import { graphql } from 'gatsby';
+import { css } from '@emotion/core';
+import { orderBy } from 'lodash';
 import SEO from 'components/SEO/SEO';
 import PageHeader from 'components/PageHeader';
 import FullWidthBox from 'components/FullWidthBox';
 import ExternalLink from 'components/ExternalLink';
 import Filter from 'components/Filter';
-import { css } from '@emotion/core';
-import { orderBy } from 'lodash';
-import loadable from '@loadable/component';
 import { media } from 'utils/media';
 
 const CompanyList = loadable(() => import('components/CompanyList'));
@@ -26,11 +26,7 @@ const Unternehmen = ({ data: { companies } }) => {
   );
 
   return (
-    <FullWidthBox
-      css={css`
-        margin-top: 100px;
-      `}
-    >
+    <>
       <SEO
         title="Tante Hilde"
         description="Dein virtueller Marktplatz im Allgäu!"
@@ -88,6 +84,7 @@ const Unternehmen = ({ data: { companies } }) => {
                 ein, wenn du auch einen Lieblingsladen hast.
               </p>
             </div>
+            <SocialShare />
           </FullWidthBox>
           <FullWidthBox
             pad="20px"
@@ -178,7 +175,7 @@ const Unternehmen = ({ data: { companies } }) => {
           </FullWidthBox>
         </article>
       </div>
-    </FullWidthBox>
+    </>
   );
 };
 export const query = graphql`

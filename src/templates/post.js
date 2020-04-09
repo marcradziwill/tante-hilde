@@ -1,49 +1,35 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import { graphql } from 'gatsby';
 import { css } from '@emotion/core';
-import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
-import { MDXProvider } from '@mdx-js/react';
-import config from 'utils/website';
 import FullWidthBox from 'components/FullWidthBox';
 import SEO from 'components/SEO/SEO';
 import ExternalLink from 'components/ExternalLink';
 import SocialShare from 'components/SocialShare';
-import mdxComponents from 'components/mdx';
-// import NewsletterBox from 'components/NewsletterBox';
-import Markdown from 'react-markdown';
 import StyledBox from 'components/StyledBox';
 
 export default function PostPage(props) {
   return <Post {...props} />;
 }
 
-function Post({ data: { site, mdx }, location }) {
-  const {
-    title,
-    // slug,
-    description,
-    banner,
-    bannerCredit,
-    modified,
-    date,
-    modifiedDescription,
-    categories,
-  } = mdx.fields;
-  // const blogPostUrl = `${config.siteUrl}${slug}`;
+function Post({ data: { post }, location }) {
+  const { title, date, excerpt, content, featured_media, categories } = post;
+
   return (
-    <MDXProvider components={mdxComponents}>
+    <>
       <SEO
         title={`blog: ${title}`}
-        description={description}
-        image={banner}
+        description={excerpt}
+        image={featured_media.source_url}
         pathname={location.pathname}
-        headerImage={banner}
+        headerImage={featured_media.source_url}
         article
-        node={mdx.fields}
         follow="index,follow"
       />
-      <StyledBox>
+      <StyledBox
+        css={css`
+          margin-top: 60px;
+        `}
+      >
         <article>
           <FullWidthBox
             pad={{
@@ -56,9 +42,9 @@ function Post({ data: { site, mdx }, location }) {
               css={css`
                 text-align: center;
               `}
-            >
-              {title}
-            </h1>
+              dangerouslySetInnerHTML={{ __html: title }}
+            />
+
             <StyledBox className="align-c">
               <StyledBox pad={{ top: 'small', left: 'none', right: 'none' }}>
                 <h3
@@ -70,8 +56,8 @@ function Post({ data: { site, mdx }, location }) {
                     margin: '0',
                   }}
                 >
-                  von Tante Hilde{' | '}
-                  <span
+                  von Tante Hilde
+                  {/* <span
                     style={{
                       lineHeight: '1.375rem',
                       fontWeight: '500',
@@ -80,129 +66,60 @@ function Post({ data: { site, mdx }, location }) {
                     }}
                   >
                     {date}
-                    {' | '}
-                  </span>
-                  <span>
-                    {mdx.timeToRead === 1
-                      ? `${mdx.timeToRead} Minute Lesezeit`
-                      : `${mdx.timeToRead} Minuten Lesezeit`}
-                  </span>
+                  </span> */}
                 </h3>
               </StyledBox>
-              {categories && (
+              {/* {categories && (
                 <StyledBox
                   css={css`
                     padding: 20px 0 0 0;
+                    margin-bottom: 20px;
                   `}
                 >
                   <span className="text large">
                     Kategorien:
                     {categories.map((categoryItem, idx) => {
-                      let categoryItemName =
-                        categoryItem.charAt(0).toUpperCase() +
-                        categoryItem.slice(1);
-
-                      if (categoryItem === 'javascript') {
-                        categoryItemName = 'JavaScript';
-                      }
-
                       return (
                         <span className="text large" key={idx}>
                           {' '}
-                          {categoryItemName}
+                          {categoryItem.name}
                           {idx === categories.length - 1 ? ' ' : ', '}
                         </span>
                       );
                     })}
                   </span>
                 </StyledBox>
-              )}
-              <StyledBox
-                css={css`
-                  padding: 20px 0 0 0;
-                `}
-              >
-                {description ? <Markdown>{description}</Markdown> : null}
-              </StyledBox>
-              {modified && (
-                <StyledBox
-                  pad={{ bottom: 'medium', left: 'none', right: 'none' }}
-                >
-                  <span className="text">
-                    Dieser Beitrag wurde am {modified} bearbeitet. Für weitere
-                    Details schaut bitte {` `}
-                    <ExternalLink href="#modifiedDescription">
-                      am Ende der Seite
-                    </ExternalLink>
-                    .
-                  </span>
-                </StyledBox>
-              )}
+              )} */}
             </StyledBox>
-            {banner && (
+            {featured_media && (
               <div style={{ textAlign: 'center' }}>
-                <Img
-                  // style={{ maxHeight: '500px' }}
-                  fluid={banner.childImageSharp.fluid}
-                  alt={site.siteMetadata.keywords.join(', ')}
+                <img
+                  src={featured_media.source_url}
+                  alt={featured_media.alt}
+                  title={featured_media.title}
                 />
-
-                {bannerCredit ? (
-                  <div
-                    css={css`
-                      p {
-                        margin: 0;
-                      }
-                    `}
-                  >
-                    <Markdown>{bannerCredit}</Markdown>{' '}
-                  </div>
-                ) : null}
               </div>
             )}
           </FullWidthBox>
           <FullWidthBox
             sectionwidth="45rem"
             pad={{ top: '10px', bottom: '40px' }}
+            css={css`
+              iframe {
+                width: 100%;
+                min-height: 400px;
+              }
+            `}
           >
-            <MDXRenderer
+            <StyledBox
               css={css`
-                img {
-                  display: block;
-                  margin-left: auto;
-                  margin-right: auto;
-                  width: 50%;
-                }
-                li > p {
-                  margin-bottom: 0 !important;
-                }
-                li > ul {
-                  margin-top: 0;
-                }
-                hr {
-                  height: 1px;
-                }
+                padding: 20px 0 0 0;
               `}
             >
-              {mdx.body}
-            </MDXRenderer>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
+            </StyledBox>
             <SocialShare />
           </FullWidthBox>
-          {modifiedDescription && (
-            <FullWidthBox
-              id="modifiedDescription"
-              sectionwidth="45rem"
-              pad={{ top: '10px', bottom: '40px' }}
-            >
-              <span className="text" style={{ fontStyle: 'italic' }}>
-                Dieser Beitrag wurde am {modified} bearbeitet.
-                <br />
-              </span>
-              <span className="text" style={{ fontStyle: 'italic' }}>
-                {modifiedDescription}
-              </span>
-            </FullWidthBox>
-          )}
 
           <FullWidthBox
             css={css`
@@ -246,7 +163,7 @@ function Post({ data: { site, mdx }, location }) {
           </FullWidthBox>
         </article>
       </StyledBox>
-    </MDXProvider>
+    </>
   );
 }
 
@@ -257,31 +174,22 @@ export const pageQuery = graphql`
         keywords
       }
     }
-    mdx(fields: { id: { eq: $id } }) {
-      fields {
+    post: wordpressPost(id: { eq: $id }) {
+      id
+      content
+      path
+      title
+      date
+      excerpt
+      slug
+      featured_media {
+        alt_text
+        source_url
         title
-        description
-        date(formatString: "MMMM DD, YYYY")
-        modified
-        modifiedDescription
-        plainTextDescription
-        author
-        banner {
-          ...bannerImage720
-          ...bannerImageSeo1200
-        }
-        bannerCredit
-        slug
-        keywords
-        readingDependencies
-        readerLevel
-        categories
       }
-      wordCount {
-        words
+      categories {
+        name
       }
-      timeToRead
-      body
     }
   }
 `;

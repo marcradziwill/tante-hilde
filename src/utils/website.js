@@ -25,6 +25,7 @@ module.exports = {
   backgroundColor: '#73B471',
 
   // Social component
+  youtube: 'https://www.youtube.com/channel/UCaA9p3ZBAIbKri1ZVH9EI3w',
   facebook: 'https://www.facebook.com/tantehildeallgaeu/',
   instagram: 'https://www.instagram.com/tantehilde_allgaeu/',
 };

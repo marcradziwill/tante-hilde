@@ -71,7 +71,7 @@ const Filter = (props) => {
       >
         <div id="search">
           <input
-            placeholder="Suchen nach Name oder Beschreibung"
+            placeholder="Suchen"
             css={css`
               box-sizing: border-box;
               font-size: inherit;

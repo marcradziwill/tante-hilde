@@ -1,11 +1,39 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import { css } from '@emotion/core';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
-import BackgroundImage from 'gatsby-background-image';
+// import BackgroundImage from 'gatsby-background-image';
 import StyledBox from 'components/StyledBox';
 
-const Feed = ({ feed, color = 'green', content }) => {
+const Feed = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allWordpressPost(
+        filter: { status: { eq: "publish" } }
+        sort: { fields: date, order: ASC }
+      ) {
+        nodes {
+          id
+          title
+          date
+          content
+          slug
+          excerpt
+          categories {
+            name
+          }
+          featured_media {
+            alt_text
+            source_url
+            title
+          }
+        }
+      }
+    }
+  `);
+
+  const feed = data.allWordpressPost.nodes;
+
   return (
     <StyledBox
       style={{
@@ -14,10 +42,15 @@ const Feed = ({ feed, color = 'green', content }) => {
         MsFlexPack: 'start',
         justifyContent: 'flex-start',
       }}
-      background={color}
+      // background="green"
     >
-      <h2>{content.frontmatter.title}</h2>
-      <ResponsiveGrid templatecolumns="33% 33% 33%">
+      <h2>Tante Hildes Schaufenster</h2>
+      <ResponsiveGrid
+        templatecolumns={feed.length > 2 ? '33% 33% 33%' : '50% 50%'}
+        css={css`
+          margin-top: 80px;
+        `}
+      >
         {feed.map((blog, idx) => {
           let borderSide = '';
 
@@ -33,66 +66,54 @@ const Feed = ({ feed, color = 'green', content }) => {
             color: 'green-4',
           };
           return (
-            <Link key={idx} to={`/blog/${blog.node.frontmatter.slug}`}>
-              <StyledBox height="medium" border={borderConfig}>
-                <BackgroundImage
+            <Link key={idx} to={`/schaufenster/${blog.slug}`}>
+              <StyledBox
+                height="medium"
+                border={borderConfig}
+                css={css`
+                  background: linear-gradient(
+                    0deg,
+                    #73b471 20%,
+                    transparent 100%
+                  );
+                  margin-right: 5px;
+                `}
+              >
+                <StyledBox
                   css={css`
-                    transition-property: transform, filter, opacity;
-                    transition-duration: 0.3s;
-                    transition-timing-function: cubic-bezier(
-                      0.57,
-                      0.21,
-                      0.69,
-                      1
-                    );
-                    &:hover {
-                      transform: scale(1.05, 1.05);
-                    }
-                    height: 100%;
+                    background-size: cover;
+                    background-image: url(${blog.featured_media.source_url});
+                    display: flex;
+                    justify-content: flex-end;
                   `}
-                  fluid={blog.node.frontmatter.banner.childImageSharp.fluid}
-                  boxBackground="white"
+                  pad="none"
+                  height="100%"
                 >
-                  <StyledBox
-                    pad="large"
-                    height="100%"
-                    style={{
-                      WebkitBoxPack: 'end',
-                      WebkitJustifyContent: 'flex-end',
-                      MsFlexPack: 'end',
-                      background:
-                        'linear-gradient(0deg, #555 20%, transparent 100%)',
-                    }}
+                  <div
+                    css={css`
+                      background-color: #73b471;
+                      padding: 24px;
+                    `}
                   >
-                    <span className="text small" size="small" color="white">
-                      {blog.node.frontmatter.date}
-                    </span>
-                    <h3 className="small white mn">{blog.node.fields.title}</h3>
-                    <span className="text small" size="small" color="white">
-                      {blog.node.frontmatter.categories.map(
-                        (categoryItem, index) => {
-                          let categoryItemName =
-                            categoryItem.charAt(0).toUpperCase() +
-                            categoryItem.slice(1);
-
-                          if (categoryItem === 'javascript') {
-                            categoryItemName = 'JavaScript';
-                          }
-
-                          return (
-                            <span key={index}>
-                              {categoryItemName}
-                              {index ===
-                              blog.node.frontmatter.categories.length - 1
-                                ? ' '
-                                : ', '}
-                            </span>
-                          );
-                        },
-                      )}
-                    </span>
-                  </StyledBox>
-                </BackgroundImage>
+                    {/* <span className="text small" size="small" color="white">
+                      {blog.date}
+                    </span> */}
+                    <h3
+                      className="small white mn"
+                      dangerouslySetInnerHTML={{ __html: blog.title }}
+                    />
+                    {/* <span className="text small" size="small" color="white">
+                      {blog.categories.map((categoryItem, index) => {
+                        return (
+                          <span key={index}>
+                            {categoryItem.name}
+                            {index === blog.categories.length - 1 ? ' ' : ', '}
+                          </span>
+                        );
+                      })}
+                    </span> */}
+                  </div>
+                </StyledBox>
               </StyledBox>
             </Link>
           );

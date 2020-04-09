@@ -5,22 +5,16 @@ import PageHeader from 'components/PageHeader';
 import FullWidthBox from 'components/FullWidthBox';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import ExternalLink from 'components/ExternalLink';
-import Filter from 'components/Filter';
-// import BranchList from 'components/BranchList';
 import { css } from '@emotion/core';
 import { scrollToAnchor } from 'utils/helpers';
 import { orderBy, uniqBy } from 'lodash';
 import loadable from '@loadable/component';
 import { media } from 'utils/media';
 import * as JsSearch from 'js-search';
-
-// import 'intersection-observer';
 import VisibilitySensor from 'react-visibility-sensor';
-// import CompanyList from 'components/CompanyList';
 import CountUp from 'react-countup';
-
-const CompanyList = loadable(() => import('components/CompanyList'));
 const SocialShare = loadable(() => import('components/SocialShare'));
+const Feed = loadable(() => import('components/Feed'));
 
 const isMobileDevice = () => {
   try {
@@ -101,6 +95,7 @@ const Index = ({ data: { companies } }) => {
       dataToSearch.searchIndex = new JsSearch.TfIdfSearchIndex('Name_Firma');
       dataToSearch.addIndex('category');
       dataToSearch.addIndex('Keywords');
+      dataToSearch.addIndex('Suchbegriffe___Schl_sselw_rter');
       dataToSearch.addIndex('Name_FirmaSearch');
       dataToSearch.addIndex('BranchSearch');
       dataToSearch.addIndex('BeschreibungSearch');
@@ -155,9 +150,9 @@ const Index = ({ data: { companies } }) => {
     }
   };
 
-  const onFocusInput = () => {
-    setSearchMode(true);
-  };
+  // const onFocusInput = () => {
+  //   setSearchMode(true);
+  // };
 
   return (
     <>
@@ -413,6 +408,9 @@ const Index = ({ data: { companies } }) => {
                 ein, wenn du auch einen Lieblingsladen hast.
               </p>
             </div>
+          </FullWidthBox>
+          <FullWidthBox>
+            <Feed />
           </FullWidthBox>
           <FullWidthBox>
             <div
@@ -724,7 +722,27 @@ export const query = graphql`
         }
       }
     }
-
+    blogWp: allWordpressPost(
+      filter: { status: { eq: "publish" } }
+      sort: { fields: date, order: ASC }
+    ) {
+      nodes {
+        id
+        title
+        date
+        content
+        slug
+        excerpt
+        categories {
+          name
+        }
+        featured_media {
+          alt_text
+          source_url
+          title
+        }
+      }
+    }
     companies: allCompaniesCsv(filter: { Publizieren: { ne: "FALSE" } }) {
       edges {
         node {
