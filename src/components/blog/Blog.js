@@ -16,7 +16,11 @@ function PaginatedBlog({ data, pageContext: { pagination } }) {
     <>
       <SEO
         title="Tante Hilde Schaufenster"
-        description="Unser Tante Hilde Schaufenster"
+        description=" Du kannst deine allgäuer Lieblingsläden und Lieblingsdienstleister
+        gerade nicht persönlich besuchen. Deshalb gibt es jetzt das Tante
+        Hilde Schaufenster für dich. In unseren Interviews erzählen die
+        Menschen, die hinter den Länden und Dienstleistungen im Allgäu
+        stecken, wie sie das Beste aus der aktuellen Situation machen."
         image="/Header-Tantehilde-Laden-Allgaeu.png"
         headerImage="/Header-Tantehilde-Laden-Allgaeu.png"
         follow="index, follow"
@@ -37,39 +41,25 @@ function PaginatedBlog({ data, pageContext: { pagination } }) {
           <FullWidthBox>
             <h1
               css={css`
-                color: #555;
                 margin-bottom: 100px;
               `}
             >
               Das Tante Hilde - Schaufenster
             </h1>
+            <h2>Was ist das Tante Hilde Schaufenster?</h2>
             <p>
-              Liebe Allgäuer! Wir sind Tante Hilde! #wirsindtantehildeallgäu.
-              Schön, dass ihr alle dabei seid, unsere Plattform unterstützt, zur
-              gezielten Suche nutzt und/oder euren Freunden empfehlt. Nur so
-              können wir auch etwas erreichen! Und wir haben bisher einiges
-              erreicht! Ihr nutzt uns vielfach und unsere Reichweite ist enorm!
-              Danke dafür! Ein herzliches Dankeschön auch von unseren
-              eingetragenen Unternehmen und Dienstleistern - die sind
-              überwältigt von so viel Wertschätzung und Unterstützung!
-              #gemeinsamimallgäu.
+              Du kannst deine allgäuer Lieblingsläden und Lieblingsdienstleister
+              gerade nicht persönlich besuchen. Deshalb gibt es jetzt das Tante
+              Hilde Schaufenster für dich. In unseren Interviews erzählen die
+              Menschen, die hinter den Länden und Dienstleistungen im Allgäu
+              stecken, wie sie das Beste aus der aktuellen Situation machen.
             </p>
             <p>
-              Demnächst wird es auch ein weiteres Format geben. Das Tante Hilde
-              - Schaufenster. Wir (die kreativen Köpfe hinter Tante Hilde)
-              werden in den kommenden Tagen und Wochen kleine Videos mit unseren
-              Lieblingsläden, Lieblingsdienstleistern und Lieblingsallgäuern
-              produzieren. In diesem Sinne! Bleibt dabei und seid gespannt!
-              Liebe Grüße von deiner Tante Hilde{' '}
-              <span aria-label="lachender Smiley mit Händen" role="img">
-                🤗
-              </span>
-              <span aria-label="grünes Herz" role="img">
-                💚
-              </span>
+              In unseren Inteviews kannst du die Menschen endlich mal wieder
+              sehen und hören. Außerdem erfährst du, warum sie Tante Hilde sind.
             </p>
           </FullWidthBox>
-          <FullWidthBox>
+          <FullWidthBox pad="none">
             <ResponsiveGrid>
               {posts.map((post) => (
                 <div

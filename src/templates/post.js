@@ -12,12 +12,12 @@ export default function PostPage(props) {
 }
 
 function Post({ data: { post }, location }) {
-  const { title, date, excerpt, content, featured_media, categories } = post;
+  const { title, date, excerpt, content, featured_media } = post;
 
   return (
     <>
       <SEO
-        title={`blog: ${title}`}
+        title={title}
         description={excerpt}
         image={featured_media.source_url}
         pathname={location.pathname}
@@ -91,7 +91,7 @@ function Post({ data: { post }, location }) {
                 </StyledBox>
               )} */}
             </StyledBox>
-            {featured_media && (
+            {/* {featured_media && (
               <div style={{ textAlign: 'center' }}>
                 <img
                   src={featured_media.source_url}
@@ -99,7 +99,7 @@ function Post({ data: { post }, location }) {
                   title={featured_media.title}
                 />
               </div>
-            )}
+            )} */}
           </FullWidthBox>
           <FullWidthBox
             sectionwidth="45rem"

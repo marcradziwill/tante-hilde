@@ -48,6 +48,7 @@ const Filter = (props) => {
     }
   };
   let places = [];
+  const reg = new RegExp(/^\d+$/);
   companies.map((compan) => {
     compan.PLZ__Ort = compan.PLZ__Ort.replace(/\(Allgäu\)/g, '');
     compan.PlaceFilter = compan.PLZ__Ort.replace(
@@ -56,7 +57,10 @@ const Filter = (props) => {
     );
     compan.PlaceFilter = compan.PlaceFilter.replace(/([0-9]+)(.)/g, '$2');
 
-    places.push(compan.PlaceFilter.trim());
+    const placeName = compan.PlaceFilter.trim();
+    if (placeName.length > 0 && !reg.test(placeName)) {
+      places.push(placeName);
+    }
     return compan;
   });
   places = orderBy(places);

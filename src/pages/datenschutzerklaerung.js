@@ -1,10 +1,18 @@
 import React from 'react';
 import FullWidthBox from 'components/FullWidthBox';
+import SEO from 'components/SEO';
 import { css } from '@emotion/core';
 
 const Impressum = () => {
   return (
     <div>
+      <SEO
+        title="Tante Hilde - Datenschutzerklaerung"
+        description="Dein virtueller Marktplatz im Allgäu - Datenschutzerklaerung"
+        image="/Header-Tantehilde-Laden-Allgaeu.png"
+        // pathname={location.pathname}
+        headerImage="/Header-Tantehilde-Laden-Allgaeu.png"
+      />
       <article>
         <FullWidthBox
           css={css`

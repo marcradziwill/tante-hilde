@@ -28,8 +28,8 @@ const Unternehmen = ({ data: { companies } }) => {
   return (
     <>
       <SEO
-        title="Tante Hilde"
-        description="Dein virtueller Marktplatz im Allgäu!"
+        title="Tante Hilde Unternehmen im Allgäu"
+        description="Dein virtueller Marktplatz für Unternehmen und Dienstleister im Allgäu!"
         image="/Header-Tantehilde-Laden-Allgaeu.png"
         // pathname={location.pathname}
         headerImage="/Header-Tantehilde-Laden-Allgaeu.png"

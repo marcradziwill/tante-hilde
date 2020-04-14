@@ -21,10 +21,7 @@ function Company({ pageContext: { company } }) {
     }
   }
   if (company.Webseite.length > 0) {
-    if (
-      !company.Webseite.startsWith('http') ||
-      !company.Webseite.startsWith('https')
-    ) {
+    if (!company.Webseite.startsWith('http')) {
       company.Webseite = `https://${company.Webseite}`;
     }
   }
@@ -64,7 +61,11 @@ function Company({ pageContext: { company } }) {
     >
       <SEO
         title={company.Name_Firma}
-        description={company.Beschreibung}
+        description={
+          company.Beschreibung
+            ? company.Beschreibung
+            : `Tante Hilde Firmenseite - Firma: ${company.Name_Firma}`
+        }
         image={company.Logo_Link}
         headerImage={company.Logo_Link}
         follow="index, follow"

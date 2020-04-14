@@ -11,17 +11,7 @@ import Twitter from './Twitter';
 // eslint-disable-next-line max-statements
 // eslint-disable-next-line complexity
 // eslint-disable-next-line max-statements
-const SEO = ({
-  title,
-  description,
-  banner,
-  pathname,
-  article,
-  node,
-  image,
-  headerImage,
-  follow,
-}) => {
+const SEO = ({ title, description, pathname, article, image, follow }) => {
   const query = graphql`
     query SEO {
       site {
