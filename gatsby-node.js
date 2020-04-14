@@ -42,7 +42,8 @@ function createCompanyPages({ companyPath, data, actions }) {
   return null;
 }
 
-function createBranchPages({ prefixPath, data, actions }) {
+const createBranchPages = ({ prefixPath, data, actions }) => {
+  console.log(data);
   if (_.isEmpty(data)) {
     throw new Error('There are no branches!');
   }
@@ -63,7 +64,7 @@ function createBranchPages({ prefixPath, data, actions }) {
     };
   });
 
-  createPage({
+  return createPage({
     path: `${prefixPath}${data.urlPath}/`,
     component: path.resolve(`./src/templates/branches.js`),
     context: {
@@ -71,8 +72,8 @@ function createBranchPages({ prefixPath, data, actions }) {
     },
   });
 
-  return null;
-}
+  // return null;
+};
 
 const createPosts = (createPage, blogPath, createRedirect, edges) => {
   edges.forEach((node, i) => {
@@ -216,7 +217,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const { companies, blogWp } = data;
 
-  const categories = companies.edges.map(async (com) => {
+  const categories = companies.edges.map((com) => {
     let cate = com.node.Branch.toLowerCase().replace(/\//g, '');
     cate = cate.replace(/ä/g, 'ae');
     cate = cate.replace(/ü/g, 'ue');
@@ -232,12 +233,12 @@ exports.createPages = async ({ actions, graphql }) => {
   });
 
   const categoriesToPage = _.uniqBy(categories, 'category');
+
   categoriesToPage.forEach((item) => {
     const cateCom = companies.edges.filter((com) => {
       return com.node.Branch.includes(item.category);
     });
     item.companies = cateCom;
-
     createBranchPages({
       prefixPath: '/branche/',
       data: item,

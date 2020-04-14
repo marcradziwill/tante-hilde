@@ -7,8 +7,8 @@ const Impressum = () => {
   return (
     <div>
       <SEO
-        title="Tante Hilde - Datenschutzerklaerung"
-        description="Dein virtueller Marktplatz im Allgäu - Datenschutzerklaerung"
+        title="Tante Hilde - Impressum"
+        description="Dein virtueller Marktplatz im Allgäu - Impressum"
         image="/Header-Tantehilde-Laden-Allgaeu.png"
         // pathname={location.pathname}
         headerImage="/Header-Tantehilde-Laden-Allgaeu.png"
