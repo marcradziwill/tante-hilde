@@ -43,7 +43,6 @@ function createCompanyPages({ companyPath, data, actions }) {
 }
 
 const createBranchPages = ({ prefixPath, data, actions }) => {
-  console.log(data);
   if (_.isEmpty(data)) {
     throw new Error('There are no branches!');
   }
