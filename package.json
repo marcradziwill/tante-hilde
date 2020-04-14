@@ -1,41 +1,26 @@
 {
-  "name": "fuers-allgaeu",
+  "name": "tante-hilde",
   "version": "0.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/marcradziwill/fuers-allgaeu.git"
+    "url": "https://github.com/marcradziwill/tante-hilde.git"
   },
   "license": "MIT",
   "author": "Marc Radziwill <hallo@marcradziwill.com>",
   "scripts": {
     "build": "rm -rf public && rm -rf .cache && gatsby build",
-    "build-and-test": "npm run build && npm run test:e2e",
-    "copyapi": "rsync -av --progress api public --exclude api/node_modules --exclude now.json",
-    "cy": "is-ci \"test:e2e\" \"cy:open\"",
-    "cy:open": "cypress open",
-    "cy:run": "CYPRESS_BASE_URL=http://localhost:5020 cypress run",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:functions": "cd api && now dev",
-    "dev:gatsby": "gatsby develop",
     "develop": "npm run start",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
-    "install:cypress": "cypress install",
     "lint": "eslint .",
     "lint:fix": "npm run lint --fix",
     "now-build": "gatsby build",
-    "now:cypress": "npm-run-all --parallel install:cypress build && npm run test:e2e",
     "serve": "gatsby serve",
-    "setup": "npm i && npm validate",
-    "start": "gatsby serve --port 5020",
+    "start": "gatsby serve",
     "test:deploy": "jest --silent",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
-    "test:coverage": "jest --coverage",
-    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
-    "test:e2e": "start-server-and-test start http://localhost:5020 cy:run",
-    "test:lighthouse": "lighthouse http://localhost:5020 --budget-path=./tests/budget.json",
-    "test:watch": "jest --watch",
-    "validate": "npm-run-all --parallel lint test:coverage build-and-test"
+    "test:coverage": "jest --coverage"
   },
   "husky": {
     "hooks": {
