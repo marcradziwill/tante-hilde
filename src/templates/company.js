@@ -1,6 +1,8 @@
 /* eslint-disable complexity */
 import React from 'react';
+import { graphql } from 'gatsby';
 import { css } from '@emotion/core';
+import Img from 'gatsby-image/withIEPolyfill';
 import FullWidthBox from 'components/FullWidthBox';
 import SEO from 'components/SEO/SEO';
 import ExternalLink from 'components/ExternalLink';
@@ -8,7 +10,7 @@ import StyledBox from 'components/StyledBox';
 import SocialShare from 'components/SocialShare';
 import Video from 'components/Video';
 
-function Company({ pageContext: { company } }) {
+function Company({ data: { image }, pageContext: { company } }) {
   company.Beschreibung = company.Beschreibung.replace(/\\n/g, '<br />');
   company.Lieferung___Bezahlung = company.Lieferung___Bezahlung.replace(
     /\\n/g,
@@ -89,14 +91,24 @@ function Company({ pageContext: { company } }) {
               width: 100%;
             `}
           >
-            {/* <Image filename="tantehilde_logo.png" alt="" title="" /> */}
-            <img
-              css={css`
-                width: 50%;
-              `}
-              src={company.Logo_Link}
-              alt=""
-            />
+            {image ? (
+              <Img
+                css={css`
+                  height: 100%;
+                `}
+                fixed={image.childImageSharp.fixed}
+                title={company.Name_Firma}
+                alt={`Das Logo von ${company.Name_Firma}`}
+              />
+            ) : (
+              <img
+                css={css`
+                  width: 50%;
+                `}
+                src={company.Logo_Link}
+                alt=""
+              />
+            )}
           </div>
           <StyledBox direction="row" className="align-c">
             {company.Webseite && (
@@ -595,4 +607,16 @@ function Company({ pageContext: { company } }) {
     </FullWidthBox>
   );
 }
+
+export const query = graphql`
+  query($imagename: [String]) {
+    image: file(relativePath: { in: $imagename }) {
+      childImageSharp {
+        fixed(width: 150, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFixed_withWebp_tracedSVG
+        }
+      }
+    }
+  }
+`;
 export default Company;

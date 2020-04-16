@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import { css } from '@emotion/core';
+import Img from 'gatsby-image/withIEPolyfill';
 
 const CompanyList = (props) => {
   return (
@@ -23,19 +24,36 @@ const CompanyList = (props) => {
                 margin-top: 50px;
               `}
             >
-              <img
-                css={css`
-                  width: 150px;
-                  height: 150px;
-                  border-radius: 50%;
-                  border: 1px solid #73b471;
-                  object-fit: contain;
-                `}
-                alt="2"
-                src={`${
-                  company.Logo_Link ? company.Logo_Link : '/Dummybild.png'
-                }`}
-              />
+              {company.image ? (
+                <Img
+                  css={css`
+                    width: 150px !important;
+                    height: 150px !important;
+                    border-radius: 50%;
+                    border: 1px solid #73b471;
+                    object-fit: contain;
+                  `}
+                  objectFit="contain"
+                  fixed={company.image.node.childImageSharp.fixed}
+                  title={company.Name_Firma}
+                  alt={`Das Logo von ${company.Name_Firma}`}
+                />
+              ) : (
+                <img
+                  css={css`
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    border: 1px solid #73b471;
+                    object-fit: contain;
+                  `}
+                  alt="2"
+                  src={`${
+                    company.Logo_Link ? company.Logo_Link : '/Dummybild.png'
+                  }`}
+                />
+              )}
+
               <div
                 css={css`
                   display: flex;

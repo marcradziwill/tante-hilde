@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { css } from '@emotion/core';
+import Img from 'gatsby-image/withIEPolyfill';
+
 import FullWidthBox from 'components/FullWidthBox';
 import PageHeader from 'components/PageHeader';
 import SEO from 'components/SEO/SEO';
@@ -12,6 +14,12 @@ function PaginatedBlog({ data, pageContext: { pagination } }) {
   const showPagination = previousPagePath || nextPagePath;
 
   const posts = data.allWordpressPost.nodes;
+
+  const sources = [
+    { ...data.mobileImage.childImageSharp.fluid, media: '640' },
+    { ...data.tabletImage.childImageSharp.fluid, media: '1280' },
+    { ...data.desktopImage.childImageSharp.fluid, media: '1600' },
+  ];
   return (
     <>
       <SEO
@@ -28,16 +36,16 @@ function PaginatedBlog({ data, pageContext: { pagination } }) {
 
       <StyledBox>
         <article>
-          <PageHeader
-            id="backtotop"
-            title="Tante Hilde Blog"
-            image={{
-              src: 'Header-Tantehilde-Laden-Allgaeu.png',
-              alt: 'Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!',
-              title: 'Tante Hilde Laden Allgaeu',
-            }}
-            vheight="50vh"
-          />
+          <PageHeader vheight="60vh">
+            <Img
+              css={css`
+                height: 100%;
+              `}
+              fluid={sources}
+              title="Tante Hilde Schaufenster"
+              alt="Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!"
+            />
+          </PageHeader>
           <FullWidthBox>
             <h1
               css={css`

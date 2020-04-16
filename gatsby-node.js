@@ -18,7 +18,7 @@ function createCompanyPages({ companyPath, data, actions }) {
   const { edges } = data;
   const { createPage } = actions;
 
-  edges.forEach(({ node }, i) => {
+  edges.forEach(({ node }) => {
     let pagePath = node.Name_Firma.toLowerCase().replace(/\s/g, '-');
     pagePath = pagePath.replace(/-+/g, '-');
     pagePath = pagePath.replace(/ä/g, 'ae');
@@ -26,14 +26,15 @@ function createCompanyPages({ companyPath, data, actions }) {
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/ß/g, 'ss');
     pagePath = pagePath.replace(/é/g, 'e');
-    pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
+    pagePath = pagePath.replace(/[&/\\#,+()$!&~®%.'"*?<>{}]/g, '');
     const pagePathFull = pagePath.replace(/-+/g, '-');
-
+    // console.log(node.Logo_Link.substr(1));
     createPage({
       path: companyPath + pagePathFull,
       component: path.resolve(`./src/templates/company.js`),
       context: {
         id: node.id,
+        imagename: node.Logo_Link.substr(1) || '',
         company: node,
       },
     });
@@ -57,7 +58,7 @@ const createBranchPages = ({ prefixPath, data, actions }) => {
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/é/g, 'e');
     pagePath = pagePath.replace(/ß/g, 'ss');
-    pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
+    pagePath = pagePath.replace(/[&/\\#,+()$!&~®%.'"*?<>{}]/g, '');
     com.node.fields = {
       pageUrl: pagePath.replace(/-+/g, '-'),
     };
@@ -222,8 +223,8 @@ exports.createPages = async ({ actions, graphql }) => {
     cate = cate.replace(/ü/g, 'ue');
     cate = cate.replace(/ö/g, 'oe');
     cate = cate.replace(/ß/g, 'ss');
-    cate = cate.replace(/\,/g, '');
-    cate = cate.replace(/\-/g, '');
+    cate = cate.replace(/,/g, '');
+    cate = cate.replace(/-/g, '');
     cate = cate.replace(/\s+/g, '-');
     return {
       urlPath: cate,
@@ -259,9 +260,9 @@ exports.createPages = async ({ actions, graphql }) => {
     actions,
   });
 };
-
+// const { createRemoteFileNode } = require('gatsby-source-filesystem');
 // eslint-disable-next-line complexity
-const createCustomNodeFields = async ({ node, actions }) => {
+const createCustomNodeFields = ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `CompaniesCsv`) {
     let pagePath = node['Name Firma'].toLowerCase().replace(/\s/g, '-');
@@ -271,7 +272,7 @@ const createCustomNodeFields = async ({ node, actions }) => {
     pagePath = pagePath.replace(/ö/g, 'oe');
     pagePath = pagePath.replace(/é/g, 'e');
     pagePath = pagePath.replace(/ß/g, 'ss');
-    pagePath = pagePath.replace(/[&\/\\#,+()$!&~®%.'"*?<>{}]/g, '');
+    pagePath = pagePath.replace(/[&/\\#,+()$!&~®%.'"*?<>{}]/g, '');
     const pagePathFull = pagePath.replace(/-+/g, '-');
 
     createNodeField({
@@ -279,6 +280,23 @@ const createCustomNodeFields = async ({ node, actions }) => {
       node,
       value: pagePathFull,
     });
+    // createNodeField({
+    //   name: 'imageUrl',
+    //   node,
+    //   value: `./static${node['Logo Link']}`,
+    // });
+
+    // const fileNode = await createRemoteFileNode({
+    //   url: node['Logo Link'],
+    //   parentNodeId: node.id,
+    //   createNode: actions.createNode,
+    //   createNodeId,
+    //   cache,
+    //   store,
+    // });
+    // if (fileNode) {
+    //   node.featuredImg___NODE = fileNode.id;
+    // }
   }
 };
 
@@ -290,6 +308,8 @@ exports.onCreateNode = ({
   loadNodeContent,
   createNodeId,
   createContentDigest,
+  store,
+  cache,
 }) => {
   createCustomNodeFields({
     node,
@@ -298,5 +318,7 @@ exports.onCreateNode = ({
     loadNodeContent,
     createNodeId,
     createContentDigest,
+    store,
+    cache,
   });
 };

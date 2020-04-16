@@ -1,5 +1,6 @@
 import React from 'react';
 import loadable from '@loadable/component';
+import Img from 'gatsby-image/withIEPolyfill';
 import { graphql } from 'gatsby';
 import { css } from '@emotion/core';
 import { orderBy } from 'lodash';
@@ -9,17 +10,28 @@ import FullWidthBox from 'components/FullWidthBox';
 import ExternalLink from 'components/ExternalLink';
 import Filter from 'components/Filter';
 import { media } from 'utils/media';
+import { find } from 'lodash';
 
 const CompanyList = loadable(() => import('components/CompanyList'));
 const SocialShare = loadable(() => import('components/SocialShare'));
 
-const Unternehmen = ({ data: { companies } }) => {
+const Unternehmen = ({
+  data: { companies, mobileImage, tabletImage, desktopImage, images },
+}) => {
   const tempCompanies = companies.edges.map((compan) => {
+    compan.node.image = find(images.edges, (image) => {
+      return compan.node.Logo_Link.includes(image.node.relativePath);
+    });
     compan.node.FilterName =
       compan.node.Name_Firma.charAt(0).toUpperCase() +
       compan.node.Name_Firma.slice(1);
     return compan.node;
   });
+  const sources = [
+    { ...mobileImage.childImageSharp.fluid, media: '640' },
+    { ...tabletImage.childImageSharp.fluid, media: '1280' },
+    { ...desktopImage.childImageSharp.fluid, media: '1600' },
+  ];
 
   const [companiesToDisplay, setCompaniesToDisplay] = React.useState(
     orderBy(tempCompanies, 'FilterName'),
@@ -37,15 +49,16 @@ const Unternehmen = ({ data: { companies } }) => {
       />
       <div>
         <article>
-          <PageHeader
-            // title={page.htmlTitle}
-            image={{
-              src: 'Header-Tantehilde-Laden-Allgaeu.png',
-              alt: 'Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!',
-              title: 'Tante Hilde Laden Allgaeu',
-            }}
-            vheight="60vh"
-          />
+          <PageHeader vheight="60vh">
+            <Img
+              css={css`
+                height: 100%;
+              `}
+              fluid={sources}
+              title="Tante Hilde Laden Allgaeu"
+              alt="Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!"
+            />
+          </PageHeader>
           <FullWidthBox>
             <h1
               css={css`
@@ -178,6 +191,7 @@ const Unternehmen = ({ data: { companies } }) => {
     </>
   );
 };
+
 export const query = graphql`
   query Unternehmen {
     site: site {
@@ -192,7 +206,46 @@ export const query = graphql`
         }
       }
     }
-
+    mobileImage: file(
+      relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 640, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    tabletImage: file(
+      relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 1280, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    desktopImage: file(
+      relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 1600, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    images: allFile {
+      edges {
+        node {
+          relativePath
+          name
+          childImageSharp {
+            fixed(width: 150, quality: 80, traceSVG: { color: "#73B471" }) {
+              ...GatsbyImageSharpFixed_withWebp_tracedSVG
+            }
+          }
+        }
+      }
+    }
     companies: allCompaniesCsv(filter: { Publizieren: { ne: "FALSE" } }) {
       edges {
         node {

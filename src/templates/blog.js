@@ -11,6 +11,45 @@ export default function CodingBlogWithData(props) {
     <StaticQuery
       query={graphql`
         query {
+          mobileImage: file(
+            relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+          ) {
+            childImageSharp {
+              fluid(
+                maxWidth: 640
+                quality: 80
+                traceSVG: { color: "#73B471" }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+          tabletImage: file(
+            relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+          ) {
+            childImageSharp {
+              fluid(
+                maxWidth: 1280
+                quality: 80
+                traceSVG: { color: "#73B471" }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
+          desktopImage: file(
+            relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+          ) {
+            childImageSharp {
+              fluid(
+                maxWidth: 1600
+                quality: 80
+                traceSVG: { color: "#73B471" }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
+          }
           allWordpressPost(
             filter: { status: { eq: "publish" } }
             sort: { fields: date, order: ASC }

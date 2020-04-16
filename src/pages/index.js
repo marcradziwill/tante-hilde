@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, Link, navigate } from 'gatsby';
+import Img from 'gatsby-image/withIEPolyfill';
 import SEO from 'components/SEO/SEO';
 import PageHeader from 'components/PageHeader';
 import FullWidthBox from 'components/FullWidthBox';
@@ -34,7 +35,15 @@ const removeSpecialChars = (str) => {
     .replace(/ß/g, 'ss');
 };
 
-const Index = ({ data: { companies } }) => {
+const Index = ({
+  data: { companies, mobileImage, tabletImage, desktopImage },
+}) => {
+  const sources = [
+    { ...mobileImage.childImageSharp.fluid, media: '640' },
+    { ...tabletImage.childImageSharp.fluid, media: '1280' },
+    { ...desktopImage.childImageSharp.fluid, media: '1600' },
+  ];
+
   const tempCompanies = companies.edges.map((compan) => {
     compan.node.Name_FirmaSearch = removeSpecialChars(compan.node.Name_Firma);
     compan.node.PLZ__OrtSearch = removeSpecialChars(compan.node.PLZ__Ort);
@@ -100,14 +109,6 @@ const Index = ({ data: { companies } }) => {
       dataToSearch.addIndex('BranchSearch');
       dataToSearch.addIndex('BeschreibungSearch');
       dataToSearch.addIndex('PLZ__OrtSearch');
-      // dataToSearch.addIndex('Name_Firma');
-      // dataToSearch.addIndex('Beschreibung');
-      // dataToSearch.addIndex('Branch');
-      // dataToSearch.addIndex('Ansprechpartner');
-      // dataToSearch.addIndex('PLZ__Ort');
-      // dataToSearch.addIndex('Strasse__Hausnummer');
-      // dataToSearch.addIndex('Lieferung___Bezahlung');
-      // dataToSearch.addIndex('Webshop_Link');
       dataToSearch.addDocuments(companiesToDisplay, branchesToDisplay);
       dataToSearch.addDocuments(branchesToDisplay);
       setSearch({ search: dataToSearch, isLoading: false });
@@ -149,11 +150,6 @@ const Index = ({ data: { companies } }) => {
       }
     }
   };
-
-  // const onFocusInput = () => {
-  //   setSearchMode(true);
-  // };
-
   return (
     <>
       <SEO
@@ -167,16 +163,16 @@ const Index = ({ data: { companies } }) => {
       <div>
         <article>
           {!searchMode && (
-            <PageHeader
-              // title={page.htmlTitle}
-              image={{
-                src: 'Header-Tantehilde-Laden-Allgaeu.png',
-                alt:
-                  'Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!',
-                title: 'Tante Hilde Laden Allgaeu',
-              }}
-              vheight="60vh"
-            />
+            <PageHeader vheight="60vh">
+              <Img
+                css={css`
+                  height: 100%;
+                `}
+                fluid={sources}
+                title="Tante Hilde Laden Allgaeu"
+                alt="Tante Hilde Laden - Dein virtueller Marktplatz im Allgäu!"
+              />
+            </PageHeader>
           )}
           <FullWidthBox>
             {!searchMode && (
@@ -293,6 +289,7 @@ const Index = ({ data: { companies } }) => {
                   />
                 </svg>
                 {results && results.searchResults.length > 0 && (
+                  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                   <ul
                     css={css`
                       padding: 0;
@@ -614,55 +611,6 @@ const Index = ({ data: { companies } }) => {
               </button>
             </div>
           </FullWidthBox>
-          {/* <FullWidthBox>
-            <div
-              css={css`
-                text-align: center;
-                width: 100%;
-              `}
-            >
-              <h2
-                css={css`
-                  max-width: 100%;
-                `}
-              >
-                Branchen
-              </h2>
-            </div>
-            <BranchList companies={companies.edges} />
-          </FullWidthBox> */}
-          {/* <FullWidthBox
-            css={css`
-              display: none;
-              @media ${media.small} {
-                display: flex;
-              }
-            `}
-          >
-            <Filter
-              id="searchDesktop"
-              companies={tempCompanies}
-              onchangecompanies={setCompaniesToDisplay}
-            />
-          </FullWidthBox> */}
-          {/* <FullWidthBox> */}
-          {/* <div
-              css={css`
-                text-align: center;
-                width: 100%;
-              `}
-            >
-              <h2
-                css={css`
-                  max-width: 100%;
-                `}
-              >
-                {companiesToDisplay.length} Allgäuer Unternehmen und
-                Dienstleister
-              </h2>
-            </div>
-            <CompanyList companies={companiesToDisplay} />
-          </FullWidthBox> */}
           <FullWidthBox
             css={css`
               display: flex;
@@ -722,24 +670,30 @@ export const query = graphql`
         }
       }
     }
-    blogWp: allWordpressPost(
-      filter: { status: { eq: "publish" } }
-      sort: { fields: date, order: ASC }
+    mobileImage: file(
+      relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
     ) {
-      nodes {
-        id
-        title
-        date
-        content
-        slug
-        excerpt
-        categories {
-          name
+      childImageSharp {
+        fluid(maxWidth: 640, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
-        featured_media {
-          alt_text
-          source_url
-          title
+      }
+    }
+    tabletImage: file(
+      relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 1280, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+    desktopImage: file(
+      relativePath: { in: "Header-Tantehilde-Laden-Allgaeu.png" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 1600, quality: 80, traceSVG: { color: "#73B471" }) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
