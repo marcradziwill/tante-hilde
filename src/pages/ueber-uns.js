@@ -3,10 +3,10 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image/withIEPolyfill';
 import SEO from 'components/SEO/SEO';
 import FullWidthBox from 'components/FullWidthBox';
-import StyledBox from 'components/StyledBox';
+// import StyledBox from 'components/StyledBox';
 import ExternalLink from 'components/ExternalLink';
 import SocialIcons from 'components/SocialIcons';
-import Image from 'components/Image';
+// import Image from 'components/Image';
 import ResponsiveGrid from 'components/Layouts/ResponsiveGrid';
 import { css } from '@emotion/core';
 
