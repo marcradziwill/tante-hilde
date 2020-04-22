@@ -612,7 +612,7 @@ export const query = graphql`
   query($imagename: [String]) {
     image: file(relativePath: { in: $imagename }) {
       childImageSharp {
-        fixed(width: 150, quality: 80, traceSVG: { color: "#73B471" }) {
+        fixed(width: 250, quality: 80, traceSVG: { color: "#73B471" }) {
           ...GatsbyImageSharpFixed_withWebp_tracedSVG
         }
       }

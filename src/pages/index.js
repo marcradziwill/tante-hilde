@@ -106,6 +106,7 @@ const Index = ({
       dataToSearch.addIndex('Keywords');
       dataToSearch.addIndex('Suchbegriffe___Schl_sselw_rter');
       dataToSearch.addIndex('Name_FirmaSearch');
+      dataToSearch.addIndex('Ansprechpartner');
       dataToSearch.addIndex('BranchSearch');
       dataToSearch.addIndex('BeschreibungSearch');
       dataToSearch.addIndex('PLZ__OrtSearch');
