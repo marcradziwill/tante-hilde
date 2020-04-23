@@ -21,14 +21,7 @@ const Impressum = () => {
         >
           <h1>Impressum</h1>
           <p>Angaben gemäß § 5 TMG </p>
-          <p>
-            Marc Radziwill <br /> Ostbahnhofstraße 7 87437, Kempten (Allgäu),
-            Bayern <br />
-            Telefon: +49 176 830 79 151
-            <br /> Email: hallo@marcradziwill.de
-            <br /> UMSATZSTEUER-ID Umsatzsteuer-Identifikationsnummer gemäß §27
-            a Umsatzsteuergesetz: DE 299 749 233
-          </p>
+          <p>Julia Leeflang & Marc Radziwill</p>
           <p>
             Studio Leeflang — Agentur für nachhaltiges Marketing
             <br /> Ulrich-Mair-Str. 15 87435 Kempten, Allgäu
@@ -39,6 +32,14 @@ const Impressum = () => {
             <br />
             Website: https://www.studio-leeflang.com/ ​ <br />
             Umsatzsteuernr. DE322271921
+          </p>
+          <p>
+            Marc Radziwill <br /> Ostbahnhofstraße 7 87437, Kempten (Allgäu),
+            Bayern <br />
+            Telefon: +49 176 830 79 151
+            <br /> Email: hallo@marcradziwill.de
+            <br /> UMSATZSTEUER-ID Umsatzsteuer-Identifikationsnummer gemäß §27
+            a Umsatzsteuergesetz: DE 299 749 233
           </p>
           <p>
             STREITSCHLICHTUNG Die Europäische Kommission stellt eine Plattform
