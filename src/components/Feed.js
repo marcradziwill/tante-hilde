@@ -9,8 +9,9 @@ const Feed = () => {
   const data = useStaticQuery(graphql`
     query {
       allWordpressPost(
+        limit: 2
         filter: { status: { eq: "publish" } }
-        sort: { fields: date, order: ASC }
+        sort: { fields: date, order: DESC }
       ) {
         nodes {
           id
