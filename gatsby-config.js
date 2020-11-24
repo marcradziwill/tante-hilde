@@ -113,36 +113,36 @@ const gatsbySettings = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-manifest',
-    //   options: {
-    //     name: website.siteTitle,
-    //     // eslint-disable-next-line
-    //     short_name: website.siteTitleShort,
-    //     description: website.siteDescription,
-    //     // eslint-disable-next-line
-    //     start_url: website.pathPrefix,
-    //     // eslint-disable-next-line
-    //     background_color: website.backgroundColor,
-    //     // eslint-disable-next-line
-    //     theme_color: website.themeColor,
-    //     display: 'standalone',
-    //     // icon: `src/images/tantehilde-gruen.png`,
-    //     icon: `src/images/tantehilde-gruen.png`,
-    //     icons: [
-    //       {
-    //         src: '/favicons/android-chrome-192x192.png',
-    //         sizes: '192x192',
-    //         type: 'image/png',
-    //       },
-    //       {
-    //         src: '/favicons/android-chrome-512x512.png',
-    //         sizes: '512x512',
-    //         type: 'image/png',
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: website.siteTitle,
+        // eslint-disable-next-line
+        short_name: website.siteTitleShort,
+        description: website.siteDescription,
+        // eslint-disable-next-line
+        start_url: website.pathPrefix,
+        // eslint-disable-next-line
+        background_color: website.backgroundColor,
+        // eslint-disable-next-line
+        theme_color: website.themeColor,
+        display: 'standalone',
+        // icon: `src/images/tantehilde-gruen.png`,
+        icon: `src/images/tantehilde-gruen.png`,
+        icons: [
+          {
+            src: '/favicons/android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/favicons/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+    },
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
