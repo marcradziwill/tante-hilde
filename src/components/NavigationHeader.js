@@ -22,10 +22,10 @@ const items = [
     title: 'Start',
     link: '/',
   },
-  {
-    title: 'Schaufenster',
-    link: '/schaufenster/',
-  },
+  // {
+  //   title: 'Schaufenster',
+  //   link: '/schaufenster/',
+  // },
   {
     title: 'Unternehmen',
     link: '/unternehmen/',

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React from 'react';
 import { graphql, Link, navigate } from 'gatsby';
 import Img from 'gatsby-image/withIEPolyfill';
@@ -15,7 +17,7 @@ import * as JsSearch from 'js-search';
 import VisibilitySensor from 'react-visibility-sensor';
 import CountUp from 'react-countup';
 const SocialShare = loadable(() => import('components/SocialShare'));
-const Feed = loadable(() => import('components/Feed'));
+// const Feed = loadable(() => import('components/Feed'));
 
 const isMobileDevice = () => {
   try {
@@ -84,8 +86,8 @@ const Index = ({
       cate = cate.replace(/ü/g, 'ue');
       cate = cate.replace(/ö/g, 'oe');
       cate = cate.replace(/ß/g, 'ss');
-      cate = cate.replace(/\,/g, '');
-      cate = cate.replace(/\-/g, '');
+      cate = cate.replace(/,/g, '');
+      cate = cate.replace(/-/g, '');
       cate = cate.replace(/\s+/g, '-');
 
       return {
@@ -407,9 +409,9 @@ const Index = ({
               </p>
             </div>
           </FullWidthBox>
-          <FullWidthBox>
+          {/* <FullWidthBox>
             <Feed />
-          </FullWidthBox>
+          </FullWidthBox> */}
           <FullWidthBox>
             <div
               css={css`

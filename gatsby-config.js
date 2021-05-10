@@ -86,27 +86,27 @@ const gatsbySettings = {
     `gatsby-plugin-react-helmet`,
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    {
-      resolve: `gatsby-source-wordpress`,
-      options: {
-        minimizeDeprecationNotice: true,
-        // your WordPress source
-        baseUrl: `tante-hilde.eu`,
-        protocol: `https`,
-        // is it hosted on wordpress.com, or self-hosted?
-        hostingWPCOM: false,
-        // does your site use the Advanced Custom Fields Plugin?
-        useACF: false,
-        includedRoutes: [
-          '**/categories',
-          '**/posts',
-          '**/pages',
-          '**/media',
-          '**/tags',
-          '**/taxonomies',
-        ],
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-wordpress`,
+    //   options: {
+    //     minimizeDeprecationNotice: true,
+    //     // your WordPress source
+    //     baseUrl: `tante-hilde.eu`,
+    //     protocol: `https`,
+    //     // is it hosted on wordpress.com, or self-hosted?
+    //     hostingWPCOM: false,
+    //     // does your site use the Advanced Custom Fields Plugin?
+    //     useACF: false,
+    //     includedRoutes: [
+    //       '**/categories',
+    //       '**/posts',
+    //       '**/pages',
+    //       '**/media',
+    //       '**/tags',
+    //       '**/taxonomies',
+    //     ],
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-typography`,
       options: {

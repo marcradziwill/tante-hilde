@@ -12,7 +12,7 @@ export default function PostPage(props) {
 }
 
 function Post({ data: { post }, location }) {
-  const { title, date, excerpt, content, featured_media } = post;
+  const { title, excerpt, content, featured_media } = post;
 
   return (
     <>
@@ -168,27 +168,10 @@ function Post({ data: { post }, location }) {
 }
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  query {
     site {
       siteMetadata {
         keywords
-      }
-    }
-    post: wordpressPost(id: { eq: $id }) {
-      id
-      content
-      path
-      title
-      date
-      excerpt
-      slug
-      featured_media {
-        alt_text
-        source_url
-        title
-      }
-      categories {
-        name
       }
     }
   }
